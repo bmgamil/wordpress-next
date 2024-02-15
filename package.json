@@ -9,19 +9,38 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@hookform/resolvers": "^3.3.4",
+    "@mui/icons-material": "^5.15.6",
+    "@mui/material": "^5.15.6",
+    "@mui/material-nextjs": "^5.15.6",
+    "@plaiceholder/next": "^3.0.0",
+    "embla-carousel-autoplay": "^8.0.0-rc22",
+    "embla-carousel-react": "^8.0.0-rc22",
+    "framer-motion": "^11.0.3",
+    "joi": "^17.12.1",
+    "lucide-react": "^0.316.0",
+    "next": "14.1.0",
+    "next-intl": "^3.5.3",
+    "plaiceholder": "^3.0.0",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.1.0"
+    "react-hook-form": "^7.50.1",
+    "sharp": "^0.33.2",
+    "slick-carousel": "^1.8.1",
+    "stylis": "^4.3.1",
+    "tss-react": "^4.9.3"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-slick": "^0.23.13",
     "autoprefixer": "^10.0.1",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0",
     "eslint": "^8",
-    "eslint-config-next": "14.1.0"
+    "eslint-config-next": "14.1.0",
+    "postcss": "^8",
+    "typescript": "^5"
   }
 }

@@ -1,0 +1,34 @@
+import { makeStyles } from 'tss-react/mui';
+
+export const useStyles = makeStyles()((theme) => {
+  return {
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '2rem',
+      alignItems: 'center',
+    },
+
+    header: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: '1.5rem',
+    },
+
+    headingContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: '1.5rem',
+    },
+
+    heading: {
+      display: 'flex',
+      gap: 5,
+      fontWeight: theme.typography.fontWeightMedium,
+    },
+  };
+});
+
+export default useStyles;

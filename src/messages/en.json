@@ -1,0 +1,264 @@
+{
+  "header": {
+    "navbar": {
+      "home": "home",
+      "service": "service",
+      "projects": "projects",
+      "blogs": "blogs",
+      "about-us": "about us",
+      "contact-us": "contact us"
+    }
+  },
+  "home": {
+    "main": {
+      "title": "we are units, we design, develop & deliver digital products",
+      "description": "it is our job to have a final product that is appealing, functioning and understandable."
+    },
+    "about": {
+      "number": "01",
+      "title": "about us",
+      "heading_1": "we are units,",
+      "heading_2": "we are united",
+      "description": "we work as units, we know that great digital product needs collaboration between many digital services like design, development, marketing and maintenance. we deliver this with hard work and discipline."
+    },
+    "services": {
+      "number": "02",
+      "title": "our services"
+    },
+    "steps": {
+      "number": "03",
+      "title": "working steps",
+      "heading_1": "launch in",
+      "heading_2": "3 easy steps",
+      "list": {
+        "step_1": {
+          "number": "1",
+          "title": "design a customized solution",
+          "description": "we offer services that can help businesses improve their visibility and business reputation online, expand market reach, and increase turnover through effective digital strategies. Following are the services we provide."
+        },
+        "step_2": {
+          "number": "2",
+          "title": "we’ll implement a dedicated training program.",
+          "description": "we offer services that can help businesses improve their visibility and business reputation online, expand market reach, and increase turnover through effective digital strategies. Following are the services we provide."
+        },
+        "step_3": {
+          "number": "3",
+          "title": "go live & schedule check-ins!",
+          "description": "we offer services that can help businesses improve their visibility and business reputation online, expand market reach, and increase turnover through effective digital strategies. Following are the services we provide."
+        }
+      }
+    },
+    "projects": {
+      "number": "04",
+      "title": "our work",
+      "heading": "latest projects",
+      "description": "we offer services that can help businesses improve their visibility and business reputation online, expand market reach, and increase turnover through effective digital strategies. Following are the services we provide."
+    },
+    "blogs": {
+      "number": "05",
+      "title": "our blogs",
+      "heading_1": "see what’s new and",
+      "heading_2": "what’s next"
+    }
+  },
+  "about": {
+    "main": {
+      "heading_1": {
+        "we": "we are",
+        "units": "units"
+      },
+      "heading_2": {
+        "united": "united",
+        "in_purpose": "in purpose"
+      }
+    },
+    "introduction": {
+      "imgAlt": "introduction",
+      "sec_1": {
+        "title": "who we are",
+        "description": "we work as units, we know that great digital product needs collaboration between many digital services like design, development, marketing and maintenance."
+      },
+      "sec_2": {
+        "title": "our mission",
+        "description": "we work as units, we know that great digital product needs collaboration between many digital services."
+      },
+      "sec_3": {
+        "title": "our vision",
+        "description": "we work as units, we know that great digital product needs collaboration between many digital services."
+      }
+    },
+    "tickerTitle": "UNITS for impact"
+  },
+
+  "faqs": {
+    "heading_1": "frequently asked questions",
+    "heading_2": "FAQs",
+    "list": {
+      "faq_1": {
+        "title": "What should i expect from using this product?",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi."
+      },
+      "faq_2": {
+        "title": "How can i get this product?",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi."
+      },
+      "faq_3": {
+        "title": "Pricing and subscriptions",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi."
+      },
+      "faq_4": {
+        "title": "Another question goes here?",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi."
+      },
+      "faq_5": {
+        "title": "How can i get this product?",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi."
+      }
+    }
+  },
+
+  "services": {
+    "main": {
+      "heading_1": {
+        "we": "we",
+        "always": "always",
+        "provide": "provide"
+      },
+      "heading_2": {
+        "best": "best",
+        "service": "service",
+        "for_you": "for you"
+      }
+    },
+    "heading": "what services we’re offering",
+    "body": "we offer services that can help businesses improve their visibility and business reputation online, expand market reach, and increase turnover through effective digital strategies. Following are the services we provide.",
+    "list": {
+      "maintenance": "maintenance & support",
+      "mobile": "mobile app development",
+      "wordpress": "wordpress & woocommerce",
+      "social": "social media design",
+      "graphic": "UI/UX graphic design",
+      "web": "web development"
+    },
+    "related": "related projects"
+  },
+  "projects": {
+    "main": {
+      "heading_1": {
+        "latest": "latest",
+        "project": "project made"
+      },
+      "heading_2": {
+        "our_clients": "our clients",
+        "success": "success"
+      }
+    }
+  },
+  "blogs": {
+    "main": {
+      "heading": {
+        "our": "our",
+        "blogs": "blogs"
+      }
+    },
+    "list": {
+      "all": "all",
+      "ai": "artificial intelligence",
+      "pm": "project management",
+      "technology": "technology",
+      "development": "development",
+      "education": "education"
+    }
+  },
+
+  "contact": {
+    "main": {
+      "heading_1": {
+        "request": "request",
+        "quote": "a quote for"
+      },
+      "heading_2": {
+        "your": "your",
+        "work": "work"
+      }
+    },
+    "description": {
+      "title": "ready to work with us?",
+      "description": "feel free to contact us through twitter or facebook if you prefer!"
+    },
+    "form": {
+      "title": "request a quote for your work",
+      "name": "first name",
+      "email": "email",
+      "phone": "phone number",
+      "subject": "subject",
+      "comment": "your comment"
+    },
+    "list": {
+      "location": {
+        "title": "office address",
+        "description": "3 Mohamed Ibrahim, Zayton, Cairo, Egypt"
+      },
+      "mail": {
+        "title": "email address",
+        "description": "Sales@units.com.eg"
+      },
+      "phone": {
+        "title": "call for help",
+        "description": "+20 128 142 4046"
+      }
+    }
+  },
+  "footer": {
+    "title": "let's talk",
+    "sitemap": {
+      "title": "sitemap",
+      "list": {
+        "home": "home",
+        "service": "service",
+        "projects": "projects",
+        "blogs": "blogs",
+        "about-us": "about us",
+        "contact-us": "contact us"
+      }
+    },
+    "follow": {
+      "title": "follow us",
+      "list": {
+        "linkedin": "linkedIn",
+        "facebook": "facebook",
+        "instagram": "instagram",
+        "dribble": "dribble"
+      }
+    },
+    "contact": {
+      "title": "contact us",
+      "location": "13 Mohamed Ibrahim Zeitoun, Cairo Egypt",
+      "phone": "+ 20 128 142 4046",
+      "mail": "sales@units.com.eg"
+    }
+  },
+  "buttons": {
+    "contact": "contact in touch",
+    "explore": "explore more",
+    "read": "read more",
+    "view": "view more",
+    "send": "send now",
+    "try": "try again"
+  },
+  "form_errors": {
+    "any": {
+      "required": "required",
+      "invalid": "invalid"
+    },
+    "string": {
+      "empty": "required",
+      "min": "too short",
+      "max": "too long",
+      "base": "required",
+      "email": "invalid email"
+    }
+  },
+  "loading": "loading",
+  "error": "error occurred"
+}
