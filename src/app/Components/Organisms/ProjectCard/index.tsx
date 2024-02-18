@@ -7,10 +7,9 @@ import { useTranslations } from 'next-intl';
 import { useStyles } from './style';
 import Text from '../../Atoms/Text';
 import Image from '../../Atoms/Image';
-
+import CustomLink from '../../Atoms/Link';
 import TagsSlider from '../../Molecules/TagsSlider';
 import { RowVariant } from '@/app/lib/MotionVariants';
-import CustomLink from '../../Atoms/Link';
 
 const ProjectCard = (props: { project: Project }) => {
   const {
@@ -21,7 +20,6 @@ const ProjectCard = (props: { project: Project }) => {
     media_details,
     source_url,
     placeholder: {
-      metadata,
       css,
       color: { b, g, r },
     },

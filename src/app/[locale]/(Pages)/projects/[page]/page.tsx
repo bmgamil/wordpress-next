@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { getProjects } from '@/app/lib/Controller';
@@ -9,11 +10,24 @@ type Props = {
   };
 };
 
-const ProjectsPerPage = async ({ params }: Props) => {
-  const pageNumber = params.page.replace('page_', '');
-  const { projects, totalPages } = await getProjects(3, Number(pageNumber));
+export const generateMetadata = ({ params }: Props): Metadata => {
+  const pageName = params.page.split('_');
+  return {
+    title: `Projects - Page ${pageName[1]} `,
+  };
+};
 
-  if (+pageNumber > totalPages) {
+const ProjectsPerPage = async ({ params }: Props) => {
+  const pageName = params.page.split('_');
+  const { projects, totalPages } = await getProjects(3, +pageName[1]);
+
+  if (
+    pageName.length > 2 ||
+    pageName[0] !== 'page' ||
+    !Number.isInteger(+pageName[1]) ||
+    +pageName[1] === 0 ||
+    +pageName[1] > totalPages
+  ) {
     notFound();
   }
 
@@ -21,7 +35,7 @@ const ProjectsPerPage = async ({ params }: Props) => {
     <ProjectsList
       list={projects}
       totalPages={+totalPages}
-      currentPage={+pageNumber}
+      currentPage={+pageName[1]}
     />
   );
 };

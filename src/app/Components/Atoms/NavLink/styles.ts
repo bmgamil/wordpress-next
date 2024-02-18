@@ -58,6 +58,16 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
         },
       },
     },
+    text: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+
+      fontSize: 'inherit',
+      fontWeight: 'inherit',
+      textWrap: isFooter ? 'wrap' : 'nowrap',
+      whiteSpace: isFooter ? 'wrap' : 'nowrap',
+    },
   };
 });
 

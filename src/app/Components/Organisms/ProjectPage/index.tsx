@@ -1,12 +1,12 @@
 'use client';
 
-import Text from '../../Atoms/Text';
-import ProjectsList from '../ProjectsList';
 import { Box } from '@mui/material';
+import { motion } from 'framer-motion';
+
+import Text from '../../Atoms/Text';
 import { useStyles } from './style';
 import Image from '../../Atoms/Image';
 import { MotionDelay, RowVariant } from '@/app/lib/MotionVariants';
-import { motion } from 'framer-motion';
 
 type Props = {
   project: Project;
@@ -19,6 +19,7 @@ const ProjectPage = ({ project }: Props) => {
     placeholder: { metadata },
     source_url,
   } = featured_media;
+
   return (
     <Box className={classes.container}>
       <Text

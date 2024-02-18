@@ -1,14 +1,18 @@
+import { Metadata } from 'next';
 import { Box, Container } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
 
 import Text from '@/app/Components/Atoms/Text';
 import { getServices } from '@/app/lib/Controller';
-import FAQs from '@/app/Components/Organisms/FAQs';
 import { MotionDelay } from '@/app/lib/MotionVariants';
 import PageIntroText from '@/app/Components/Organisms/PageIntroText';
 import AboutService from '@/app/Components/Organisms/AboutPage/Services';
 import Introduction from '@/app/Components/Organisms/AboutPage/Introduction';
 import TickerWithTitle from '@/app/Components/Organisms/AboutPage/TickerWithTitle';
+
+export const metadata: Metadata = {
+  title: 'About Us',
+};
 
 const AboutUs = async () => {
   const t = await getTranslations('about.main');
@@ -46,7 +50,6 @@ const AboutUs = async () => {
       <Introduction />
       <TickerWithTitle />
       <AboutService services={services} />
-      {/* <FAQs /> */}
     </Container>
   );
 };

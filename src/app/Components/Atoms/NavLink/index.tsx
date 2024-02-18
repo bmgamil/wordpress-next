@@ -17,6 +17,7 @@ type Props = ListItemProps & {
   setActiveLine?: Function;
   fontSize: FontSize;
   index?: number;
+  target?: string;
 };
 
 const NavLink = (props: Props) => {
@@ -28,6 +29,7 @@ const NavLink = (props: Props) => {
     setActiveLine,
     fontSize,
     index,
+    target,
     ...proprties
   } = props;
   const { classes } = useStyles({ isFooter, fontSize });
@@ -61,8 +63,8 @@ const NavLink = (props: Props) => {
       ref={linkRef}
       {...proprties}
     >
-      <Link href={to as '/' | '/pathnames'}>
-        <Text textSize={isFooter ? 'sm' : 'base'}> {children}</Text>
+      <Link href={to as '/' | '/pathnames'} target={target}>
+        <Text className={classes.text}>{children}</Text>
       </Link>
     </ListItem>
   );

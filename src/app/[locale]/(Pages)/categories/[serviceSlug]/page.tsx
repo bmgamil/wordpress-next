@@ -1,13 +1,26 @@
-import Text from '@/app/Components/Atoms/Text';
-import CategoryWrapper from '@/app/Components/Organisms/CategoryWrapper';
-import ProjectsList from '@/app/Components/Organisms/ProjectsList';
+import { Metadata } from 'next';
+import { Box, Container } from '@mui/material';
 
 import { getServices } from '@/app/lib/Controller';
-import { Box, Container } from '@mui/material';
+import CategoryWrapper from '@/app/Components/Organisms/CategoryWrapper';
 
 type Props = {
   params: {
     serviceSlug: string;
+  };
+};
+
+export const generateMetadata = async ({
+  params: { serviceSlug },
+}: Props): Promise<Metadata> => {
+  const {
+    services: { services },
+  } = await getServices(serviceSlug);
+
+  const seo = services.seo;
+
+  return {
+    ...seo,
   };
 };
 

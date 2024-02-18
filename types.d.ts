@@ -36,6 +36,7 @@ type SingleContact = {
   title?: string;
   icon: any;
   description: string;
+  link: string;
 };
 
 type ServiceDetail = {
@@ -47,6 +48,7 @@ type ServiceDetail = {
   projects: Project[];
   featured_media: ProjectMedia;
   faq: { q: string; a: string }[];
+  seo: SEO;
 };
 
 type Blog = {
@@ -73,6 +75,7 @@ type Project = {
   categories: ProjectCategory[];
   featured_media: ProjectMedia;
   services: ProjectCategory[];
+  seo: SEO;
 };
 
 type ProjectMedia = {
@@ -107,4 +110,25 @@ type ProjectCategory = {
   name: string;
   slug: string;
   taxonomy: string;
+};
+
+type SEO = {
+  title: string;
+  robots: string | Robots | null | undefined;
+  openGraph: {
+    locale: string;
+    type: string;
+    title: string;
+    url: string;
+    siteName: string;
+
+    images: [
+      {
+        width: number;
+        height: number;
+        url: string;
+        type: string;
+      }
+    ];
+  };
 };

@@ -1,11 +1,16 @@
-import Text from '@/app/Components/Atoms/Text';
-import ContactDetails from '@/app/Components/Organisms/ContactPage/ContactDetails';
-import ContactForm from '@/app/Components/Organisms/ContactPage/ContactForm';
-import FAQs from '@/app/Components/Organisms/FAQs';
-import PageIntroText from '@/app/Components/Organisms/PageIntroText';
-import { MotionDelay } from '@/app/lib/MotionVariants';
-import { Box, Container, Grid } from '@mui/material';
+import { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
+import { Box, Container, Grid } from '@mui/material';
+
+import Text from '@/app/Components/Atoms/Text';
+import { MotionDelay } from '@/app/lib/MotionVariants';
+import PageIntroText from '@/app/Components/Organisms/PageIntroText';
+import ContactForm from '@/app/Components/Organisms/ContactPage/ContactForm';
+import ContactDetails from '@/app/Components/Organisms/ContactPage/ContactDetails';
+
+export const metadata: Metadata = {
+  title: 'Contact Us',
+};
 
 const ContactUs = () => {
   const t = useTranslations('contact.main');
@@ -45,7 +50,6 @@ const ContactUs = () => {
           <ContactForm />
         </Grid>
       </Grid>
-      <FAQs />
     </Container>
   );
 };

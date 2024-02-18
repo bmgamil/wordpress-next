@@ -1,12 +1,19 @@
 'use client';
-import { useState } from 'react';
-import createCache from '@emotion/cache';
-import { useServerInsertedHTML } from 'next/navigation';
-import { CacheProvider } from '@emotion/react';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { LTRTheme, RTLTheme } from '@/app/theme/theme';
+import { useEffect, useState } from 'react';
 import { useLocale } from 'next-intl';
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import { useServerInsertedHTML } from 'next/navigation';
+
+import { AppWrapper, useAppContext } from '@/context';
+import {
+  LTRTheme,
+  RTLTheme,
+  darkTheme,
+  generateTheme,
+} from '@/app/theme/theme';
 
 type Props = {
   children: React.ReactNode;
@@ -16,6 +23,9 @@ export default function ThemeRegistry(props: Props) {
   const isAr = locale === 'ar';
   const { children } = props;
   const options = { key: 'mui-theme' };
+  const { appMode } = useAppContext();
+
+  const [theme, setTheme] = useState(generateTheme(isAr, appMode));
 
   const [{ cache, flush }] = useState(() => {
     const cache = createCache(options);
@@ -55,12 +65,19 @@ export default function ThemeRegistry(props: Props) {
       />
     );
   });
+
+  useEffect(() => {
+    setTheme(generateTheme(isAr, appMode));
+  }, [isAr, appMode]);
+
   return (
-    <CacheProvider value={cache}>
-      <ThemeProvider theme={isAr ? RTLTheme : LTRTheme}>
-        <CssBaseline />
-        {children}
-      </ThemeProvider>
-    </CacheProvider>
+    <AppWrapper>
+      <CacheProvider value={cache}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          {children}
+        </ThemeProvider>
+      </CacheProvider>
+    </AppWrapper>
   );
 }

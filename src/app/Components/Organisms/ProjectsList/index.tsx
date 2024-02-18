@@ -9,7 +9,8 @@ import { Link } from '@/navigation';
 import ProjectCard from '../ProjectCard';
 import Pagination from '../../Molecules/Pagination';
 import { useStyles } from './style';
-
+import { useState } from 'react';
+import LoadingCircular from '@/app/Components/Molecules/Loading/LoadingCircular';
 type Props = {
   list: Project[];
   isLatestList?: boolean;
@@ -26,23 +27,32 @@ const ProjectsList = ({
   const t = useTranslations('buttons');
   const router = useRouter();
   const { classes } = useStyles();
+  const [pageNumber, setPageNumber] = useState(currentPage ?? 0);
+  const [loading, setLoading] = useState(false);
 
   const handlePagination = (value: number) => {
+    setPageNumber((prev) => value);
+    setLoading(true);
     router.push(`/projects/page_${value}` as any);
   };
 
   return (
     <Box className={classes.container}>
-      <Grid container spacing={3}>
-        {list.map((project, i) => {
-          const isInteger = Number.isInteger((i + 1) / 3) || list.length === 1;
+      <Grid container spacing={3} flexGrow={1}>
+        {loading ? (
+          <LoadingCircular />
+        ) : (
+          list.map((project, i) => {
+            const isInteger =
+              Number.isInteger((i + 1) / 3) || list.length === 1;
 
-          return (
-            <Grid key={project.id} item xs={12} md={isInteger ? 12 : 6}>
-              <ProjectCard project={project} />
-            </Grid>
-          );
-        })}
+            return (
+              <Grid key={project.id} item xs={12} md={isInteger ? 12 : 6}>
+                <ProjectCard project={project} />
+              </Grid>
+            );
+          })
+        )}
 
         {isLatestList && (
           <Grid
@@ -83,7 +93,7 @@ const ProjectsList = ({
         <Pagination
           total={totalPages}
           handleChange={handlePagination}
-          currentPage={currentPage}
+          currentPage={pageNumber}
         />
       )}
     </Box>

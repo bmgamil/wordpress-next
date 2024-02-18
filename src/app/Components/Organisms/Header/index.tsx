@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useLocale, useTranslations } from 'next-intl';
@@ -16,6 +16,7 @@ import Navbar from '@/app/Components/Molecules/Navbar';
 import HeaderLogo from '@/../public/image/header-logo.svg';
 import BluredCircle from '@/app/Components/Atoms/BluredCircle';
 import LocaleSwitcherSelect from '../../Molecules/LocaleSwitcher';
+import { useAppContext } from '@/context';
 
 const Header = () => {
   const locale = useLocale();
@@ -24,6 +25,7 @@ const Header = () => {
   const { classes } = useStyles({ isAr });
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const { appMode, setAppMode } = useAppContext();
 
   return (
     <Box className={classes.container}>
@@ -67,7 +69,7 @@ const Header = () => {
           </Box>
         </Box>
       </ClickAwayListener>
-      <Button
+      {/* <Button
         sx={{
           display: { xs: 'none', md: 'flex' },
         }}
@@ -78,6 +80,25 @@ const Header = () => {
         onPointerUp={(e) => router.push('/contact-us' as any)}
       >
         {t('contact')}
+      </Button> */}
+      <Button
+        sx={{
+          display: { xs: 'none', md: 'flex' },
+        }}
+        disableRipple
+        fontSize='base'
+        textTrasfrom='capitalize'
+        isBold
+        onPointerUp={(e) => {
+          if (setAppMode) {
+            appMode === 'dark' ? setAppMode('light') : setAppMode('dark');
+            appMode === 'dark'
+              ? localStorage.setItem('appMode', JSON.stringify('light'))
+              : localStorage.setItem('appMode', JSON.stringify('dark'));
+          }
+        }}
+      >
+        Switch
       </Button>
     </Box>
   );

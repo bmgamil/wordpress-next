@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { Box, Container } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
 
@@ -6,6 +7,13 @@ import { getServices } from '@/app/lib/Controller';
 import { MotionDelay } from '@/app/lib/MotionVariants';
 import PageIntroText from '@/app/Components/Organisms/PageIntroText';
 import ServicePageServices from '@/app/Components/Organisms/ServicePage/Services';
+
+export const metadata: Metadata = {
+  title: {
+    default: 'Services',
+    template: '%s - Services - UNITS',
+  },
+};
 
 const ServicesLayout = async ({ children }: { children: React.ReactNode }) => {
   const t = await getTranslations('services');

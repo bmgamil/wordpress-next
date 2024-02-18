@@ -9,6 +9,7 @@ export const useStyles = makeStyles()((theme) => {
       alignItems: 'center',
       gap: '2rem',
       alignSelf: 'stretch',
+      height: '100%',
     },
   };
 });

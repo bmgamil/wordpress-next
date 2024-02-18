@@ -31,7 +31,8 @@ const Accordion = (props: Props) => {
         background: 'transparent',
         boxShadow: 'none',
         width: '100%',
-        padding: 0,
+        padding: '0 !important',
+        borderBottom: '1px solid',
         '&::before': {
           height: 0,
         },
