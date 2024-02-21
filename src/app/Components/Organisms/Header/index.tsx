@@ -5,7 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Close from '@mui/icons-material/Close';
 import { useLocale, useTranslations } from 'next-intl';
 
-import { Link, useRouter } from '@/navigation';
+import { Link, usePathname, useRouter } from '@/navigation';
 import { useStyles } from './styles';
 import Image from '@/app/Components/Atoms/Image';
 import Button from '@/app/Components/Atoms/Button';
@@ -26,6 +26,7 @@ const Header = ({ header }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { classes } = useStyles({ isAr, isOpen });
   const router = useRouter();
+  const pathname = usePathname();
   const { logo } = header;
 
   return (
@@ -85,7 +86,9 @@ const Header = ({ header }: Props) => {
             sx={{
               display: { xs: 'none', md: 'flex' },
             }}
-            disableRipple
+            disableRipple={pathname === '/'}
+            background={pathname !== '/' ? 'main' : undefined}
+            radius='2xl'
             fontSize='base'
             textTrasfrom='capitalize'
             isBold

@@ -19,7 +19,7 @@ const Pagination = ({ total, handleChange, currentPage }: Props) => {
       count={total}
       color='primary'
       variant='outlined'
-      page={currentPage}
+      page={Number(currentPage)}
       onChange={(_e, value) => handleChange(value)}
       renderItem={(item) => (
         <PaginationItem

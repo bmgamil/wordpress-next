@@ -3,9 +3,10 @@ import { makeStyles } from 'tss-react/mui';
 
 type Props = {
   mode: 'dark' | 'light';
+  href?: string;
 };
 
-export const useStyles = makeStyles<Props>()((theme, { mode }) => {
+export const useStyles = makeStyles<Props>()((theme, { mode, href }) => {
   return {
     container: {
       padding: '0.3rem 1rem',
@@ -22,6 +23,7 @@ export const useStyles = makeStyles<Props>()((theme, { mode }) => {
       textWrap: 'nowrap',
       whiteSpace: 'nowrap',
       textDecoration: 'none',
+      cursor: href ? 'pointer' : 'auto',
     },
   };
 });

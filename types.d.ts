@@ -52,10 +52,22 @@ type ServiceDetail = {
 };
 
 type Blog = {
-  id: string;
+  id: number;
   title: string;
-  tags: string[];
-  imageSrc: string | StaticImageData;
+  type: string;
+  slug: string;
+  content: string;
+  categories: ProjectCategory[];
+  featured_media: ProjectMedia;
+  seo: SEO;
+};
+
+type BlogCategory = {
+  id: number;
+  title: string;
+  slug: string;
+  posts?: Blog[];
+  seo?: SEO;
 };
 
 type ContactSubmission = {
@@ -85,29 +97,13 @@ type ProjectMedia = {
     width: number;
     height: number;
   };
-  placeholder: {
-    css: {
-      backgroundImage: string;
-      backgroundSize: string;
-      backgroundRepeat: string;
-    };
-    base64: string;
-    metadata: {
-      width: number;
-      height: number;
-    };
-    color: {
-      r: number;
-      g: number;
-      b: number;
-      hex: color;
-    };
-  };
+  placeholder: Placeholder;
 };
 
 type ProjectCategory = {
   id: number;
-  name: string;
+  name?: string;
+  title?: string;
   slug: string;
   taxonomy: string;
 };
@@ -143,9 +139,10 @@ type optionMedia = {
   id: number;
   title: string;
   url: string;
-  link: 'https://units.a2hosted.com/next/rectangle/';
+  link: string;
   width: number;
   height: number;
+  placeholder: Placeholder;
 };
 
 type optionFooterLinks = {
@@ -178,5 +175,24 @@ type options = {
       title: string;
       description: string;
     };
+  };
+};
+
+type Placeholder = {
+  css: {
+    backgroundImage: string;
+    backgroundSize: string;
+    backgroundRepeat: string;
+  };
+  base64: string;
+  metadata: {
+    width: number;
+    height: number;
+  };
+  color: {
+    r: number;
+    g: number;
+    b: number;
+    hex: color;
   };
 };

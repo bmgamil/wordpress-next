@@ -10,10 +10,11 @@ import { useLocale } from 'next-intl';
 type Props = {
   tags: ProjectCategory[];
   mode: 'light' | 'dark';
+  isBlog?: boolean;
 };
 
 const TagsSlider = (props: Props) => {
-  const { tags, mode } = props;
+  const { tags, mode, isBlog } = props;
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState<number>(0);
   const { classes } = useStyles();
@@ -43,10 +44,15 @@ const TagsSlider = (props: Props) => {
         className={classes.innerContainer}
       >
         {tags.map((tag, i) => {
-          const { id, name, slug } = tag;
+          const { id, name, slug, title } = tag;
           return (
-            <Tag href={`/categories/${slug}`} mode={mode} key={id ?? i}>
-              {name.replace('&amp;', '')}
+            <Tag
+              href={isBlog ? undefined : `/categories/${slug}`}
+              mode={mode}
+              key={id ?? i}
+            >
+              {name?.replace('&amp;', '')}
+              {title?.replace('&amp;', '')}
             </Tag>
           );
         })}

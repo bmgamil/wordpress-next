@@ -9,7 +9,7 @@ import { Link } from '@/navigation';
 import ProjectCard from '../ProjectCard';
 import Pagination from '../../Molecules/Pagination';
 import { useStyles } from './style';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LoadingCircular from '@/app/Components/Molecules/Loading/LoadingCircular';
 type Props = {
   list: Project[];
@@ -33,8 +33,12 @@ const ProjectsList = ({
   const handlePagination = (value: number) => {
     setPageNumber((prev) => value);
     setLoading(true);
-    router.push(`/projects/page_${value}` as any);
+    router.push(`/projects?page=${value}` as any);
   };
+
+  useEffect(() => {
+    setLoading(false);
+  }, [currentPage]);
 
   return (
     <Box className={classes.container}>

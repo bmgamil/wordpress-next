@@ -16,8 +16,10 @@ type Props = {
 
 const BlogCard = (props: Props) => {
   const {
-    blog: { imageSrc, tags, title },
+    blog: { featured_media, title, categories, slug },
   } = props;
+
+  const { source_url, placeholder, media_details } = featured_media;
 
   const bt = useTranslations('buttons');
   const { classes } = useStyles();
@@ -25,13 +27,20 @@ const BlogCard = (props: Props) => {
   return (
     <Box className={classes.container}>
       <Box className={classes.image}>
-        <Image src={imageSrc} placeholder='blur' alt='blog' />
+        <Image
+          src={source_url}
+          width={media_details.width}
+          height={media_details.height}
+          placeholder='blur'
+          blurDataURL={placeholder.base64}
+          alt='blog'
+        />
       </Box>
-      {/* <TagsSlider mode='light' tags={tags} /> */}
+      {categories && <TagsSlider isBlog mode='light' tags={categories} />}
       <Text textSize='base' textWeight='medium'>
         {title}
       </Text>
-      <CustomLink href='/' title={bt('read')} />
+      <CustomLink href={`/blog/${slug}`} title={bt('read')} />
     </Box>
   );
 };

@@ -11,7 +11,7 @@ import SingleServiceBlog from '../../Molecules/SingleServiceBlog';
 type Props = {
   textSize: FontSize;
   iconSize?: FontSize;
-  list: ServiceDetail[];
+  list: ServiceDetail[] | BlogCategory[];
   isBlog?: boolean;
 };
 
@@ -20,30 +20,52 @@ const ServicesBlogsList = (props: Props) => {
   const { classes } = useStyles();
   const locale = useLocale();
   const isAr = locale === 'ar';
-
   return (
     <Box className={classes.container}>
-      {list.map((service, i) => (
+      {isBlog && (
         <motion.div
           variants={RowVariant}
           initial='hidden'
           whileInView='visible'
           viewport={{ once: true, amount: 0.8 }}
-          custom={i}
+          custom={0}
           transition={{
             duration: 0.3,
           }}
-          key={service.title}
         >
           <SingleServiceBlog
-            href={`/service/${service.slug}`}
-            title={service.title.replace('#038;', '')}
+            href={`/blogs`}
+            title='all'
             iconSize={iconSize}
             textSize={textSize}
             isAr={isAr}
           />
         </motion.div>
-      ))}
+      )}
+
+      {list.map((item, i) => {
+        return (
+          <motion.div
+            variants={RowVariant}
+            initial='hidden'
+            whileInView='visible'
+            viewport={{ once: true, amount: 0.8 }}
+            custom={i + 1}
+            transition={{
+              duration: 0.3,
+            }}
+            key={item.title}
+          >
+            <SingleServiceBlog
+              href={`/${isBlog ? 'blogs' : 'service'}/${item.slug}`}
+              title={item.title.replace('#038;', '')}
+              iconSize={iconSize}
+              textSize={textSize}
+              isAr={isAr}
+            />
+          </motion.div>
+        );
+      })}
     </Box>
   );
 };

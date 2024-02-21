@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getPlaiceholder } from 'plaiceholder';
 
 export async function GET(request: NextRequest) {
+  const slug = request.nextUrl.searchParams.get('slug');
   const perPage = request.nextUrl.searchParams.get('per_page')
     ? `&per_page=${request.nextUrl.searchParams.get('per_page')}`
     : '';
@@ -12,12 +13,16 @@ export async function GET(request: NextRequest) {
 
   try {
     const response = await fetch(
-      `https://units.a2hosted.com/next/wp-json/wp/v2/project?${perPage}${page}`
+      `https://units.a2hosted.com/next/wp-json/wp/v2/posts?category=${slug}${perPage}${page}`
     );
     const totalPages = response.headers.get('x-wp-totalpages');
+    const data = await response.json();
 
-    const data: Project[] = await response.json();
-    const newData: Project[] = [];
+    const categoryResponse = await fetch(
+      `https://units.a2hosted.com/next/wp-json/wp/v2/categories?slug=${slug}`
+    );
+
+    const categoryData = await categoryResponse.json();
 
     if (data.length > 0) {
       for (let i = 0; i < data.length; i++) {
@@ -25,26 +30,22 @@ export async function GET(request: NextRequest) {
           const buffer = await fetch(
             data[i].featured_media.source_url ?? ''
           ).then(async (res) => Buffer.from(await res.arrayBuffer()));
-          const { base64, color, metadata, css } = await getPlaiceholder(
-            buffer
-          );
+          const { base64 } = await getPlaiceholder(buffer);
 
-          data[i].featured_media.placeholder = { base64, color, metadata, css };
+          data[i].featured_media.placeholder = {
+            base64,
+          };
         }
-
-        newData.push(data[i]);
       }
     }
 
     return NextResponse.json({
-      projects: newData,
+      blogs: data,
+      seo: categoryData[0].seo,
       totalPages,
       error: null,
     });
   } catch (error) {
-    return NextResponse.json({
-      projects: null,
-      error: error,
-    });
+    return NextResponse.json(error);
   }
 }

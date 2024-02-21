@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const getProjects = async (perPage?: number, page?: number) => {
   const _perPage = perPage ? `per_page=${perPage}` : '';
@@ -51,8 +51,6 @@ export const getProject = async (slug: string) => {
   }
 };
 
-export const getBlogs = async (pageNumber: number) => {};
-
 export const contactSubmitHandler = async (data: ContactSubmission) => {
   const response = fetch(
     'https://units.a2hosted.com/next/wp-json/wp/v2/contacts',
@@ -86,6 +84,67 @@ export const getOptions = async () => {
       next: { revalidate: 5 },
     });
     return await response.json();
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getCategoriesList = async () => {
+  try {
+    const response = await fetch(`${API_URL}/blogs-categories`, {
+      next: { revalidate: 5 },
+    });
+    return await response.json();
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getBlogs = async (perPage: number, page: number) => {
+  const _perPage = `per_page=${perPage}`;
+  const _page = `&page=${page}`;
+  try {
+    const response = await fetch(`${API_URL}/blogs?${_perPage}${_page}`, {
+      next: { revalidate: 5 },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getCategoryBlogs = async (
+  slug: string,
+  perPage: number,
+  page: number
+) => {
+  const _slug = `slug=${slug}`;
+  const _perPage = `&per_page=${perPage}`;
+  const _page = `&page=${page}`;
+  try {
+    const response = await fetch(
+      `${API_URL}/blog-category?${_slug}${_perPage}${_page}`,
+      {
+        next: { revalidate: 5 },
+      }
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getBlogBySlug = async (slug: string) => {
+  const _slug = `slug=${slug}`;
+
+  try {
+    const response = await fetch(`${API_URL}/blog?${_slug}`, {
+      next: { revalidate: 5 },
+    });
+    const data = await response.json();
+    return data;
   } catch (error) {
     return error;
   }

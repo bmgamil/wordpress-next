@@ -12,12 +12,12 @@ export async function GET(request: NextRequest) {
 
   try {
     const response = await fetch(
-      `https://units.a2hosted.com/next/wp-json/wp/v2/project?${perPage}${page}`
+      `https://units.a2hosted.com/next/wp-json/wp/v2/posts?${perPage}${page}`
     );
     const totalPages = response.headers.get('x-wp-totalpages');
 
-    const data: Project[] = await response.json();
-    const newData: Project[] = [];
+    const data: Blog[] = await response.json();
+    const newData: Blog[] = [];
 
     if (data.length > 0) {
       for (let i = 0; i < data.length; i++) {
@@ -37,13 +37,13 @@ export async function GET(request: NextRequest) {
     }
 
     return NextResponse.json({
-      projects: newData,
+      blogs: newData,
       totalPages,
       error: null,
     });
   } catch (error) {
     return NextResponse.json({
-      projects: null,
+      blogs: null,
       error: error,
     });
   }
