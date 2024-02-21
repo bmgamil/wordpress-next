@@ -1,40 +1,31 @@
 'use client';
 import { Box } from '@mui/material';
 import { useStyles } from './style';
-import { useTranslations } from 'next-intl';
 import WorkingStep from '../../Molecules/WorkingStep';
+import { Dispatch, SetStateAction } from 'react';
 
-const WorkingStepsList = () => {
+type Props = {
+  steps: options['home']['steps'];
+  selectorIndex: number;
+  setSelectorIndex: Dispatch<SetStateAction<number>>;
+};
+
+const WorkingStepsList = (props: Props) => {
+  const { selectorIndex, setSelectorIndex, steps } = props;
   const { classes } = useStyles();
-  const t = useTranslations('home.steps.list');
 
-  const WorkingSteps: WorkingStep[] = [
-    {
-      number: t('step_1.number'),
-      title: t('step_1.title'),
-      description: t('step_1.description'),
-    },
-    {
-      number: t('step_2.number'),
-      title: t('step_2.title'),
-      description: t('step_2.description'),
-    },
-    {
-      number: t('step_3.number'),
-      title: t('step_3.title'),
-      description: t('step_3.description'),
-    },
-  ];
   return (
     <Box className={classes.container}>
-      {WorkingSteps.map((step, i) => {
+      {steps.map((step, i) => {
         return (
           <WorkingStep
             description={step.description}
-            number={step.number}
+            number={i + 1}
             title={step.title}
             key={step.title}
             index={i}
+            selectorIndex={selectorIndex}
+            setSelectorIndex={setSelectorIndex}
           />
         );
       })}

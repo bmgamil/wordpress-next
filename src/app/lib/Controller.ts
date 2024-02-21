@@ -1,14 +1,13 @@
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export const getProjects = async (perPage?: number, page?: number) => {
   const _perPage = perPage ? `per_page=${perPage}` : '';
   const _page = page ? `&page=${page}` : '';
 
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/projects?${_perPage}${_page}`,
-      {
-        cache: 'force-cache',
-      }
-    );
+    const response = await fetch(`${API_URL}/projects?${_perPage}${_page}`, {
+      next: { revalidate: 5 },
+    });
     const data = await response.json();
     return {
       projects: data.projects,
@@ -26,7 +25,7 @@ export const getProjects = async (perPage?: number, page?: number) => {
 export const getServices = async (slug?: string) => {
   const _slug = slug ? `?slug=${slug}` : '';
   try {
-    const response = await fetch(`http://localhost:3000/api/services${_slug}`, {
+    const response = await fetch(`${API_URL}/services${_slug}`, {
       next: { revalidate: 5 },
     });
     const data = await response.json();
@@ -43,18 +42,12 @@ export const getServices = async (slug?: string) => {
 };
 export const getProject = async (slug: string) => {
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/project?slug=${slug}`,
-      {
-        next: { revalidate: 5 },
-      }
-    );
+    const response = await fetch(`${API_URL}/project?slug=${slug}`, {
+      next: { revalidate: 5 },
+    });
     return await response.json();
   } catch (error) {
-    return {
-      services: null,
-      error: error,
-    };
+    return error;
   }
 };
 
@@ -73,4 +66,27 @@ export const contactSubmitHandler = async (data: ContactSubmission) => {
   );
 
   return response;
+};
+
+export const getFAQS = async () => {
+  try {
+    const response = await fetch(`${API_URL}/faqs`, {
+      next: { revalidate: 5 },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getOptions = async () => {
+  try {
+    const response = await fetch(`${API_URL}/options`, {
+      next: { revalidate: 5 },
+    });
+    return await response.json();
+  } catch (error) {
+    return error;
+  }
 };

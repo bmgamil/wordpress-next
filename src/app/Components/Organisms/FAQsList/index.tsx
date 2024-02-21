@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { Box } from '@mui/material';
 import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
 
 import Text from '../../Atoms/Text';
 import Accordion from '../../Molecules/Accordion';
@@ -15,7 +14,6 @@ type Props = {
 
 const FAQsList = ({ list }: Props) => {
   const [expandedId, setExpandedId] = useState('');
-  const t = useTranslations('faqs.list');
 
   const onChange = (id: string) => {
     if (expandedId === id) {
@@ -40,6 +38,9 @@ const FAQsList = ({ list }: Props) => {
             initial='hidden'
             whileInView='visible'
             viewport={{ once: true, amount: 0.8 }}
+            sx={{
+              borderBottom: '1px solid',
+            }}
             custom={i}
             key={item.q}
           >

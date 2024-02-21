@@ -57,7 +57,11 @@ const ProjectCard = (props: { project: Project }) => {
         />
       </Box>
 
-      <CustomLink href={`/project/${slug}`} title={t('view')} />
+      <CustomLink
+        className={classes.link}
+        href={`/project/${slug}`}
+        title={t('view')}
+      />
     </Box>
   );
 };

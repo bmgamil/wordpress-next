@@ -11,8 +11,12 @@ export const useStyles = makeStyles()((theme) => {
       padding: '2rem',
       borderRadius: handleBorderRadiusSize('xl'),
       height: '100%',
-      button: {
-        alignSelf: 'flex-start',
+    },
+    link: {
+      alignSelf: 'flex-start',
+      filter: `drop-shadow(0px 0px 6px rgba(0,0,0,0.6))`,
+      svg: {
+        filter: `drop-shadow(0px 0px 6px rgba(0,0,0,0.6))`,
       },
     },
 
@@ -25,6 +29,8 @@ export const useStyles = makeStyles()((theme) => {
         width: '100%',
         textOverflow: 'ellipsis',
         overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        filter: `drop-shadow(0px 0px 6px rgba(0,0,0,0.4))`,
       },
     },
 
@@ -37,6 +43,7 @@ export const useStyles = makeStyles()((theme) => {
         objectFit: 'contain',
         width: '100%',
         maxWidth: '300px',
+        filter: `drop-shadow(0px 0px 6px rgba(0,0,0,0.4))`,
       },
     },
   };

@@ -7,10 +7,12 @@ export const useStyles = makeStyles()((theme) => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      paddingBlock: '10dvh',
+      height: '55dvh',
 
-      [theme.breakpoints.up('md')]: {
-        height: '55dvh',
-        paddingBlock: '10dvh',
+      [theme.breakpoints.down('md')]: {
+        height: 'unset',
+        paddingBottom: 0,
       },
     },
     heading: {
@@ -33,6 +35,10 @@ export const useStyles = makeStyles()((theme) => {
         display: 'flex',
         alignItems: 'center',
         gap: '0.5rem',
+        [theme.breakpoints.down('md')]: {
+          justifyContent: 'center',
+          flexWrap: 'wrap',
+        },
       },
     },
   };

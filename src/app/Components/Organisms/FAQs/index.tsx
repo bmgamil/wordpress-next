@@ -3,10 +3,14 @@
 import Text from '@/app/Components/Atoms/Text';
 import { Box } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import FAQsList from '../FAQsList';
 import useStyles from './styles';
+import FAQsList from '../FAQsList';
 
-const FAQs = () => {
+type Props = {
+  list: FAQ[];
+};
+
+const FAQs = ({ list }: Props) => {
   const t = useTranslations('faqs');
   const { classes } = useStyles();
   return (
@@ -30,7 +34,7 @@ const FAQs = () => {
         </Text>
       </Box>
 
-      {/* <FAQsList /> */}
+      <FAQsList list={list} />
     </Box>
   );
 };

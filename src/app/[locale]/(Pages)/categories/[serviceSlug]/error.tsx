@@ -1,6 +1,5 @@
 'use client';
 import Error from '@/app/Components/Organisms/ErrorBoundry';
-import { Grid } from '@mui/material';
 
 const ErrorBoundry = ({
   error,

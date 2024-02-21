@@ -1,19 +1,16 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLocale } from 'next-intl';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useServerInsertedHTML } from 'next/navigation';
 
 import { AppWrapper, useAppContext } from '@/context';
-import {
-  LTRTheme,
-  RTLTheme,
-  darkTheme,
-  generateTheme,
-} from '@/app/theme/theme';
+import { orange } from '@mui/material/colors';
+import { Cairo, ClashDisplay } from '../theme/theme';
+// import { LTRTheme, RTLTheme } from '@/app/theme/theme';
 
 type Props = {
   children: React.ReactNode;
@@ -22,10 +19,39 @@ export default function ThemeRegistry(props: Props) {
   const locale = useLocale();
   const isAr = locale === 'ar';
   const { children } = props;
-  const options = { key: 'mui-theme' };
-  const { appMode } = useAppContext();
+  const { appMode, setAppMode } = useAppContext();
+  const options = useMemo(() => ({ key: `mui-theme-${appMode}` }), [appMode]);
 
-  const [theme, setTheme] = useState(generateTheme(isAr, appMode));
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: (appMode as 'light') || 'light',
+          background: {
+            default: appMode === 'dark' ? '#090D11' : '#FFF',
+          },
+          primary: {
+            main: '#F37820',
+            contrastText: orange[800],
+            light: appMode === 'dark' ? '#ffffff' : '#090D11',
+            dark: appMode === 'dark' ? '#090D11' : '#ffffff',
+          },
+          grey: {
+            '100': '#F2F4F7',
+          },
+        },
+        typography: {
+          fontFamily: `${
+            isAr ? Cairo.style.fontFamily : ClashDisplay.style.fontFamily
+          }, system-ui, Roboto , Helvetica , Arial , sans-serif `,
+          fontWeightLight: '300',
+          fontWeightRegular: '500',
+          fontWeightMedium: '600',
+          fontWeightBold: 'bold',
+        },
+      }),
+    [appMode]
+  );
 
   const [{ cache, flush }] = useState(() => {
     const cache = createCache(options);
@@ -46,6 +72,7 @@ export default function ThemeRegistry(props: Props) {
     };
     return { cache, flush };
   });
+
   useServerInsertedHTML(() => {
     const names = flush();
     if (names.length === 0) {
@@ -67,17 +94,23 @@ export default function ThemeRegistry(props: Props) {
   });
 
   useEffect(() => {
-    setTheme(generateTheme(isAr, appMode));
-  }, [isAr, appMode]);
+    if (typeof window !== 'undefined') {
+      const getThemeLocalStorage =
+        typeof window !== 'undefined' && window.localStorage.getItem('appMode');
+      const useThemeLocalStorage = getThemeLocalStorage
+        ? JSON.parse(getThemeLocalStorage)
+        : 'dark';
+      setAppMode && setAppMode(useThemeLocalStorage);
+    }
+    flush();
+  }, [appMode]);
 
   return (
-    <AppWrapper>
-      <CacheProvider value={cache}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          {children}
-        </ThemeProvider>
-      </CacheProvider>
-    </AppWrapper>
+    <CacheProvider value={cache}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
+    </CacheProvider>
   );
 }

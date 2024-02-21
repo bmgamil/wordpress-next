@@ -9,17 +9,19 @@ import useStyles from './style';
 type Props = {
   href: string;
   title: string;
+  textSize?: FontSize;
+  className?: string;
 };
 
 const CustomLink = (props: Props) => {
-  const { href, title } = props;
+  const { href, title, textSize, className } = props;
   const locale = useLocale();
   const isAr = locale === 'ar';
   const { classes } = useStyles();
 
   return (
-    <Link href={href as any} className={classes.container}>
-      <Text>{title}</Text>
+    <Link href={href as any} className={`${classes.container} ${className}`}>
+      <Text textSize={textSize}>{title}</Text>
       {!isAr ? (
         <NorthEastIcon fontSize='small' />
       ) : (

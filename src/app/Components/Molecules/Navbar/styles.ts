@@ -9,6 +9,8 @@ export const useStyles = makeStyles()((theme) => {
 
       [theme.breakpoints.down('md')]: {
         flexDirection: 'column',
+        flex: 1,
+        gap: '1.5rem',
       },
     },
   };

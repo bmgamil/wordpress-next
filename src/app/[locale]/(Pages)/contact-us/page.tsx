@@ -1,8 +1,10 @@
 import { Metadata } from 'next';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { Box, Container, Grid } from '@mui/material';
 
+import { getFAQS } from '@/app/lib/Controller';
 import Text from '@/app/Components/Atoms/Text';
+import FAQs from '@/app/Components/Organisms/FAQs';
 import { MotionDelay } from '@/app/lib/MotionVariants';
 import PageIntroText from '@/app/Components/Organisms/PageIntroText';
 import ContactForm from '@/app/Components/Organisms/ContactPage/ContactForm';
@@ -12,8 +14,9 @@ export const metadata: Metadata = {
   title: 'Contact Us',
 };
 
-const ContactUs = () => {
-  const t = useTranslations('contact.main');
+const ContactUs = async () => {
+  const t = await getTranslations('contact.main');
+  const faqs: FAQ[] = await getFAQS();
   return (
     <Container
       component='main'
@@ -50,6 +53,7 @@ const ContactUs = () => {
           <ContactForm />
         </Grid>
       </Grid>
+      <FAQs list={faqs} />
     </Container>
   );
 };

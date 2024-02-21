@@ -3,27 +3,62 @@
 import { motion } from 'framer-motion';
 import { Container, Grid } from '@mui/material';
 import { useLocale, useTranslations } from 'next-intl';
+import { RefObject, useEffect, useRef, useState } from 'react';
 
-import HomeMainBG from '@/../public/image/home-main-bg.png';
-import Button from '@/app/Components/Atoms/Button';
-import Image from '@/app/Components/Atoms/Image';
-import Text from '@/app/Components/Atoms/Text';
-import { FadeInVariant, RowVariant } from '@/app/lib/MotionVariants';
 import useStyles from './styles';
+import Text from '@/app/Components/Atoms/Text';
+import Image from '@/app/Components/Atoms/Image';
+import Button from '@/app/Components/Atoms/Button';
+import { FadeInVariant, RowVariant } from '@/app/lib/MotionVariants';
 
-const HomeMain = () => {
-  const t = useTranslations('home.main');
+type Props = {
+  mainOptions: options['home']['main'];
+};
+
+const HomeMain = ({ mainOptions }: Props) => {
   const bt = useTranslations('buttons');
   const locale = useLocale();
   const isAr = locale === 'ar';
-  const { classes } = useStyles({ isAr });
+  const [width, setWidth] = useState(0);
+  const containerRef: RefObject<HTMLElement> = useRef(null);
+  const { classes } = useStyles({ isAr, width });
+  const { description, image, title } = mainOptions;
+
+  useEffect(() => {
+    let viewPortWidth = window.document.documentElement.clientWidth;
+    setWidth((x) =>
+      containerRef && containerRef.current
+        ? viewPortWidth - containerRef.current.clientWidth
+        : 0
+    );
+    const handleResize = () => {
+      let viewPortWidth = window.document.documentElement.clientWidth;
+      setWidth((x) =>
+        containerRef && containerRef.current
+          ? viewPortWidth - containerRef.current.clientWidth
+          : 0
+      );
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
-    <Grid container className={classes.container} component='section'>
+    <Grid
+      container
+      className={classes.container}
+      component='section'
+      ref={containerRef}
+    >
       <Grid
         item
         xs={12}
         md={6}
+        className={classes.column1}
         component={motion.div}
         variants={RowVariant}
         initial='hidden'
@@ -32,25 +67,23 @@ const HomeMain = () => {
           duration: 1,
         }}
       >
-        <Container className={classes.column1}>
-          <Text textSize='3xl' textTransform='capitalize' textWeight='bold'>
-            {t('title')}
-          </Text>
+        <Text textSize='3xl' textTransform='capitalize' textWeight='bold'>
+          {title}
+        </Text>
 
-          <Text textSize='lg' textTransform='capitalize' textWeight='light'>
-            {t('description')}
-          </Text>
-          <Button
-            background='main'
-            radius='2xl'
-            isBold
-            sx={{
-              alignSelf: { xs: 'stretch', sm: 'unset' },
-            }}
-          >
-            {bt('explore')}
-          </Button>
-        </Container>
+        <Text textSize='lg' textWeight='light'>
+          {description}
+        </Text>
+        <Button
+          background='main'
+          radius='2xl'
+          isBold
+          sx={{
+            alignSelf: { xs: 'stretch', sm: 'unset' },
+          }}
+        >
+          {bt('explore')}
+        </Button>
       </Grid>
       <Grid
         xs={12}
@@ -66,7 +99,13 @@ const HomeMain = () => {
           delay: 1,
         }}
       >
-        <Image src={HomeMainBG} shadow placeholder='blur' alt='units' />
+        <Image
+          src={image.url}
+          shadow
+          height={image.height}
+          width={image.width}
+          alt='units'
+        />
       </Grid>
     </Grid>
   );

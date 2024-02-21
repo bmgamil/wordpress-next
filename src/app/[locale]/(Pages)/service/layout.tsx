@@ -11,7 +11,7 @@ import ServicePageServices from '@/app/Components/Organisms/ServicePage/Services
 export const metadata: Metadata = {
   title: {
     default: 'Services',
-    template: '%s - Services - UNITS',
+    template: '%s - Services',
   },
 };
 

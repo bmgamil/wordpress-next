@@ -53,7 +53,7 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
       gridTemplateRows: isHovered ? 'auto 1fr' : 'auto 0fr',
       gap: '0.5rem',
       transition: 'grid-template-rows 0.3s ease-in-out',
-      '& :nth-child(2)': {
+      '& :nth-of-type(2)': {
         overflow: 'hidden',
       },
     },

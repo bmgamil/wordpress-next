@@ -1,13 +1,16 @@
 'use client';
 
-import { useStyles } from './styles';
-import { ListItem, ListItemProps } from '@mui/material';
-import { useEffect, useRef } from 'react';
 import { useLocale } from 'next-intl';
-import { Link } from '@/navigation';
 import { motion } from 'framer-motion';
-import { FadeInVariant } from '@/app/lib/MotionVariants';
+import { useEffect, useRef } from 'react';
+import { Box, ListItem, ListItemProps } from '@mui/material';
+import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+
 import Text from '../Text';
+import { Link } from '@/navigation';
+import { useStyles } from './styles';
+import { FadeInVariant } from '@/app/lib/MotionVariants';
 
 type Props = ListItemProps & {
   to: string;
@@ -35,17 +38,18 @@ const NavLink = (props: Props) => {
   const { classes } = useStyles({ isFooter, fontSize });
   const linkRef = useRef<HTMLLIElement>(null);
   const locale = useLocale();
+  const isAr = locale === 'ar';
+
   useEffect(() => {
     if (isActive && setActiveLine && linkRef && linkRef.current) {
       const item = linkRef.current;
-      const isAr = locale === 'ar';
       const linkAxis = Math.floor(
         isAr ? item.offsetLeft + item.offsetWidth : item.offsetLeft
       );
       const linkWidth = Math.floor(item.offsetWidth);
       setActiveLine(linkAxis, linkWidth);
     }
-  }, [isActive, locale]);
+  }, [isActive, isAr]);
 
   return (
     <ListItem
@@ -65,6 +69,13 @@ const NavLink = (props: Props) => {
     >
       <Link href={to as '/' | '/pathnames'} target={target}>
         <Text className={classes.text}>{children}</Text>
+        <Box className={classes.icon}>
+          {isAr ? (
+            <ArrowCircleLeftOutlinedIcon />
+          ) : (
+            <ArrowCircleRightOutlinedIcon />
+          )}
+        </Box>
       </Link>
     </ListItem>
   );

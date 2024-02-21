@@ -27,34 +27,19 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
         filter: !isFooter ? 'drop-shadow(0px 0px 6px rgba(0,0,0,0.6))' : '',
       },
       [theme.breakpoints.down('md')]: {
+        fontSize: handleFontSize('lg'),
         transitionProperty: 'transform',
         transitionDuration: '0.3s',
         transitionTimingFunction: 'ease-in-out',
-        justifyContent: 'center',
         position: 'relative',
-        width: 'fit-content',
-        '&::after': {
-          content: "''",
-          position: 'absolute',
-          bottom: -2,
-          left: '5%',
-          width: '90%',
-          height: 3,
-          transform: 'scaleX(0)',
-          transitionProperty: 'transform',
-          transitionDuration: '0.2s',
-          transitionTimingFunction: 'ease-in-out',
-          background: '#fff',
-          borderRadius: 4,
-        },
+        borderBottom: !isFooter ? '1px solid' : '',
+
         a: {
           filter: 'unset',
-        },
-        '&:hover': {
-          transform: 'scale(1.1) ',
-          '&::after': {
-            transform: 'scaleX(1) ',
-          },
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '100%',
         },
       },
     },
@@ -67,6 +52,18 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
       fontWeight: 'inherit',
       textWrap: isFooter ? 'wrap' : 'nowrap',
       whiteSpace: isFooter ? 'wrap' : 'nowrap',
+    },
+    icon: {
+      svg: {
+        fontSize: handleFontSize('xl'),
+      },
+
+      [theme.breakpoints.down('md')]: {
+        display: isFooter ? 'none' : '',
+      },
+      [theme.breakpoints.up('md')]: {
+        display: 'none',
+      },
     },
   };
 });

@@ -11,10 +11,15 @@ import HomeAbout from '@/../public/image/home-about.jpg';
 import SectionRoundedTitle from '@/app/Components/Molecules/SectionRoundedTitle';
 import { MotionDelay, RowVariant } from '@/app/lib/MotionVariants';
 
-const HomeAboutUs = () => {
+type Props = {
+  aboutOptions: options['home']['about'];
+};
+
+const HomeAboutUs = ({ aboutOptions }: Props) => {
   const { classes } = useStyles();
   const t = useTranslations('home.about');
   const bt = useTranslations('buttons');
+  const { description, image } = aboutOptions;
   return (
     <Box className={classes.container} component={motion.section}>
       <Grid container justifyContent='space-between' rowGap={3}>
@@ -29,7 +34,12 @@ const HomeAboutUs = () => {
           viewport={{ once: true, amount: 0.8 }}
           custom={2}
         >
-          <Image src={HomeAbout} alt={t('title')} placeholder='blur' />
+          <Image
+            src={image.url}
+            alt={t('title')}
+            width={image.width}
+            height={image.height}
+          />
         </Grid>
         <Grid item md={7} className={classes.column2}>
           <SectionRoundedTitle
@@ -61,11 +71,10 @@ const HomeAboutUs = () => {
           <Text
             textWeight='regular'
             textSize='base'
-            textTransform='capitalize'
             animate
             delay={MotionDelay.lg}
           >
-            {t('description')}
+            {description}
           </Text>
 
           <Button

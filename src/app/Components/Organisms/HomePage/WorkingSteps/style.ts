@@ -39,11 +39,11 @@ export const useStyles = makeStyles()((theme) => {
     },
 
     column2: {
-      borderRadius: '24px',
-      overflow: 'hidden',
       img: {
+        borderRadius: '24px',
         objectFit: 'cover',
         height: '100%',
+        boxShadow: theme.shadows[4],
       },
       [theme.breakpoints.down('md')]: {
         order: 1,

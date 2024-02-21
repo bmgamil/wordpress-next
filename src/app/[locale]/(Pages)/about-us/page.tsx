@@ -3,8 +3,9 @@ import { Box, Container } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
 
 import Text from '@/app/Components/Atoms/Text';
-import { getServices } from '@/app/lib/Controller';
+import FAQs from '@/app/Components/Organisms/FAQs';
 import { MotionDelay } from '@/app/lib/MotionVariants';
+import { getFAQS, getServices } from '@/app/lib/Controller';
 import PageIntroText from '@/app/Components/Organisms/PageIntroText';
 import AboutService from '@/app/Components/Organisms/AboutPage/Services';
 import Introduction from '@/app/Components/Organisms/AboutPage/Introduction';
@@ -19,6 +20,9 @@ const AboutUs = async () => {
   const {
     services: { services },
   } = await getServices();
+
+  const faqs: FAQ[] = await getFAQS();
+
   return (
     <Container
       component='main'
@@ -50,6 +54,7 @@ const AboutUs = async () => {
       <Introduction />
       <TickerWithTitle />
       <AboutService services={services} />
+      <FAQs list={faqs} />
     </Container>
   );
 };

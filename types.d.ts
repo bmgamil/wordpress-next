@@ -27,9 +27,9 @@ type ServiceBlog = {
 };
 
 type WorkingStep = {
-  number: string;
   title: string;
   description: string;
+  image: optionMedia;
 };
 
 type SingleContact = {
@@ -47,7 +47,7 @@ type ServiceDetail = {
   content: string | TrustedHTML;
   projects: Project[];
   featured_media: ProjectMedia;
-  faq: { q: string; a: string }[];
+  faq: FAQ[];
   seo: SEO;
 };
 
@@ -130,5 +130,53 @@ type SEO = {
         type: string;
       }
     ];
+  };
+};
+
+type FAQ = {
+  id?: string;
+  q: string;
+  a: string;
+};
+
+type optionMedia = {
+  id: number;
+  title: string;
+  url: string;
+  link: 'https://units.a2hosted.com/next/rectangle/';
+  width: number;
+  height: number;
+};
+
+type optionFooterLinks = {
+  icon?: optionMedia;
+  text: string;
+  url: string;
+};
+
+type options = {
+  header: {
+    logo: optionMedia;
+  };
+  footer: {
+    logo: optionMedia;
+    social: optionFooterLinks[];
+    contactUs: optionFooterLinks[];
+  };
+  home: {
+    main: {
+      title: string;
+      description: string;
+      image: optionMedia;
+    };
+    about: {
+      description: string;
+      image: optionMedia;
+    };
+    steps: WorkingStep[];
+    ourWork: {
+      title: string;
+      description: string;
+    };
   };
 };

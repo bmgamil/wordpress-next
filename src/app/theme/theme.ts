@@ -2,17 +2,17 @@ import { orange } from '@mui/material/colors';
 import { createTheme } from '@mui/material/styles';
 import localFont from 'next/font/local';
 
-const ClashDisplay = localFont({
+export const ClashDisplay = localFont({
   src: '../fonts/ClashDisplay-Variable.ttf',
   display: 'swap',
 });
 
-const Cairo = localFont({
+export const Cairo = localFont({
   src: '../fonts/Cairo.ttf',
   display: 'swap',
 });
 
-export const darkTheme = {
+export const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     background: {
@@ -31,29 +31,10 @@ export const darkTheme = {
   shape: {
     borderRadius: 6,
   },
-};
-export const lightTheme = {
-  palette: {
-    mode: 'light',
-    background: {
-      default: '#EDED',
-    },
-    primary: {
-      main: '#F37820',
-      contrastText: orange[800],
-      light: '#090D11',
-      dark: '#ffffff',
-    },
-    grey: {
-      '100': '#F2F4F7',
-    },
-  },
-  shape: {
-    borderRadius: 6,
-  },
-};
+});
 
-export const LTRTheme = {
+export const LTRTheme = createTheme({
+  ...darkTheme,
   typography: {
     fontFamily: `${ClashDisplay.style.fontFamily}, system-ui, Roboto , Helvetica , Arial , sans-serif `,
     fontWeightLight: '300',
@@ -61,9 +42,11 @@ export const LTRTheme = {
     fontWeightMedium: '600',
     fontWeightBold: 'bold',
   },
-};
+});
 
-export const RTLTheme = {
+export const RTLTheme = createTheme({
+  ...darkTheme,
+
   typography: {
     fontFamily: `${Cairo.style.fontFamily}, system-ui, Roboto , Helvetica , Arial , sans-serif `,
     fontWeightLight: '300',
@@ -71,32 +54,4 @@ export const RTLTheme = {
     fontWeightMedium: '600',
     fontWeightBold: 'bold',
   },
-};
-
-export const generateTheme = (isAr: boolean, mode: 'dark' | 'light') => {
-  if (mode === 'dark') {
-    if (isAr) {
-      // @ts-ignore
-      const theme = createTheme({ ...darkTheme, ...RTLTheme });
-
-      return theme;
-    } else {
-      // @ts-ignore
-      const theme = createTheme({ ...darkTheme, ...LTRTheme });
-
-      return theme;
-    }
-  } else {
-    if (isAr) {
-      // @ts-ignore
-      const theme = createTheme({ ...lightTheme, ...RTLTheme });
-
-      return theme;
-    } else {
-      // @ts-ignore
-      const theme = createTheme({ ...lightTheme, ...LTRTheme });
-
-      return theme;
-    }
-  }
-};
+});

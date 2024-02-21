@@ -5,25 +5,25 @@ import {
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from 'react';
 
 type Context = {
-  appMode: 'dark' | 'light';
-  setAppMode?: Dispatch<SetStateAction<'dark' | 'light'>>;
+  appMode: 'dark' | 'light' | string;
+  setAppMode?: Dispatch<SetStateAction<'dark' | 'light' | string>>;
 };
+
+// const getThemeLocalStorage =
+//   typeof window !== 'undefined' && window.localStorage.getItem('appMode');
+// const useThemeLocalStorage = getThemeLocalStorage
+//   ? JSON.parse(getThemeLocalStorage)
+//   : 'dark';
 
 const AppContext = createContext<Context>({ appMode: 'dark' });
 
 export function AppWrapper({ children }: { children: React.ReactNode }) {
-  const getThemeLocalStorage = window?.localStorage.getItem('appMode');
-  const useThemeLocalStorage = getThemeLocalStorage
-    ? JSON.parse(getThemeLocalStorage)
-    : 'dark';
-
-  const [appMode, setAppMode] = useState<'dark' | 'light'>(
-    useThemeLocalStorage
-  );
+  const [appMode, setAppMode] = useState('');
 
   return (
     <AppContext.Provider

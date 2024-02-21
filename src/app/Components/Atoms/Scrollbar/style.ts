@@ -11,6 +11,7 @@ export const useStyles = makeStyles()((theme) => {
       // borderRadius: '10px',
       background: '#F37820',
       transformOrigin: ' 0%',
+      zIndex: 9999,
     },
   };
 });

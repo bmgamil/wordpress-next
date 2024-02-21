@@ -1,5 +1,5 @@
 'use client';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Box, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
 
@@ -15,13 +15,20 @@ import {
   MotionDelay,
   RowVariant,
 } from '@/app/lib/MotionVariants';
+import { useState } from 'react';
 
-const HomeWorkingSteps = () => {
+type Props = {
+  stepsOptions: options['home']['steps'];
+};
+
+const HomeWorkingSteps = ({ stepsOptions }: Props) => {
   const t = useTranslations('home.steps');
   const bt = useTranslations('buttons');
   const { classes } = useStyles();
+  const [selectorIndex, setSelectorIndex] = useState(0);
+
   return (
-    <Box className={classes.container} component='section'>
+    <Box className={classes.container} component={motion.section} layout>
       <Box className={classes.header}>
         <SectionRoundedTitle
           number={t('number')}
@@ -46,7 +53,11 @@ const HomeWorkingSteps = () => {
       </Box>
       <Grid container justifyContent='space-between' rowGap={3}>
         <Grid item md={6} className={classes.column1}>
-          <WorkingStepsList />
+          <WorkingStepsList
+            selectorIndex={selectorIndex}
+            setSelectorIndex={setSelectorIndex}
+            steps={stepsOptions}
+          />
         </Grid>
         <Grid
           item
@@ -61,7 +72,24 @@ const HomeWorkingSteps = () => {
             duration: MotionDelay.sm,
           }}
         >
-          <Image src={HomeSteps} alt={t('title')} placeholder='blur' />
+          <Box
+            component={motion.div}
+            variants={RowVariant}
+            initial='hidden'
+            animate='visible'
+            key={selectorIndex}
+            layout
+            transition={{
+              duration: MotionDelay.sm,
+            }}
+          >
+            <Image
+              src={stepsOptions[selectorIndex].image.url}
+              alt={t('title')}
+              width={stepsOptions[selectorIndex].image.width}
+              height={stepsOptions[selectorIndex].image.height}
+            />
+          </Box>
         </Grid>
       </Grid>
       <Button textColor='main' radius='2xl' isBold>

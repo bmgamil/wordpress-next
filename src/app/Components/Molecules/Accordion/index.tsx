@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
+import { useStyles } from './style';
 
 type Props = AccordionProps & {
   header: React.ReactNode;
@@ -21,22 +22,14 @@ const Accordion = (props: Props) => {
   const { children, header, expandedId, setExpandedId, itemId, ...proprties } =
     props;
   const expanded = itemId === expandedId;
+  const { classes } = useStyles();
 
   return (
     <MUIAccordion
       expanded={expanded}
       slotProps={{ transition: { unmountOnExit: true } }}
       onChange={() => setExpandedId(itemId)}
-      sx={{
-        background: 'transparent',
-        boxShadow: 'none',
-        width: '100%',
-        padding: '0 !important',
-        borderBottom: '1px solid',
-        '&::before': {
-          height: 0,
-        },
-      }}
+      className={classes.accordion}
       disableGutters
       {...proprties}
     >
