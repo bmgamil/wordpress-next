@@ -6,22 +6,18 @@ export const useStyles = makeStyles()((theme) => {
     container: {
       display: 'flex',
       flexDirection: 'column',
-      gap: '0.5rem',
-
-      button: {
-        alignSelf: 'flex-start',
-        paddingLeft: '0',
-      },
-    },
-    image: {
+      justifyContent: 'space-between',
+      gap: '1rem',
+      padding: '2rem',
       borderRadius: handleBorderRadiusSize('xl'),
-      overflow: 'hidden',
+      height: '100%',
+    },
+
+    header: {
       display: 'flex',
-      mask: 'linear-gradient(to top, transparent, white 50%)',
-      img: {
-        objectFit: 'cover',
-        width: '100%',
-      },
+      flexDirection: 'column',
+      gap: '0.5rem',
+      textTransform: 'capitalize',
     },
   };
 });

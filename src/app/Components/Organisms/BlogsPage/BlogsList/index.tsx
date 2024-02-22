@@ -9,6 +9,7 @@ import Pagination from '@/app/Components/Molecules/Pagination';
 import { useRouter } from '@/navigation';
 import { useEffect, useState } from 'react';
 import LoadingCircular from '@/app/Components/Molecules/Loading/LoadingCircular';
+import BlogSkeleton from '@/app/Components/Molecules/BlogSkeleton';
 
 type Props = {
   list: Blog[];
@@ -27,7 +28,7 @@ const BlogsList = (props: Props) => {
   const handlePagination = (value: number) => {
     setPageNumber((prev) => value);
     setLoading(true);
-    router.replace(`${path}?page=${value}` as any);
+    router.push(`${path}?page=${value}` as any, { scroll: true });
   };
 
   useEffect(() => {
@@ -36,44 +37,48 @@ const BlogsList = (props: Props) => {
 
   return (
     <Grid container spacing={2} sx={{ height: '100%' }}>
-      {loading ? (
-        <LoadingCircular />
-      ) : (
-        list.map((blog, i) => {
-          if (i === 0) {
+      {loading
+        ? Array.from(Array(3)).map((_item, i) => {
             return (
-              <Grid
-                component={motion.div}
-                variants={RowVariant}
-                initial='hidden'
-                whileInView='visible'
-                viewport={{ once: true, amount: 0.8 }}
-                item
-                xs={12}
-                key={blog.id}
-              >
-                <BlogCard blog={blog} />
+              <Grid key={i} item xs={12} md={i === 0 ? undefined : 6}>
+                <BlogSkeleton index={i} />
               </Grid>
             );
-          } else {
-            return (
-              <Grid
-                component={motion.div}
-                variants={RowVariant}
-                initial='hidden'
-                whileInView='visible'
-                viewport={{ once: true, amount: 0.8 }}
-                item
-                xs={12}
-                md={6}
-                key={blog.id}
-              >
-                <BlogCard blog={blog} />
-              </Grid>
-            );
-          }
-        })
-      )}
+          })
+        : list.map((blog, i) => {
+            if (i === 0) {
+              return (
+                <Grid
+                  component={motion.div}
+                  variants={RowVariant}
+                  initial='hidden'
+                  whileInView='visible'
+                  viewport={{ once: true, amount: 0.8 }}
+                  item
+                  xs={12}
+                  key={blog.id}
+                >
+                  <BlogCard blog={blog} />
+                </Grid>
+              );
+            } else {
+              return (
+                <Grid
+                  component={motion.div}
+                  variants={RowVariant}
+                  initial='hidden'
+                  whileInView='visible'
+                  viewport={{ once: true, amount: 0.8 }}
+                  item
+                  xs={12}
+                  md={6}
+                  key={blog.id}
+                >
+                  <BlogCard blog={blog} />
+                </Grid>
+              );
+            }
+          })}
       {total > 1 && (
         <Grid
           item

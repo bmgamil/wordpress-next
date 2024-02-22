@@ -43,9 +43,9 @@ export const useStyles = makeStyles<Props>()((theme, { isAr, width }) => {
       display: 'flex',
       justifyContent: 'flex-end',
       img: {
-        transform: `${isAr ? 'rotateY(180deg)' : ''} translateX(calc(20% + ${
+        transform: `${isAr ? 'rotateY(180deg)' : ''} translateX( ${
           width / 2
-        }px))`,
+        }px)`,
       },
       [theme.breakpoints.down('md')]: {
         img: {

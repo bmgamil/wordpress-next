@@ -23,7 +23,7 @@ export const useStyles = makeStyles<Props>()((theme, { mode, href }) => {
       textWrap: 'nowrap',
       whiteSpace: 'nowrap',
       textDecoration: 'none',
-      cursor: href ? 'pointer' : 'auto',
+      pointerEvents: href ? 'auto' : 'none',
     },
   };
 });
