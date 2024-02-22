@@ -1,14 +1,13 @@
 'use client';
 
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+
 import { Grid } from '@mui/material';
 import BlogCard from '../../SingleBlog';
-import { Blogs } from '@/app/lib/data';
-import { motion } from 'framer-motion';
+import { useRouter } from '@/navigation';
 import { RowVariant } from '@/app/lib/MotionVariants';
 import Pagination from '@/app/Components/Molecules/Pagination';
-import { useRouter } from '@/navigation';
-import { useEffect, useState } from 'react';
-import LoadingCircular from '@/app/Components/Molecules/Loading/LoadingCircular';
 import BlogSkeleton from '@/app/Components/Molecules/BlogSkeleton';
 
 type Props = {

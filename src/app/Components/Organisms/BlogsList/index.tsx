@@ -1,8 +1,6 @@
 'use client';
 
 import { Grid } from '@mui/material';
-import BlogCard from '../SingleBlog';
-import { Blogs } from '@/app/lib/data';
 import { RowVariant } from '@/app/lib/MotionVariants';
 import { motion } from 'framer-motion';
 
@@ -24,7 +22,7 @@ const BlogsList = () => {
             md={4}
             key={i}
           >
-            <BlogCard blog={Blogs[0]} key={i} />
+            {/* <BlogCard blog={Blogs[0]} key={i} /> */}
           </Grid>
         );
       })}
