@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { Box, Container } from '@mui/material';
+import { Container } from '@mui/material';
 
 import { getServices } from '@/app/lib/Controller';
 import CategoryWrapper from '@/app/Components/Organisms/CategoryWrapper';

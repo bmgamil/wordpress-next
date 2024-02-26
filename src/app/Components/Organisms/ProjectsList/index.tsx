@@ -12,6 +12,7 @@ import { useStyles } from './style';
 import { useEffect, useState } from 'react';
 import LoadingCircular from '@/app/Components/Molecules/Loading/LoadingCircular';
 import ProjectSkeleton from '../../Molecules/ProjectSkeleton';
+import { AnimatePresence } from 'framer-motion';
 type Props = {
   list: Project[];
   isLatestList?: boolean;
@@ -44,25 +45,26 @@ const ProjectsList = ({
   return (
     <Box className={classes.container}>
       <Grid container spacing={3} flexGrow={1}>
-        {loading
-          ? Array.from(Array(3)).map((_item, i) => {
-              return (
-                <Grid key={i} item xs={12} md={i === 2 ? 12 : 6}>
-                  <ProjectSkeleton index={i} />
-                </Grid>
-              );
-            })
-          : list.map((project, i) => {
-              const isInteger =
-                Number.isInteger((i + 1) / 3) || list.length === 1;
+        <AnimatePresence>
+          {loading
+            ? Array.from(Array(3)).map((_item, i) => {
+                return (
+                  <Grid key={i} item xs={12} md={i === 2 ? 12 : 6}>
+                    <ProjectSkeleton index={i} />
+                  </Grid>
+                );
+              })
+            : list.map((project, i) => {
+                const isInteger =
+                  Number.isInteger((i + 1) / 3) || list.length === 1;
 
-              return (
-                <Grid key={project.id} item xs={12} md={isInteger ? 12 : 6}>
-                  <ProjectCard project={project} />
-                </Grid>
-              );
-            })}
-
+                return (
+                  <Grid key={project.id} item xs={12} md={isInteger ? 12 : 6}>
+                    <ProjectCard project={project} />
+                  </Grid>
+                );
+              })}
+        </AnimatePresence>
         {isLatestList && (
           <Grid
             item

@@ -44,6 +44,7 @@ const ServicesBlogsList = (props: Props) => {
       )}
 
       {list.map((item, i) => {
+        const title = item.name || item.title;
         return (
           <motion.div
             variants={RowVariant}
@@ -54,11 +55,11 @@ const ServicesBlogsList = (props: Props) => {
             transition={{
               duration: 0.3,
             }}
-            key={item.title}
+            key={title}
           >
             <SingleServiceBlog
               href={`/${isBlog ? 'blogs' : 'service'}/${item.slug}`}
-              title={item.title.replace('#038;', '')}
+              title={title.replace('#038;', '')}
               iconSize={iconSize}
               textSize={textSize}
               isAr={isAr}

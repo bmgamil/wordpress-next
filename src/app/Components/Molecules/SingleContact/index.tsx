@@ -1,8 +1,8 @@
 'use client';
-import { Box, useTheme } from '@mui/material';
-import Icon, { IconName } from '../../Atoms/Icon';
-import Text from '../../Atoms/Text';
 import { motion } from 'framer-motion';
+import { Box, useTheme } from '@mui/material';
+
+import Text from '../../Atoms/Text';
 import { RowVariant } from '@/app/lib/MotionVariants';
 
 type Props = {

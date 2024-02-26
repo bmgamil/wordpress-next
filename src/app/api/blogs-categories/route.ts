@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
         const category: BlogCategory = {
           id: data[i].id,
           title: data[i].title,
+          name: data[i].name,
           slug: data[i].slug,
         };
 

@@ -34,6 +34,7 @@ const ProjectCard = (props: { project: Project }) => {
       variants={RowVariant}
       initial='hidden'
       whileInView='visible'
+      exit='exit'
       viewport={{ once: true, amount: 0.3 }}
       className={classes.container}
       sx={{

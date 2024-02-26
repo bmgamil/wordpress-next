@@ -42,6 +42,7 @@ type SingleContact = {
 type ServiceDetail = {
   id: number;
   title: string;
+  name?: string;
   type: string;
   slug: string;
   content: string | TrustedHTML;
@@ -65,6 +66,7 @@ type Blog = {
 type BlogCategory = {
   id: number;
   title: string;
+  name?: string;
   slug: string;
   posts?: Blog[];
   seo?: SEO;

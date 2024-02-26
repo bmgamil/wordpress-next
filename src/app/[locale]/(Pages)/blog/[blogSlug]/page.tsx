@@ -1,8 +1,8 @@
-import { getBlogBySlug, getCategoryBlogs } from '@/app/lib/Controller';
-import BlogsList from '@/app/Components/Organisms/BlogsPage/BlogsList';
-import Text from '@/app/Components/Atoms/Text';
 import { Metadata } from 'next';
 import { Container } from '@mui/material';
+
+import Text from '@/app/Components/Atoms/Text';
+import { getBlogBySlug } from '@/app/lib/Controller';
 
 type Props = {
   params: { blogSlug: string };

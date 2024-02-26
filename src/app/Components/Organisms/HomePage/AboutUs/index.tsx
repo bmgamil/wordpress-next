@@ -7,7 +7,6 @@ import useStyles from './style';
 import Button from '@/app/Components/Atoms/Button';
 import Image from '@/app/Components/Atoms/Image';
 import Text from '@/app/Components/Atoms/Text';
-import HomeAbout from '@/../public/image/home-about.jpg';
 import SectionRoundedTitle from '@/app/Components/Molecules/SectionRoundedTitle';
 import { MotionDelay, RowVariant } from '@/app/lib/MotionVariants';
 

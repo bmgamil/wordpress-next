@@ -28,7 +28,7 @@ const HomeProjects = (props: Props) => {
   } = props;
 
   const navigateToProjects = () => {
-    router.push('/blogs' as '/pathnames');
+    router.push('/projects' as '/pathnames');
   };
 
   return (

@@ -1,14 +1,11 @@
 import type { Metadata } from 'next';
 import { Box } from '@mui/material';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import { NextIntlClientProvider } from 'next-intl';
 
 import '../globals.css';
 import ThemeRegistry from '../ThemeRegistery';
 import Header from '../Components/Organisms/Header';
 import Footer from '../Components/Organisms/Footer';
-import { AppWrapper } from '@/context';
 import ScrollBar from '../Components/Atoms/Scrollbar';
 import { getOptions } from '../lib/Controller';
 import { getMessages } from 'next-intl/server';
