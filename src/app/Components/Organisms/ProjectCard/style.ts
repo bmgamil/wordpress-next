@@ -31,6 +31,10 @@ export const useStyles = makeStyles()((theme) => {
         overflow: 'hidden',
         whiteSpace: 'nowrap',
         filter: `drop-shadow(0px 0px 6px rgba(0,0,0,0.4))`,
+
+        [theme.breakpoints.down('sm')]: {
+          whiteSpace: 'wrap',
+        },
       },
     },
 

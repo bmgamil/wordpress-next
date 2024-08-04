@@ -26,6 +26,7 @@ export const useStyles = makeStyles<Props>()((theme, { isAr, isOpen }) => {
       justifyContent: 'space-between',
       gap: '0.8rem',
       paddingBlock: '1rem',
+
       [theme.breakpoints.down('md')]: {
         marginBottom: '2rem',
         display: 'grid',
@@ -33,6 +34,10 @@ export const useStyles = makeStyles<Props>()((theme, { isAr, isOpen }) => {
         gridTemplateRows: isOpen ? 'auto 1fr' : 'auto 0fr',
         transition: 'grid-template-rows 0.3s ease-in-out',
         height: '100%',
+
+        img: {
+          maxWidth: '80%',
+        },
       },
     },
     navContainer: {

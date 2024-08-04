@@ -46,7 +46,7 @@ const ProjectCategoryNav = (props: Props) => {
       <Dropdown
         className={classes.dropdown}
         list={categories}
-        currentValue={currentValue}
+        currentValue={currentValue.replace('#038;', '')}
         onChange={(slug, value) => {
           const url: any = slug ? `?category=${slug}` : '/projects';
           setCurrentValue(value);

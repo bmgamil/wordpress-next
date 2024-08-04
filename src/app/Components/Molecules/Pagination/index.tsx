@@ -20,9 +20,14 @@ const Pagination = ({ total, handleChange, currentPage }: Props) => {
       color='primary'
       variant='outlined'
       page={Number(currentPage)}
-      onChange={(_e, value) => handleChange(value)}
+      onChange={(_e, value) => {
+        if (currentPage !== value) handleChange(value);
+      }}
       renderItem={(item) => (
         <PaginationItem
+          sx={{
+            lineHeight: 0,
+          }}
           slots={{
             previous: isAr ? ArrowForwardIcon : ArrowBackIcon,
             next: isAr ? ArrowBackIcon : ArrowForwardIcon,
