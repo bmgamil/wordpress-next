@@ -8,7 +8,7 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
   const { isAr } = props;
   return {
     container: {
-      maxWidth: '100%',
+      width: '100%',
       overflow: 'hidden',
       mask: 'linear-gradient(to right, transparent, white 10%, white 90%, transparent)',
     },
@@ -19,7 +19,7 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
       gap: '3rem',
       padding: 0,
       animation: 'ticker 15s infinite linear',
-      width: 'max-content',
+      contain: 'inline-size',
       '@keyframes ticker': {
         from: {
           transform: 'translateX(0)',

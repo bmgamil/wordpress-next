@@ -16,7 +16,7 @@ export const generateMetadata = async ({
     services: { services },
   } = await getServices(serviceSlug);
 
-  const seo = services.seo;
+  const seo = services?.seo;
 
   return {
     ...seo,
@@ -27,6 +27,10 @@ const SingleService = async ({ params: { serviceSlug } }: Props) => {
   const {
     services: { services },
   } = await getServices(serviceSlug);
+
+  // if (!services) {
+  //   return <div></div>;
+  // }
 
   return <ServiceDetail service={services} />;
 };

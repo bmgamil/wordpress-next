@@ -15,13 +15,19 @@ type Props = {
 };
 
 const ServiceDetail = (props: Props) => {
-  const { content, projects, title, featured_media, faq } = props.service;
+  const { content, projects, title, featured_media, faq } = {
+    ...props.service,
+  };
   const { source_url, media_details, placeholder } = { ...featured_media };
   const { height, width } = { ...media_details };
 
   const { classes } = useStyles();
   const markup = { __html: content };
   const t = useTranslations('services');
+
+  if (!props.service) {
+    return <div></div>;
+  }
 
   return (
     <>
@@ -60,8 +66,8 @@ const ServiceDetail = (props: Props) => {
       <Grid item xs={12}>
         <ServiceFAQs list={faq} />
       </Grid>
-      <Grid item xs={12}>
-        {!!projects.length && (
+      {!!projects.length && (
+        <Grid item xs={12}>
           <Carousel listLength={projects.length} title={t('related')}>
             {projects.map((project, i) => {
               return (
@@ -71,8 +77,8 @@ const ServiceDetail = (props: Props) => {
               );
             })}
           </Carousel>
-        )}
-      </Grid>
+        </Grid>
+      )}
     </>
   );
 };

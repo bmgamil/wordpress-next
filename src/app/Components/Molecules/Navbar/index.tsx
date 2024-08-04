@@ -13,6 +13,7 @@ const Navbar = ({ setIsOpen }: { setIsOpen: Function }) => {
   const { classes } = useStyles();
   const pathname = usePathname();
   const [activeLine, setActiveLine] = useState({ width: 0, left: 0 });
+
   const t = useTranslations('header.navbar');
   const listRef = useRef<HTMLUListElement>(null);
   const setActiveLineDimenstions = (left: number, width: number) => {
@@ -42,8 +43,10 @@ const Navbar = ({ setIsOpen }: { setIsOpen: Function }) => {
             isActive={isActive}
             setActiveLine={setActiveLineDimenstions}
             fontSize='base'
+            currentActive={pathname}
             index={i}
             onPointerUp={() => setIsOpen(false)}
+            hasIcon
           >
             {t(navlink.title as any)}
           </NavLink>

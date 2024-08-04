@@ -4,16 +4,18 @@ import { makeStyles } from 'tss-react/mui';
 type Props = {
   isFooter?: boolean;
   fontSize: FontSize;
+  isProjectCate?: boolean;
 };
 
 export const useStyles = makeStyles<Props>()((theme, props) => {
-  const { isFooter, fontSize } = props;
+  const { isFooter, fontSize, isProjectCate } = props;
   return {
     link: {
       fontSize: handleFontSize(fontSize),
       textTransform: 'capitalize',
       textWrap: 'nowrap',
       whiteSpace: 'nowrap',
+      width: isProjectCate ? 'fit-content' : undefined,
       fontWeight: !isFooter
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightLight,
@@ -27,7 +29,7 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
         filter: !isFooter ? 'drop-shadow(0px 0px 6px rgba(0,0,0,0.6))' : '',
       },
       [theme.breakpoints.down('md')]: {
-        fontSize: handleFontSize('lg'),
+        fontSize: !isFooter ? handleFontSize('lg') : '',
         transitionProperty: 'transform',
         transitionDuration: '0.3s',
         transitionTimingFunction: 'ease-in-out',

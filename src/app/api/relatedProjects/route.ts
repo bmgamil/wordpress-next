@@ -2,26 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getPlaiceholder } from 'plaiceholder';
 
 export async function GET(request: NextRequest) {
-  const perPage = request.nextUrl.searchParams.get('per_page')
-    ? `&per_page=${request.nextUrl.searchParams.get('per_page')}`
-    : '';
+  const id = request.nextUrl.searchParams.get('id');
 
-  const page = request.nextUrl.searchParams.get('page')
-    ? `&page=${request.nextUrl.searchParams.get('page')}`
-    : '';
+  const title = request.nextUrl.searchParams.get('title');
 
-  const category = request.nextUrl.searchParams.get('types_cat_slug')
-    ? `&types_cat_slug=${request.nextUrl.searchParams.get('types_cat_slug')}`
-    : '';
-
-  const url = `https://units.a2hosted.com/next/wp-json/wp/v2/project?${perPage}${page}${category}`;
+  const url = `https://units.a2hosted.com/next/wp-json/wp/v2/project?exclude=${id}&post_type=project&orderby=relevance&search=${title}`;
   try {
     const response = await fetch(url, {
       next: {
         revalidate: 5,
       },
     });
-    const totalPages = response.headers.get('x-wp-totalpages');
 
     const data: Project[] = await response.json();
     const newData: Project[] = [];
@@ -43,15 +34,8 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({
-      projects: newData,
-      totalPages,
-      error: null,
-    });
+    return NextResponse.json({ data: newData });
   } catch (error) {
-    return NextResponse.json({
-      projects: null,
-      error: error,
-    });
+    return NextResponse.json(error);
   }
 }

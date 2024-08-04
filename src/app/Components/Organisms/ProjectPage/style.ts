@@ -4,12 +4,12 @@ import { makeStyles } from 'tss-react/mui';
 export const useStyles = makeStyles()((theme) => {
   return {
     container: {
-      paddingTop: '10dvh',
+      paddingTop: '20dvh',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      gap: '4rem',
-      paddingBottom: '2rem',
+      gap: '2rem',
+      paddingBottom: '4rem',
     },
     image: {
       borderRadius: handleBorderRadiusSize('xl'),

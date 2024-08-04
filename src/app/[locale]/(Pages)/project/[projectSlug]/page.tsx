@@ -23,7 +23,6 @@ export const generateMetadata = async ({
 
 const Category = async ({ params: { projectSlug } }: Props) => {
   const project = await getProject(projectSlug);
-
   return (
     <Container>
       <ProjectPage project={project} />

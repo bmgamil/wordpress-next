@@ -1,7 +1,7 @@
 'use client';
 import { Box, Typography, TypographyProps } from '@mui/material';
 import { useStyles } from './style';
-import Icon, { IconName } from '../Icon';
+// import Icon, { IconName } from '../Icon';
 
 type Props = TypographyProps & {
   hasGradientBG?: boolean;
@@ -10,7 +10,7 @@ type Props = TypographyProps & {
   textWeight?: FontWeight;
   rotateDeg?: number;
   textColor?: TextColor;
-  icon: IconName;
+  // icon: IconName;
   iconSize?: number | string;
   iconDirection?: 'start' | 'end';
 };
@@ -23,7 +23,7 @@ const TextIcon = (props: Props) => {
     textSize,
     rotateDeg,
     textColor,
-    icon,
+    // icon,
     iconDirection,
     iconSize,
     ...proprties
@@ -44,7 +44,7 @@ const TextIcon = (props: Props) => {
           order: iconDirection === 'end' ? 2 : '',
         }}
       >
-        {<Icon name={icon} size={iconSize} />}
+        {/* {<Icon name={icon} size={iconSize} />} */}
       </Box>
       <Typography {...proprties} className={classes.text}>
         {children}

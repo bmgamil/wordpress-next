@@ -10,9 +10,9 @@ import ProjectCard from '../ProjectCard';
 import Pagination from '../../Molecules/Pagination';
 import { useStyles } from './style';
 import { useEffect, useState } from 'react';
-import LoadingCircular from '@/app/Components/Molecules/Loading/LoadingCircular';
 import ProjectSkeleton from '../../Molecules/ProjectSkeleton';
 import { AnimatePresence } from 'framer-motion';
+import { useSearchParams } from 'next/navigation';
 type Props = {
   list: Project[];
   isLatestList?: boolean;
@@ -28,19 +28,27 @@ const ProjectsList = ({
 }: Props) => {
   const t = useTranslations('buttons');
   const router = useRouter();
+  const category = useSearchParams().get('category');
   const { classes } = useStyles();
-  const [pageNumber, setPageNumber] = useState(currentPage ?? 0);
+  const [pageNumber, setPageNumber] = useState(currentPage ?? 1);
   const [loading, setLoading] = useState(false);
 
   const handlePagination = (value: number) => {
     setPageNumber((prev) => value);
     setLoading(true);
-    router.push(`/projects?page=${value}` as any, { scroll: true });
+    const query = category
+      ? `category=${category}&page=${value}`
+      : `page=${value}`;
+    router.push(`/projects?${query}` as any, { scroll: true });
   };
 
   useEffect(() => {
     setLoading(false);
   }, [currentPage]);
+
+  useEffect(() => {
+    setPageNumber(1);
+  }, [category]);
 
   return (
     <Box className={classes.container}>
@@ -54,7 +62,7 @@ const ProjectsList = ({
                   </Grid>
                 );
               })
-            : list.map((project, i) => {
+            : list?.map((project, i) => {
                 const isInteger =
                   Number.isInteger((i + 1) / 3) || list.length === 1;
 

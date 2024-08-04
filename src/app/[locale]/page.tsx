@@ -1,6 +1,5 @@
-import { Box, Container } from '@mui/material';
+import { Container } from '@mui/material';
 
-import Blogs from '../Components/Organisms/HomePage/Blogs';
 import HomeMain from '../Components/Organisms/HomePage/Main';
 import HomeAboutUs from '../Components/Organisms/HomePage/AboutUs';
 import HomeService from '../Components/Organisms/HomePage/Services';

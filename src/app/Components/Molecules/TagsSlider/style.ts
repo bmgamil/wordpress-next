@@ -1,12 +1,17 @@
 import { makeStyles } from 'tss-react/mui';
+type Props = {
+  clearDrag?: boolean;
+};
 
-export const useStyles = makeStyles()((theme) => {
+export const useStyles = makeStyles<Props>()((theme, props) => {
+  const { clearDrag } = props;
   return {
     container: {
-      maxWidth: '100%',
+      maxWidth: clearDrag ? undefined : '100%',
+      contain: clearDrag ? undefined : 'inline-size',
       userSelect: 'none',
-      overflow: 'hidden',
-      cursor: 'grab',
+      overflow: clearDrag ? undefined : 'hidden',
+      cursor: clearDrag ? undefined : 'grab',
     },
     innerContainer: {
       display: 'flex',

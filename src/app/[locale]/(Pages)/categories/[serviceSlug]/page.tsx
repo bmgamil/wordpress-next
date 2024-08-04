@@ -17,7 +17,7 @@ export const generateMetadata = async ({
     services: { services },
   } = await getServices(serviceSlug);
 
-  const seo = services.seo;
+  const seo = services?.seo;
 
   return {
     ...seo,

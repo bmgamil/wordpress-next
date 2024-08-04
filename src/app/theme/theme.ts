@@ -19,7 +19,7 @@ export const darkTheme = createTheme({
       default: '#090D11',
     },
     primary: {
-      main: '#F37820',
+      main: '#f59f28',
       contrastText: orange[800],
       light: '#ffffff',
       dark: '#090D11',

@@ -7,7 +7,7 @@ const BluredCircle = () => {
     <Box
       sx={{
         width: '60%',
-        height: { md: '20dvh', xs: '40dvh' },
+        height: { md: '20dvh', xs: '30dvh' },
         position: 'absolute',
         left: '50%',
         top: 0,

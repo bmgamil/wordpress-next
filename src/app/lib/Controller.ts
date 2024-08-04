@@ -1,13 +1,21 @@
 export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const getProjects = async (perPage?: number, page?: number) => {
+export const getProjects = async (
+  perPage?: number,
+  page?: number,
+  slug?: string
+) => {
   const _perPage = perPage ? `per_page=${perPage}` : '';
   const _page = page ? `&page=${page}` : '';
+  const _slug = slug ? `&types_cat_slug=${slug}` : '';
 
   try {
-    const response = await fetch(`${API_URL}/projects?${_perPage}${_page}`, {
-      next: { revalidate: 5 },
-    });
+    const response = await fetch(
+      `${API_URL}/projects?${_perPage}${_page}${_slug}`,
+      {
+        next: { revalidate: 5 },
+      }
+    );
     const data = await response.json();
     return {
       projects: data.projects,
@@ -18,6 +26,40 @@ export const getProjects = async (perPage?: number, page?: number) => {
     return {
       projects: null,
       error: error,
+    };
+  }
+};
+
+export const getProjectCategories = async () => {
+  try {
+    const response = await fetch(`${API_URL}/projectCategories`);
+    const data = await response.json();
+
+    return {
+      success: true,
+      data,
+    };
+  } catch (error) {
+    return {
+      success: false,
+    };
+  }
+};
+
+export const getRelatedProjects = async (id: number, title: string) => {
+  try {
+    const response = await fetch(
+      `${API_URL}/relatedProjects?id=${id}&title=${title}`
+    );
+    const data = await response.json();
+
+    return {
+      success: true,
+      data,
+    };
+  } catch (error) {
+    return {
+      success: false,
     };
   }
 };

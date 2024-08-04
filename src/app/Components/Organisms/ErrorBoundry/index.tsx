@@ -22,6 +22,10 @@ const Error = ({ error, reset }: { error: Error; reset: () => void }) => {
       <Text textWeight='medium' textSize='2xl'>
         {t('error')}
       </Text>
+      {/* 
+      <Text textWeight='light' textSize='base'>
+        {error.message}
+      </Text> */}
 
       <Button onClick={reset} background='main' endIcon={undefined} radius='xl'>
         {t('buttons.try')}

@@ -107,7 +107,7 @@ type ProjectCategory = {
   name?: string;
   title?: string;
   slug: string;
-  taxonomy: string;
+  taxonomy?: string;
 };
 
 type SEO = {
