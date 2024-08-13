@@ -7,6 +7,10 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig = {
   reactStrictMode: false,
   transpilePackages: ['lucide-react'],
+  webpack: (config, { isServer }) => {
+    config.resolve.alias['@'] = path.join(__dirname, 'src');
+    return config;
+  },
   images: {
     remotePatterns: [
       {

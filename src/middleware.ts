@@ -7,7 +7,7 @@ const nextIntlMiddleWare = createMiddleware({
 
   // Used when no locale matches
   defaultLocale: 'en',
-  localePrefix: 'as-needed',
+  // localePrefix: 'as-needed',
 });
 
 export default function (req: NextRequest): NextResponse {
