@@ -22,9 +22,11 @@ export async function GET(request: NextRequest) {
     const categoryResponse = await fetch(
       `https://units.a2hosted.com/next/wp-json/wp/v2/categories?slug=${slug}`,
       {
-        next: {
-          revalidate,
-        },
+        // next: {
+        //   revalidate,
+        // },
+
+        cache: 'force-cache',
       }
     );
 

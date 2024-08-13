@@ -6,9 +6,10 @@ export async function GET() {
     const response = await fetch(
       `https://units.a2hosted.com/next/wp-json/wp/v2/service`,
       {
-        next: {
-          revalidate,
-        },
+        // next :{
+        //   revalidate,
+        // },
+        cache: 'force-cache',
       }
     );
 
