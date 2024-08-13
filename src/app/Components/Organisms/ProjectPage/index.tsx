@@ -10,6 +10,8 @@ import Image from '../../Atoms/Image';
 import { MotionDelay, RowVariant } from '@/app/lib/MotionVariants';
 import { getRelatedProjects } from '@/app/lib/Controller';
 import TagsSlider from '../../Molecules/TagsSlider';
+import RelatedProjects from '../RelatedProjects';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   project: Project;
@@ -17,8 +19,9 @@ type Props = {
 
 const ProjectPage = ({ project }: Props) => {
   const { classes } = useStyles();
+  const t = useTranslations('services');
   const [relatedProjects, setRelatedProjects] = useState<Project[]>([]);
-  const { featured_media, content, title, categories, id } = project;
+  const { featured_media, content, categories, id, title } = project;
   const {
     placeholder: { metadata },
     source_url,
@@ -26,15 +29,17 @@ const ProjectPage = ({ project }: Props) => {
 
   const handleRelatedProjects = async () => {
     try {
-      const response = await getRelatedProjects(id, title);
-      console.log(response);
+      const response = await getRelatedProjects(id);
+      if (response.success) {
+        setRelatedProjects(response.data);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    // handleRelatedProjects();
+    handleRelatedProjects();
   }, []);
 
   return (
@@ -53,7 +58,7 @@ const ProjectPage = ({ project }: Props) => {
       >
         {title.replace('#038;', '')}
       </Text>
-      <Box
+      {/* <Box
         className={classes.image}
         component={motion.div}
         variants={RowVariant}
@@ -68,8 +73,11 @@ const ProjectPage = ({ project }: Props) => {
           height={metadata.height}
           alt={title}
         />
-      </Box>
+      </Box> */}
       <div dangerouslySetInnerHTML={{ __html: content }} />
+      {!!relatedProjects.length && (
+        <RelatedProjects projects={relatedProjects} title={t('related')} />
+      )}
     </Box>
   );
 };

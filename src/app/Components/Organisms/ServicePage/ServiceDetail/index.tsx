@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl';
 import ServiceFAQs from '../FAQs';
 import { motion } from 'framer-motion';
 import { RowVariant } from '@/app/lib/MotionVariants';
+import RelatedProjects from '../../RelatedProjects';
 
 type Props = {
   service: ServiceDetail;
@@ -68,7 +69,7 @@ const ServiceDetail = (props: Props) => {
       </Grid>
       {!!projects.length && (
         <Grid item xs={12}>
-          <Carousel listLength={projects.length} title={t('related')}>
+          {/* <Carousel listLength={projects.length} title={t('related')}>
             {projects.map((project, i) => {
               return (
                 <div key={project.id} className='embla__slide'>
@@ -76,7 +77,8 @@ const ServiceDetail = (props: Props) => {
                 </div>
               );
             })}
-          </Carousel>
+          </Carousel> */}
+          <RelatedProjects projects={projects} title={t('related')} />
         </Grid>
       )}
     </>

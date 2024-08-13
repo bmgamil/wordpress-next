@@ -9,7 +9,6 @@ export const useStyles = makeStyles()((theme) => {
       flexDirection: 'column',
       alignItems: 'center',
       gap: '2rem',
-      paddingBottom: '4rem',
     },
     image: {
       borderRadius: handleBorderRadiusSize('xl'),

@@ -11,6 +11,7 @@ export const useStyles = makeStyles()((theme) => {
       padding: '2rem',
       borderRadius: handleBorderRadiusSize('xl'),
       height: '100%',
+      userSelect: 'none',
     },
     link: {
       alignSelf: 'flex-start',

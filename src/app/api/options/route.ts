@@ -2,6 +2,8 @@ import { getPlaiceholder } from 'plaiceholder';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
+  const lang = request.nextUrl.searchParams.get('lang');
+
   try {
     const response = await fetch(
       `https://units.a2hosted.com/next/wp-json/wp/v2/options`

@@ -46,11 +46,9 @@ export const getProjectCategories = async () => {
   }
 };
 
-export const getRelatedProjects = async (id: number, title: string) => {
+export const getRelatedProjects = async (id: number) => {
   try {
-    const response = await fetch(
-      `${API_URL}/relatedProjects?id=${id}&title=${title}`
-    );
+    const response = await fetch(`${API_URL}/relatedProjects?id=${id}`);
     const data = await response.json();
 
     return {

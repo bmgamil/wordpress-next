@@ -156,14 +156,22 @@ type optionFooterLinks = {
 type options = {
   header: {
     logo: optionMedia;
+    logo_ar: optionMedia;
   };
   footer: {
-    logo: optionMedia;
+    // logo: optionMedia;
     social: optionFooterLinks[];
+    social_ar: optionFooterLinks[];
     contactUs: optionFooterLinks[];
+    contactUs_ar: optionFooterLinks[];
   };
   home: {
     main: {
+      title: string;
+      description: string;
+      image: optionMedia;
+    };
+    main_ar: {
       title: string;
       description: string;
       image: optionMedia;
@@ -172,8 +180,17 @@ type options = {
       description: string;
       image: optionMedia;
     };
+    about_ar: {
+      description: string;
+      image: optionMedia;
+    };
     steps: WorkingStep[];
+    steps_ar: WorkingStep[];
     ourWork: {
+      title: string;
+      description: string;
+    };
+    ourWork_ar: {
       title: string;
       description: string;
     };

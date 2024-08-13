@@ -31,8 +31,8 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
       lineHeight: hasBgImage ? 1.3 : 1.5,
       backgroundImage: hasGradientBG
         ? !isAr
-          ? `linear-gradient(90deg, #F37820 30%, #FFFEFD)`
-          : `linear-gradient(90deg, #FFFEFD , #F37820 40%)`
+          ? `linear-gradient(90deg, ${theme.palette.primary.main} 30%, #FFFEFD)`
+          : `linear-gradient(90deg, #FFFEFD , ${theme.palette.primary.main} 40%)`
         : hasBgImage
         ? 'linear-gradient( rgba(255, 170, 0, 0.3) 100%, rgba(255, 170, 0, 0.3) 100%),url(/image/text-bg.png);'
         : '',

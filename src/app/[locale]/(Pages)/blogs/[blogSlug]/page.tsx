@@ -32,7 +32,7 @@ const CategoryBlogs = async (props: Props) => {
     currentPage
   );
 
-  if (data.blogs.length <= 0) {
+  if (data.blogs && data.blogs?.length <= 0) {
     return <Text>No Blogs Avilable</Text>;
   }
 

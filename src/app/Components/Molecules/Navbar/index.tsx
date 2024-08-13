@@ -33,6 +33,8 @@ const Navbar = ({ setIsOpen }: { setIsOpen: Function }) => {
         } else {
           if (pathname.startsWith(navlink.link)) {
             isActive = true;
+          } else {
+            isActive = false;
           }
         }
 

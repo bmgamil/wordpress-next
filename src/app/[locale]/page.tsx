@@ -6,6 +6,7 @@ import HomeService from '../Components/Organisms/HomePage/Services';
 import HomeProjects from '../Components/Organisms/HomePage/Projects';
 import HomeWorkingSteps from '../Components/Organisms/HomePage/WorkingSteps';
 import { getOptions, getProjects, getServices } from '../lib/Controller';
+import Blogs from '../Components/Organisms/HomePage/Blogs';
 
 export default async function Home() {
   const projectsPromise = getProjects(4);
@@ -22,6 +23,7 @@ export default async function Home() {
   const {
     home: { main, about, ourWork, steps },
   } = options;
+
   return (
     <Container
       sx={{

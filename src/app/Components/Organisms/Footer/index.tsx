@@ -21,7 +21,7 @@ const Footer = ({ footer }: Props) => {
   const { classes } = useStyles();
   const router = useRouter();
 
-  const { contactUs, logo, social } = footer;
+  const { contactUs, social } = footer;
 
   return (
     <Box component='section' className={classes.container}>
@@ -116,12 +116,12 @@ const Footer = ({ footer }: Props) => {
           </Grid>
         </Grid>
       </Container>
-      <Image
+      {/* <Image
         src={logo.url}
         alt='footer logo'
         width={logo.width}
         height={logo.height}
-      />
+      /> */}
     </Box>
   );
 };
