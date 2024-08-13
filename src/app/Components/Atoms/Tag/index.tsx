@@ -1,4 +1,5 @@
 'use client';
+import { AppPathnames } from '@/config';
 import Text from '../Text';
 import { useStyles } from './styles';
 import { Link } from '@/navigation';
@@ -14,7 +15,7 @@ const Tag = (props: Props) => {
 
   return (
     <Link
-      href={(href as any) ?? '#'}
+      href={(href as AppPathnames) ?? '#'}
       draggable='false'
       className={classes.container}
     >

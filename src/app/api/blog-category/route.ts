@@ -1,3 +1,4 @@
+import { revalidate } from '@/app/lib/data';
 import { NextRequest, NextResponse } from 'next/server';
 import { getPlaiceholder } from 'plaiceholder';
 
@@ -22,7 +23,7 @@ export async function GET(request: NextRequest) {
       `https://units.a2hosted.com/next/wp-json/wp/v2/categories?slug=${slug}`,
       {
         next: {
-          revalidate: 5,
+          revalidate,
         },
       }
     );

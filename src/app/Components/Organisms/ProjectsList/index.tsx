@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import ProjectSkeleton from '../../Molecules/ProjectSkeleton';
 import { AnimatePresence } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
+import { AppPathnames } from '@/config';
 type Props = {
   list: Project[];
   isLatestList?: boolean;
@@ -39,7 +40,7 @@ const ProjectsList = ({
     const query = category
       ? `category=${category}&page=${value}`
       : `page=${value}`;
-    router.push(`/projects?${query}` as any, { scroll: true });
+    router.push(`/projects?${query}` as AppPathnames, { scroll: true });
   };
 
   useEffect(() => {

@@ -5,6 +5,7 @@ import NorthWestIcon from '@mui/icons-material/NorthWest';
 import Text from '../Text';
 import { useLocale } from 'next-intl';
 import useStyles from './style';
+import { AppPathnames } from '@/config';
 
 type Props = {
   href: string;
@@ -20,7 +21,10 @@ const CustomLink = (props: Props) => {
   const { classes } = useStyles();
 
   return (
-    <Link href={href as any} className={`${classes.container} ${className}`}>
+    <Link
+      href={href as AppPathnames}
+      className={`${classes.container} ${className}`}
+    >
       <Text textSize={textSize}>{title}</Text>
       {!isAr ? (
         <NorthEastIcon fontSize='small' />

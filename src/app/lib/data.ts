@@ -2,6 +2,8 @@ import BlogBG from '@/../public/image/blog-bg.jpg';
 import BlogBG2 from '@/../public/image/blog-bg-2.jpg';
 import { makeid } from './handlers';
 
+export const revalidate = 3600;
+
 export const navlinks: Navlink[] = [
   {
     title: 'home',

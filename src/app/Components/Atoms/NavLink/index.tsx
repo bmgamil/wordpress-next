@@ -11,6 +11,7 @@ import Text from '../Text';
 import { Link } from '@/navigation';
 import { useStyles } from './styles';
 import { FadeInVariant } from '@/app/lib/MotionVariants';
+import { AppPathnames } from '@/config';
 
 type Props = ListItemProps & {
   to: string;
@@ -90,7 +91,7 @@ const NavLink = (props: Props) => {
       ref={linkRef}
       {...proprties}
     >
-      <Link href={to as '/'} target={target}>
+      <Link href={to as AppPathnames} target={target}>
         <Text className={classes.text}>{children}</Text>
         {hasIcon && (
           <Box className={classes.icon}>

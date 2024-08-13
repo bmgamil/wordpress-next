@@ -1,16 +1,20 @@
 import { Pathnames } from 'next-intl/navigation';
+import { LocalePrefix } from 'next-intl/routing';
 
 export const locales = ['en', 'ar'] as const;
 
 export const pathnames = {
   '/': '/',
-  '/pathnames': {
-    en: '/pathnames',
-    ar: '/المسارات',
+  '/about-us': {
+    en: '/about-us',
+    ar: '/عنا',
   },
-} satisfies Pathnames<typeof locales>;
+  '/porjects': {
+    en: '/porjects',
+    ar: '/المشاريع',
+  },
+};
 
-// Use the default: `always`
-export const localePrefix = undefined;
+export const localePrefix = 'as-needed' satisfies LocalePrefix;
 
 export type AppPathnames = keyof typeof pathnames;

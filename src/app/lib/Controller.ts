@@ -1,4 +1,5 @@
 export const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { revalidate } from '@/app/lib/data';
 
 export const getProjects = async (
   perPage?: number,
@@ -13,7 +14,7 @@ export const getProjects = async (
     const response = await fetch(
       `${API_URL}/projects?${_perPage}${_page}${_slug}`,
       {
-        next: { revalidate: 5 },
+        next: { revalidate },
       }
     );
     const data = await response.json();
@@ -66,7 +67,7 @@ export const getServices = async (slug?: string) => {
   const _slug = slug ? `?slug=${slug}` : '';
   try {
     const response = await fetch(`${API_URL}/services${_slug}`, {
-      next: { revalidate: 5 },
+      next: { revalidate },
     });
     const data = await response.json();
     return {
@@ -83,7 +84,7 @@ export const getServices = async (slug?: string) => {
 export const getProject = async (slug: string) => {
   try {
     const response = await fetch(`${API_URL}/project?slug=${slug}`, {
-      next: { revalidate: 5 },
+      next: { revalidate },
     });
     return await response.json();
   } catch (error) {
@@ -109,7 +110,7 @@ export const contactSubmitHandler = async (data: ContactSubmission) => {
 export const getFAQS = async () => {
   try {
     const response = await fetch(`${API_URL}/faqs`, {
-      next: { revalidate: 5 },
+      next: { revalidate },
     });
     const data = await response.json();
     return data;
@@ -121,7 +122,7 @@ export const getFAQS = async () => {
 export const getOptions = async () => {
   try {
     const response = await fetch(`${API_URL}/options`, {
-      next: { revalidate: 5 },
+      next: { revalidate },
     });
     return await response.json();
   } catch (error) {
@@ -132,7 +133,7 @@ export const getOptions = async () => {
 export const getCategoriesList = async () => {
   try {
     const response = await fetch(`${API_URL}/blogs-categories`, {
-      next: { revalidate: 5 },
+      next: { revalidate },
     });
     return await response.json();
   } catch (error) {
@@ -145,7 +146,7 @@ export const getBlogs = async (perPage: number, page: number) => {
   const _page = `&page=${page}`;
   try {
     const response = await fetch(`${API_URL}/blogs?${_perPage}${_page}`, {
-      next: { revalidate: 5 },
+      next: { revalidate },
     });
     const data = await response.json();
     return data;
@@ -166,7 +167,7 @@ export const getCategoryBlogs = async (
     const response = await fetch(
       `${API_URL}/blog-category?${_slug}${_perPage}${_page}`,
       {
-        next: { revalidate: 5 },
+        next: { revalidate },
       }
     );
     const data = await response.json();
@@ -181,7 +182,7 @@ export const getBlogBySlug = async (slug: string) => {
 
   try {
     const response = await fetch(`${API_URL}/blog?${_slug}`, {
-      next: { revalidate: 5 },
+      next: { revalidate },
     });
     const data = await response.json();
     return data;

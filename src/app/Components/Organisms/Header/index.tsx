@@ -13,6 +13,7 @@ import Navbar from '@/app/Components/Molecules/Navbar';
 import HeaderLogo from '@/../public/image/header-logo.svg';
 import BluredCircle from '@/app/Components/Atoms/BluredCircle';
 import Text from '../../Atoms/Text';
+import { AppPathnames } from '@/config';
 
 type Props = {
   header: options['header'];
@@ -92,7 +93,7 @@ const Header = ({ header }: Props) => {
             fontSize='base'
             textTrasfrom='capitalize'
             isBold
-            onPointerUp={(e) => router.push('/contact-us' as any)}
+            onPointerUp={(e) => router.push('/contact-us' as AppPathnames)}
           >
             {bt('contact')}
           </Button>

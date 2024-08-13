@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getPlaiceholder } from 'plaiceholder';
+import { revalidate } from '@/app/lib/data';
 
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get('id');
@@ -8,7 +9,7 @@ export async function GET(request: NextRequest) {
   try {
     const response = await fetch(url, {
       next: {
-        revalidate: 5,
+        revalidate,
       },
     });
 

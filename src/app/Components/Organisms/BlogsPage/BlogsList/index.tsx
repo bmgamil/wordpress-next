@@ -9,6 +9,7 @@ import { useRouter } from '@/navigation';
 import { RowVariant } from '@/app/lib/MotionVariants';
 import Pagination from '@/app/Components/Molecules/Pagination';
 import BlogSkeleton from '@/app/Components/Molecules/BlogSkeleton';
+import { AppPathnames } from '@/config';
 
 type Props = {
   list: Blog[];
@@ -27,7 +28,7 @@ const BlogsList = (props: Props) => {
   const handlePagination = (value: number) => {
     setPageNumber((prev) => value);
     setLoading(true);
-    router.push(`${path}?page=${value}` as any, { scroll: true });
+    router.push(`${path}?page=${value}` as AppPathnames, { scroll: true });
   };
 
   useEffect(() => {

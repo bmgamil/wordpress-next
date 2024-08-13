@@ -10,6 +10,7 @@ import Image from '../../Atoms/Image';
 import Button from '../../Atoms/Button';
 import NavLink from '../../Atoms/NavLink';
 import { navlinks } from '@/app/lib/data';
+import { AppPathnames } from '@/config';
 
 type Props = {
   footer: options['footer'];
@@ -45,7 +46,7 @@ const Footer = ({ footer }: Props) => {
                 background='main'
                 radius='2xl'
                 isBold
-                onPointerUp={(e) => router.push('/contact-us' as any)}
+                onPointerUp={(e) => router.push('/contact-us' as AppPathnames)}
               >
                 {bt('contact')}
               </Button>

@@ -1,3 +1,4 @@
+import { revalidate } from '@/app/lib/data';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
@@ -6,7 +7,7 @@ export async function GET() {
       `https://units.a2hosted.com/next/wp-json/wp/v2/service`,
       {
         next: {
-          revalidate: 5,
+          revalidate,
         },
       }
     );

@@ -1,3 +1,4 @@
+import { revalidate } from '@/app/lib/data';
 import { NextRequest, NextResponse } from 'next/server';
 import { getPlaiceholder } from 'plaiceholder';
 
@@ -18,7 +19,7 @@ export async function GET(request: NextRequest) {
   try {
     const response = await fetch(url, {
       next: {
-        revalidate: 5,
+        revalidate,
       },
     });
     const totalPages = response.headers.get('x-wp-totalpages');
