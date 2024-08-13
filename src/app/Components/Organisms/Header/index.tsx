@@ -93,7 +93,7 @@ const Header = ({ header }: Props) => {
             fontSize='base'
             textTrasfrom='capitalize'
             isBold
-            onPointerUp={(e) => router.push('/contact-us' as AppPathnames)}
+            onPointerUp={(e) => router.push('/contact-us')}
           >
             {bt('contact')}
           </Button>

@@ -9,9 +9,17 @@ export const pathnames = {
     en: '/about-us',
     ar: '/عنا',
   },
-  '/porjects': {
-    en: '/porjects',
+  '/projects': {
+    en: '/projects',
     ar: '/المشاريع',
+  },
+  '/blogs': {
+    en: '/blogs',
+    ar: '/مدونات',
+  },
+  '/contact-us': {
+    en: '/contact-us',
+    ar: '/تواصل-معنا',
   },
 };
 

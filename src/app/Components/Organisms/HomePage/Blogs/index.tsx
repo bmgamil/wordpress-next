@@ -19,7 +19,7 @@ const Blogs = () => {
   const router = useRouter();
 
   const navigateToBlogs = () => {
-    router.push('/blogs' as '/pathnames');
+    router.push('/blogs');
   };
 
   return (

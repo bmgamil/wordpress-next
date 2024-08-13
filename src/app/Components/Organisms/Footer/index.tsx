@@ -46,7 +46,7 @@ const Footer = ({ footer }: Props) => {
                 background='main'
                 radius='2xl'
                 isBold
-                onPointerUp={(e) => router.push('/contact-us' as AppPathnames)}
+                onPointerUp={(e) => router.push('/contact-us')}
               >
                 {bt('contact')}
               </Button>
