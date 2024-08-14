@@ -48,6 +48,7 @@ export const useStyles = makeStyles<Props>()((theme, { isAr, width }) => {
         }px)`,
       },
       [theme.breakpoints.down('md')]: {
+        display: 'none',
         img: {
           maxWidth: '100%',
           alignItems: 'flex-end',
