@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 
 import { getServices } from '@/app/lib/Controller';
 import ServiceDetail from '@/app/Components/Organisms/ServicePage/ServiceDetail';
+import { notFound } from 'next/navigation';
 
 type Props = {
   params: {
@@ -28,9 +29,9 @@ const SingleService = async ({ params: { serviceSlug } }: Props) => {
     services: { services },
   } = await getServices(serviceSlug);
 
-  // if (!services) {
-  //   return <div></div>;
-  // }
+  if (!services) {
+    notFound();
+  }
 
   return <ServiceDetail service={services} />;
 };

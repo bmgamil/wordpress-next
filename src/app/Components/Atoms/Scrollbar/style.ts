@@ -9,7 +9,7 @@ export const useStyles = makeStyles()((theme) => {
       right: 0,
       height: '5px',
       // borderRadius: '10px',
-      background: '#F37820',
+      background: theme.palette.primary.main,
       transformOrigin: ' 0%',
       zIndex: 9999,
     },

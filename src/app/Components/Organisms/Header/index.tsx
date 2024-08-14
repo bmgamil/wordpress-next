@@ -20,15 +20,19 @@ type Props = {
 };
 
 const Header = ({ header }: Props) => {
+  const { logo } = header;
+
+  const router = useRouter();
+  const pathname = usePathname();
+
   const locale = useLocale();
   const isAr = locale === 'ar';
   const t = useTranslations('footer');
   const bt = useTranslations('buttons');
+
   const [isOpen, setIsOpen] = useState(false);
+
   const { classes } = useStyles({ isAr, isOpen });
-  const router = useRouter();
-  const pathname = usePathname();
-  const { logo } = header;
 
   return (
     <Box className={classes.container}>

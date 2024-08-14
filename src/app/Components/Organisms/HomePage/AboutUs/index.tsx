@@ -27,11 +27,11 @@ const HomeAboutUs = ({ aboutOptions }: Props) => {
           md={4}
           className={classes.column1}
           component={motion.div}
-          variants={RowVariant}
-          initial='hidden'
-          whileInView='visible'
-          viewport={{ once: true, amount: 0.8 }}
-          custom={2}
+          // variants={RowVariant}
+          // initial='hidden'
+          // whileInView='visible'
+          // viewport={{ once: true, amount: 0.8 }}
+          // custom={2}
         >
           <Image
             src={image.url}
@@ -40,6 +40,7 @@ const HomeAboutUs = ({ aboutOptions }: Props) => {
             height={image.height}
             blurDataURL={image.placeholder.base64}
             placeholder='blur'
+            priority
           />
         </Grid>
         <Grid item md={7} className={classes.column2}>
