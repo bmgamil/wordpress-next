@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { Container, Grid } from '@mui/material';
 import { useLocale, useTranslations } from 'next-intl';
-import { RefObject, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 
 import useStyles from './styles';
 import Text from '@/app/Components/Atoms/Text';
@@ -24,7 +24,7 @@ const HomeMain = ({ mainOptions }: Props) => {
   const { classes } = useStyles({ isAr, width });
   const { description, image, title } = mainOptions;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     let viewPortWidth = window.document.documentElement.clientWidth;
     setWidth((x) =>
       containerRef && containerRef.current
@@ -90,24 +90,23 @@ const HomeMain = ({ mainOptions }: Props) => {
         md={6}
         item
         className={classes.column2}
-        // component={motion.div}
-        // variants={FadeInVariant}
-        // initial='hidden'
-        // animate='visible'
-        // transition={{
-        //   duration: 1,
-        //   delay: 1,
-        // }}
+        component={motion.div}
+        variants={FadeInVariant}
+        initial='hidden'
+        animate='visible'
+        transition={{
+          duration: 1,
+          delay: 1,
+        }}
       >
         <Image
           src={image.url}
           shadow
           height={image.height}
           width={image.width}
-          // blurDataURL={image.placeholder.base64}
-          // placeholder='blur'
+          blurDataURL={image.placeholder.base64}
+          placeholder='blur'
           alt='units'
-          priority
         />
       </Grid>
     </Grid>
