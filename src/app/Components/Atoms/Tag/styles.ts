@@ -24,6 +24,9 @@ export const useStyles = makeStyles<Props>()((theme, { mode, href }) => {
       whiteSpace: 'nowrap',
       textDecoration: 'none',
       pointerEvents: href ? 'auto' : 'none',
+      transitionProperty: 'background-color, border-color',
+      transitionDuration: '0.3s',
+      transitionTimingFunction: 'ease-in-out',
     },
   };
 });
