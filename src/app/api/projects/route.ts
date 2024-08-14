@@ -18,7 +18,10 @@ export async function GET(request: NextRequest) {
   const url = `https://units.a2hosted.com/next/wp-json/wp/v2/project?${perPage}${page}${category}`;
   try {
     const response = await fetch(url, {
-      cache: 'force-cache',
+      next: {
+        revalidate,
+      },
+      // cache: 'force-cache',
     });
     const totalPages = response.headers.get('x-wp-totalpages');
 
