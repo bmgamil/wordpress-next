@@ -107,7 +107,7 @@ const HomeMain = ({ mainOptions }: Props) => {
           blurDataURL={image.placeholder.base64}
           placeholder='blur'
           alt='units'
-          // priority
+          priority
         />
       </Grid>
     </Grid>
