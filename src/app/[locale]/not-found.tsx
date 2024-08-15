@@ -1,9 +1,8 @@
 'use client';
-
 import Text from '@/app/Components/Atoms/Text';
 import { Colors } from '@/app/theme/colors';
 import { Link } from '@/navigation';
-import { colors, Container } from '@mui/material';
+import { Container } from '@mui/material';
 
 const NotFound = () => {
   return (
