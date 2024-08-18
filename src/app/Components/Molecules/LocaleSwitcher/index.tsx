@@ -29,6 +29,7 @@ export default function LocaleSwitcherSelect() {
   return (
     <FormControl>
       <Select
+        name='locale'
         labelId='locale-select'
         id='locale'
         MenuProps={{
