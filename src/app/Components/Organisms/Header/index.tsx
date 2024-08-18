@@ -14,6 +14,7 @@ import HeaderLogo from '@/../public/image/header-logo.svg';
 import BluredCircle from '@/app/Components/Atoms/BluredCircle';
 import Text from '../../Atoms/Text';
 import { AppPathnames } from '@/config';
+import LocaleSwitcherSelect from '../../Molecules/LocaleSwitcher';
 
 type Props = {
   header: options['header'];
@@ -40,8 +41,8 @@ const Header = ({ header }: Props) => {
     <Box className={classes.container}>
       <Container sx={{ height: '100%' }}>
         <Box className={classes.innerContainer}>
-          {/* <LocaleSwitcherSelect /> */}
           <BluredCircle />
+
           <Link href='/'>
             <Image
               priority
@@ -88,21 +89,30 @@ const Header = ({ header }: Props) => {
               {bt('contact')}
             </Button>
           </Box>
-
-          <Button
+          <Box
             sx={{
-              display: { xs: 'none', md: 'flex' },
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
             }}
-            disableRipple={pathname === '/'}
-            background={pathname !== '/' ? 'main' : undefined}
-            radius='2xl'
-            fontSize='base'
-            textTrasfrom='capitalize'
-            isBold
-            onPointerUp={(e) => router.push('/contact-us')}
           >
-            {bt('contact')}
-          </Button>
+            <Button
+              sx={{
+                display: { xs: 'none', md: 'flex' },
+              }}
+              disableRipple={pathname === '/'}
+              background={pathname !== '/' ? 'main' : undefined}
+              radius='2xl'
+              fontSize='base'
+              textTrasfrom='capitalize'
+              isBold
+              onPointerUp={(e) => router.push('/contact-us')}
+            >
+              {bt('contact')}
+            </Button>
+
+            <LocaleSwitcherSelect />
+          </Box>
         </Box>
       </Container>
     </Box>

@@ -1,20 +1,15 @@
 'use client';
 
-import { ReactNode, useState, useTransition } from 'react';
-import { useRouter, usePathname } from '../../../../navigation';
+import { useLocale } from 'next-intl';
+import { useState, useTransition } from 'react';
+import { useRouter, usePathname } from '@/navigation';
 import {
   FormControl,
   MenuItem,
   Select,
   SelectChangeEvent,
 } from '@mui/material';
-import { useLocale } from 'next-intl';
-
-type Props = {
-  children: ReactNode;
-  defaultValue: string;
-  label: string;
-};
+import Image from '@/app/Components/Atoms/Image';
 
 export default function LocaleSwitcherSelect() {
   const router = useRouter();
@@ -34,14 +29,29 @@ export default function LocaleSwitcherSelect() {
   return (
     <FormControl>
       <Select
-        labelId='demo-simple-select-label'
-        id='demo-simple-select'
+        labelId='locale-select'
+        id='locale'
         // @ts-ignore
         value={currentLocale}
         onChange={onSelectChange}
+        sx={{
+          '#locale': {
+            padding: '0.8rem',
+          },
+          fieldset: {
+            border: 'none !important',
+          },
+        }}
+        IconComponent={() =>
+          currentLocale === 'ar' ? (
+            <Image src='/image/eg.png' alt='eg' height={12} width={28} />
+          ) : (
+            <Image src='/image/uk.png' alt='uk' height={12} width={28} />
+          )
+        }
       >
-        <MenuItem value={'en'}>en</MenuItem>
-        <MenuItem value={'ar'}>ar</MenuItem>
+        <MenuItem value={'en'}>EN</MenuItem>
+        <MenuItem value={'ar'}>AR</MenuItem>
       </Select>
     </FormControl>
   );
