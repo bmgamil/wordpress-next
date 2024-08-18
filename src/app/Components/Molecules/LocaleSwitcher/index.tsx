@@ -31,6 +31,9 @@ export default function LocaleSwitcherSelect() {
       <Select
         labelId='locale-select'
         id='locale'
+        MenuProps={{
+          disableScrollLock: true,
+        }}
         // @ts-ignore
         value={currentLocale}
         onChange={onSelectChange}

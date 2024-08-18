@@ -10,7 +10,7 @@ export const useStyles = makeStyles<Props>()((theme, { isAr, isOpen }) => {
       left: '50%',
       transform: 'translateX(-50%)',
       width: '100%',
-      zIndex: 9999,
+      zIndex: 99,
       background: 'linear-gradient(0deg,transparent,black)',
       [theme.breakpoints.down('md')]: {
         height: isOpen ? '100dvh' : '',

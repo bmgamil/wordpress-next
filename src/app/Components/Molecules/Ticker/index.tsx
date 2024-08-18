@@ -23,7 +23,6 @@ const Ticker = (props: Props) => {
       direction='right'
       pauseOnHover
     >
-      {/* I can be a React component, multiple React components, or just some text. */}
       {Array.from(Array(4))
         .fill(props.gallery)
         .flat()
