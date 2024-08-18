@@ -26,9 +26,9 @@ const ServiceDetail = (props: Props) => {
   const markup = { __html: content };
   const t = useTranslations('services');
 
-  if (!props.service) {
-    return <div></div>;
-  }
+  // if (!props.service) {
+  //   return <div></div>;
+  // }
 
   return (
     <>
@@ -67,17 +67,8 @@ const ServiceDetail = (props: Props) => {
       <Grid item xs={12}>
         <ServiceFAQs list={faq} />
       </Grid>
-      {!!projects.length && (
+      {projects && !!projects.length && (
         <Grid item xs={12}>
-          {/* <Carousel listLength={projects.length} title={t('related')}>
-            {projects.map((project, i) => {
-              return (
-                <div key={project.id} className='embla__slide'>
-                  <ProjectCard project={project} />
-                </div>
-              );
-            })}
-          </Carousel> */}
           <RelatedProjects projects={projects} title={t('related')} />
         </Grid>
       )}

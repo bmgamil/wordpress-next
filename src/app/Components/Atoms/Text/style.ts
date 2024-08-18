@@ -53,7 +53,7 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
         : 'inherit',
       padding: hasBgImage ? '0 1.5rem' : '',
       borderRadius: hasBgImage ? handleBorderRadiusSize('lg') : '',
-      transition: 'color 0.3s ease-in-out',
+      // transition: 'color 0.3s ease-in-out',
 
       [theme.breakpoints.down('lg')]: {
         borderRadius: hasBgImage ? handleBorderRadiusSize('md') : '',
