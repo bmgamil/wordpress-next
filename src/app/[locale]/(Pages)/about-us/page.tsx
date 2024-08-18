@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
 import { Box, Container } from '@mui/material';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 import Text from '@/app/Components/Atoms/Text';
 import FAQs from '@/app/Components/Organisms/FAQs';
 import { MotionDelay } from '@/app/lib/MotionVariants';
-import { getFAQS, getServices } from '@/app/lib/Controller';
+import { getFAQS, getOptions, getServices } from '@/app/lib/Controller';
 import PageIntroText from '@/app/Components/Organisms/PageIntroText';
 import AboutService from '@/app/Components/Organisms/AboutPage/Services';
 import Introduction from '@/app/Components/Organisms/AboutPage/Introduction';
@@ -16,12 +16,14 @@ export const metadata: Metadata = {
 };
 
 const AboutUs = async () => {
+  const locale = await getLocale();
   const t = await getTranslations('about.main');
   const {
     services: { services },
   } = await getServices();
 
   const faqs: FAQ[] = await getFAQS();
+  const options: options = await getOptions(locale);
 
   return (
     <Container
@@ -52,7 +54,7 @@ const AboutUs = async () => {
         </Box>
       </PageIntroText>
       <Introduction />
-      <TickerWithTitle />
+      <TickerWithTitle gallery={options.home.clients_gallary} />
       <AboutService services={services} />
       <FAQs list={faqs} />
     </Container>
