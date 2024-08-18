@@ -29,9 +29,9 @@ const SingleService = async ({ params: { serviceSlug } }: Props) => {
     services: { services },
   } = await getServices(serviceSlug);
 
-  if (!services) {
-    notFound();
-  }
+  // if (!services) {
+  //   notFound();
+  // }
 
   return <ServiceDetail service={services} />;
 };

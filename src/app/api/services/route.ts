@@ -2,57 +2,35 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getPlaiceholder } from 'plaiceholder';
 
 export async function GET(request: NextRequest) {
-  const slug = request.nextUrl.searchParams.get('slug')
-    ? `?slug=${request.nextUrl.searchParams.get('slug')}`
-    : '';
+  const slug = request.nextUrl.searchParams.get('slug');
+  const url = `https://units.a2hosted.com/next/wp-json/wp/v2/service${
+    slug ? `?slug=${slug}` : ''
+  }`;
 
   try {
-    const response = await fetch(
-      `https://units.a2hosted.com/next/wp-json/wp/v2/service${slug}`
-    );
+    const response = await fetch(url);
     const totalPages = response.headers.get('x-wp-totalpages');
-
     const data: ServiceDetail[] = await response.json();
-    const newData: ServiceDetail[] = [];
-    if (data.length > 0 && slug) {
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].featured_media !== null) {
-          const buffer = await fetch(
-            data[i].featured_media.source_url ?? ''
-          ).then(async (res) => Buffer.from(await res.arrayBuffer()));
-          const { base64, color, metadata, css } = await getPlaiceholder(
-            buffer
-          );
-
-          data[i].featured_media.placeholder = { base64, color, metadata, css };
-        }
-
-        if (data[i].projects.length > 0) {
-          for (let j = 0; j < data[i].projects.length; j++) {
-            if (data[i].projects[j].featured_media !== null) {
-              const buffer = await fetch(
-                data[i].projects[j].featured_media.source_url ?? ''
-              ).then(async (res) => Buffer.from(await res.arrayBuffer()));
-              const { base64, color, metadata, css } = await getPlaiceholder(
-                buffer
-              );
-
-              data[i].projects[j].featured_media.placeholder = {
-                base64,
-                color,
-                metadata,
-                css,
-              };
-            }
-          }
-        }
-
-        newData.push(data[i]);
+    const processData = async (item: any) => {
+      if (item.featured_media) {
+        const buffer = await fetch(item.featured_media.source_url ?? '');
+        const { base64, color, metadata, css } = await getPlaiceholder(
+          Buffer.from(await buffer.arrayBuffer())
+        );
+        item.featured_media.placeholder = { base64, color, metadata, css };
       }
-    }
 
+      if (item.projects && item.projects.length > 0) {
+        for (const project of item.projects) {
+          await processData(project);
+        }
+      }
+    };
+    slug
+      ? [await processData(data[0])]
+      : await Promise.all(data.map(processData));
     return NextResponse.json({
-      services: slug ? newData[0] : data,
+      services: slug ? data[0] : data,
       totalPages,
       error: null,
     });
