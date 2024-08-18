@@ -20,7 +20,7 @@ type Props = {
 };
 
 const Header = ({ header }: Props) => {
-  const { logo } = header;
+  const { logo, logo_ar } = header;
 
   const router = useRouter();
   const pathname = usePathname();
@@ -34,6 +34,8 @@ const Header = ({ header }: Props) => {
 
   const { classes } = useStyles({ isAr, isOpen });
 
+  const currentLogo = isAr ? logo_ar : logo;
+
   return (
     <Box className={classes.container}>
       <Container sx={{ height: '100%' }}>
@@ -43,10 +45,10 @@ const Header = ({ header }: Props) => {
           <Link href='/'>
             <Image
               priority
-              src={logo.url}
+              src={currentLogo.url}
               alt='header logo'
-              width={logo.width}
-              height={logo.height}
+              width={currentLogo.width}
+              height={currentLogo.height}
             />
           </Link>
 

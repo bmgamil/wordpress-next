@@ -1,4 +1,5 @@
 import { Container } from '@mui/material';
+import { getLocale } from 'next-intl/server';
 
 import HomeMain from '../Components/Organisms/HomePage/Main';
 import HomeAboutUs from '../Components/Organisms/HomePage/AboutUs';
@@ -9,9 +10,11 @@ import { getOptions, getProjects, getServices } from '../lib/Controller';
 import Blogs from '../Components/Organisms/HomePage/Blogs';
 
 export default async function Home() {
+  const locale = await getLocale();
+  const isAr = locale === 'ar';
   const projectsPromise = getProjects(4);
   const servicePromise = getServices();
-  const optionsPromise: Promise<options> = getOptions();
+  const optionsPromise: Promise<options> = getOptions(locale);
 
   const [
     { projects },
@@ -21,7 +24,16 @@ export default async function Home() {
     options,
   ] = await Promise.all([projectsPromise, servicePromise, optionsPromise]);
   const {
-    home: { main, about, ourWork, steps },
+    home: {
+      main,
+      about_ar,
+      about,
+      ourWork,
+      main_ar,
+      ourWork_ar,
+      steps_ar,
+      steps,
+    },
   } = options;
 
   return (
@@ -33,12 +45,12 @@ export default async function Home() {
         paddingBottom: '4rem',
       }}
     >
-      <HomeMain mainOptions={main} />
+      <HomeMain mainOptions={isAr ? main_ar : main} />
 
-      <HomeAboutUs aboutOptions={about} />
+      <HomeAboutUs aboutOptions={isAr ? about_ar : about} />
       <HomeService services={services} />
-      <HomeWorkingSteps stepsOptions={steps} />
-      <HomeProjects list={projects} workOptions={ourWork} />
+      <HomeWorkingSteps stepsOptions={isAr ? steps_ar : steps} />
+      <HomeProjects list={projects} workOptions={isAr ? ourWork_ar : ourWork} />
 
       {/* <Blogs /> */}
     </Container>

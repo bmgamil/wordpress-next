@@ -123,9 +123,9 @@ export const getFAQS = async () => {
   }
 };
 
-export const getOptions = async () => {
+export const getOptions = async (lang: string) => {
   try {
-    const response = await fetch(`${API_URL}/options`, {
+    const response = await fetch(`${API_URL}/options?lang=${lang}`, {
       next: { revalidate },
       // cache: 'force-cache',
     });

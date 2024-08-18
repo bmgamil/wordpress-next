@@ -38,7 +38,7 @@ export default async function RootLayout({
 }>) {
   const messages = await getMessages();
   const dir = locale === 'ar' ? 'rtl' : 'ltr';
-  const options: options = await getOptions();
+  const options: options = await getOptions(locale);
 
   return (
     <html lang={locale} dir={dir}>
@@ -54,7 +54,7 @@ export default async function RootLayout({
                 overflowX: 'hidden',
               }}
             >
-              <Header header={options.header} />
+              {options.header && <Header header={options.header} />}
               <ScrollBar />
 
               {children}
