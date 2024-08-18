@@ -69,7 +69,7 @@ const NavLink = (props: Props) => {
     return () => {
       window.removeEventListener('resize', onResize);
     };
-  }, [currentActive]);
+  }, [currentActive, locale]);
 
   useEffect(() => {
     handleActiveLink();

@@ -194,6 +194,7 @@ type options = {
       title: string;
       description: string;
     };
+    clients_gallary: optionMedia[];
   };
 };
 

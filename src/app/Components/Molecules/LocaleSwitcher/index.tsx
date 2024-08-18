@@ -36,7 +36,8 @@ export default function LocaleSwitcherSelect() {
         onChange={onSelectChange}
         sx={{
           '#locale': {
-            padding: '0.8rem',
+            padding: 0,
+            paddingInlineEnd: '0.8rem',
           },
           fieldset: {
             border: 'none !important',

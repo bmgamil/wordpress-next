@@ -21,32 +21,5 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
         },
       },
     },
-    innerContainer: {
-      listStyle: 'none',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '3rem',
-      padding: 0,
-      // '@keyframes ticker': {
-      //   from: {
-      //     transform: 'translateX(0)',
-      //   },
-      //   to: {
-      //     transform: !isAr
-      //       ? 'translateX(calc(-50% - 1.5rem))'
-      //       : 'translateX(calc(50% + 1.5rem))',
-      //   },
-      // },
-      li: {
-        img: {
-          width: 150,
-          maxWidth: 'unset',
-
-          [theme.breakpoints.down('sm')]: {
-            width: 100,
-          },
-        },
-      },
-    },
   };
 });
