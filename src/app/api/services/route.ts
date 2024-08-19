@@ -10,7 +10,9 @@ export async function GET(request: NextRequest) {
   try {
     const response = await fetch(url);
     const totalPages = response.headers.get('x-wp-totalpages');
+
     const data: ServiceDetail[] = await response.json();
+
     const processData = async (item: any) => {
       if (item.featured_media) {
         const buffer = await fetch(item.featured_media.source_url ?? '');
@@ -26,9 +28,11 @@ export async function GET(request: NextRequest) {
         }
       }
     };
+
     slug
       ? [await processData(data[0])]
       : await Promise.all(data.map(processData));
+
     return NextResponse.json({
       services: slug ? data[0] : data,
       totalPages,

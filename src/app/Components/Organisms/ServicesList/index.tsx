@@ -43,7 +43,7 @@ const ServicesBlogsList = (props: Props) => {
         </motion.div>
       )}
 
-      {list.map((item, i) => {
+      {list?.map((item, i) => {
         const title = item.name || item.title;
         return (
           <motion.div
