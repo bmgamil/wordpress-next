@@ -46,7 +46,7 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
       zIndex: 10,
       borderRadius: '1rem',
 
-      boxShadow: `0 0 10px ${theme.palette.primary.main}4d`,
+      border: '1px solid',
     },
 
     listItem: {
@@ -59,9 +59,14 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
       cursor: 'pointer',
       borderRadius: '0.5rem',
       textTransform: 'capitalize',
+      fontSize: '1.2rem',
       '&:hover': {
-        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.primary.main,
         // color: theme.palette.primary.dark,
+      },
+
+      '&.active': {
+        color: theme.palette.primary.main,
       },
     },
   };

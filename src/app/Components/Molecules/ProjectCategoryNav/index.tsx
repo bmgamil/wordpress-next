@@ -46,6 +46,7 @@ const ProjectCategoryNav = (props: Props) => {
     <>
       <Dropdown
         className={classes.dropdown}
+        hasAll
         list={categories}
         currentValue={currentValue.replace('#038;', '')}
         onChange={(slug, value) => {

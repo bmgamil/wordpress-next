@@ -36,7 +36,12 @@ const ServicePageServices = ({
       </Box>
       <Grid container columnSpacing={4} rowGap={4}>
         <Grid item xs={12} md={4}>
-          <ServicesBlogsList textSize='base' iconSize='lg' list={services} />
+          <ServicesBlogsList
+            textSize='base'
+            iconSize='lg'
+            list={services}
+            hasDropdown
+          />
         </Grid>
         {children}
       </Grid>

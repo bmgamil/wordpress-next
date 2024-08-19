@@ -13,10 +13,11 @@ type Props = {
   list: any[];
   onChange: (value: string, title: string) => void;
   className?: string;
+  hasAll?: boolean;
 };
 
 const Dropdown = (props: Props) => {
-  const { currentValue, list, onChange, className } = props;
+  const { currentValue, list, onChange, className, hasAll } = props;
   const [isOpen, setIsOpen] = useState(false);
 
   const { classes } = useStyles({ isOpen });
@@ -45,20 +46,25 @@ const Dropdown = (props: Props) => {
             exit='exit'
             custom={0}
           >
-            <ListItem
-              className={classes.listItem}
-              onClick={() => handleChange('', 'all')}
-              component={motion.li}
-              variants={RowVariant}
-              initial='hidden'
-              animate='visible'
-              custom={0}
-            >
-              all
-            </ListItem>
-            {list.map((li, i) => (
+            {hasAll && (
               <ListItem
                 className={classes.listItem}
+                onClick={() => handleChange('', 'all')}
+                component={motion.li}
+                variants={RowVariant}
+                initial='hidden'
+                animate='visible'
+                custom={0}
+              >
+                all
+              </ListItem>
+            )}
+
+            {list.map((li, i) => (
+              <ListItem
+                className={`${classes.listItem} ${
+                  li.title === currentValue && 'active'
+                }`}
                 key={li.id}
                 onClick={() =>
                   handleChange(li.slug, li.title.replace('#038;', ''))
