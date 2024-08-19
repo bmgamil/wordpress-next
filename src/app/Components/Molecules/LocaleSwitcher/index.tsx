@@ -4,12 +4,15 @@ import { useLocale } from 'next-intl';
 import { useState, useTransition } from 'react';
 import { useRouter, usePathname } from '@/navigation';
 import {
+  Box,
   FormControl,
   MenuItem,
   Select,
   SelectChangeEvent,
 } from '@mui/material';
 import Image from '@/app/Components/Atoms/Image';
+import Text from '../../Atoms/Text';
+import { useStyles } from './style';
 
 export default function LocaleSwitcherSelect() {
   const router = useRouter();
@@ -17,6 +20,7 @@ export default function LocaleSwitcherSelect() {
   const pathname = usePathname();
   const locale = useLocale();
   const [currentLocale, setCurrentLocale] = useState(locale);
+  const { classes } = useStyles();
 
   function onSelectChange(event: SelectChangeEvent<HTMLSelectElement>) {
     const nextLocale = event.target.value;
@@ -47,16 +51,30 @@ export default function LocaleSwitcherSelect() {
             border: 'none !important',
           },
         }}
-        IconComponent={() =>
-          currentLocale === 'ar' ? (
-            <Image src='/image/eg.png' alt='eg' height={12} width={28} />
-          ) : (
-            <Image src='/image/uk.png' alt='uk' height={12} width={28} />
-          )
-        }
+        IconComponent={() => undefined}
       >
-        <MenuItem value={'en'}>EN</MenuItem>
-        <MenuItem value={'ar'}>AR</MenuItem>
+        <MenuItem value={'en'}>
+          <Box className={classes.menuItem}>
+            <Text color='#fff'>English</Text>
+            <Image
+              src='/image/English_language.png'
+              alt='english language'
+              height={600}
+              width={900}
+            />
+          </Box>
+        </MenuItem>
+        <MenuItem value={'ar'}>
+          <Box className={classes.menuItem}>
+            <Text color='#fff'>العربية</Text>
+            <Image
+              src='/image/Flag_of_the_Arabic_language.png'
+              alt='اللغة العربية'
+              height={600}
+              width={900}
+            />
+          </Box>
+        </MenuItem>
       </Select>
     </FormControl>
   );
