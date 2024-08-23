@@ -1,3 +1,4 @@
+import { handleBorderRadiusSize } from '@/app/lib/handlers';
 import { makeStyles } from 'tss-react/mui';
 
 type Props = {
@@ -40,18 +41,15 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
 
       display: 'flex',
       flexDirection: 'column',
-
-      backgroundColor: theme.palette.primary.dark,
-      paddingBlock: '1rem',
+      backgroundColor: 'rgba(0,0,0,0.9)',
+      paddingBlock: '0.5rem',
+      borderRadius: handleBorderRadiusSize('sm'),
+      border: '1px solid rgba(255,255,255,0.5)',
       zIndex: 10,
-      borderRadius: '1rem',
-
-      border: '1px solid',
     },
 
     listItem: {
       color: theme.palette.primary.light,
-      backgroundColor: theme.palette.primary.dark,
       paddingInline: '0.5rem',
       transitionProperty: 'color , background-color',
       transitionDuration: '0.3s',

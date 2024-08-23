@@ -1,17 +1,25 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import { motion } from 'framer-motion';
-import { useEffect, useRef } from 'react';
-import { Box, ListItem, ListItemProps } from '@mui/material';
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+  MouseEvent,
+  MouseEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { Box, List, ListItem, ListItemProps } from '@mui/material';
 import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import Text from '../Text';
 import { Link } from '@/navigation';
 import { useStyles } from './styles';
-import { FadeInVariant } from '@/app/lib/MotionVariants';
+import { FadeInVariant, RowVariant } from '@/app/lib/MotionVariants';
 import { AppPathnames } from '@/config';
+import { handleFontSize } from '@/app/lib/handlers';
 
 type Props = ListItemProps & {
   to: string;
@@ -25,6 +33,8 @@ type Props = ListItemProps & {
   target?: string;
   hasIcon?: boolean;
   isProjectCate?: boolean;
+  menu?: any[];
+  menuBaseUrl?: string;
 };
 
 const NavLink = (props: Props) => {
@@ -40,12 +50,20 @@ const NavLink = (props: Props) => {
     currentActive,
     hasIcon,
     isProjectCate,
+    menu,
+    menuBaseUrl,
     ...proprties
   } = props;
-  const { classes } = useStyles({ isFooter, fontSize, isProjectCate });
+  const { classes } = useStyles({
+    isFooter,
+    fontSize,
+    isProjectCate,
+  });
   const linkRef = useRef<HTMLLIElement>(null);
   const locale = useLocale();
   const isAr = locale === 'ar';
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleActiveLink = () => {
     if (isActive && setActiveLine && linkRef && linkRef.current) {
@@ -89,11 +107,22 @@ const NavLink = (props: Props) => {
       className={classes.link}
       disablePadding
       ref={linkRef}
+      onMouseOver={() => menu && setIsMenuOpen(true)}
+      onMouseLeave={() => menu && setIsMenuOpen(false)}
       {...proprties}
     >
-      <Link href={to as AppPathnames} target={target}>
+      <Link
+        onClick={(e: any) => {
+          if (menu) {
+            e.preventDefault();
+            setIsMenuOpen(true);
+          }
+        }}
+        href={to as AppPathnames}
+        target={target}
+      >
         <Text className={classes.text}>{children}</Text>
-        {hasIcon && (
+        {hasIcon && !menu && (
           <Box className={classes.icon}>
             {isAr ? (
               <ArrowCircleLeftOutlinedIcon />
@@ -102,7 +131,46 @@ const NavLink = (props: Props) => {
             )}
           </Box>
         )}
+        {menu && <KeyboardArrowDownIcon fontSize='medium' />}
       </Link>
+
+      <AnimatePresence>
+        {menu && isMenuOpen && (
+          <List
+            className={classes.dropdownMenu}
+            component={motion.ul}
+            variants={FadeInVariant}
+            initial='hidden'
+            animate='visible'
+            exit='exit'
+            transition={{
+              delay: 0.3,
+            }}
+          >
+            {menu.map((item: any, i) => {
+              return (
+                <ListItem
+                  key={item.id}
+                  component={motion.li}
+                  variants={RowVariant}
+                  initial='hidden'
+                  animate='visible'
+                  custom={i}
+                >
+                  <Link
+                    href={`${menuBaseUrl}/${item.slug}` as AppPathnames}
+                    target={target}
+                  >
+                    <Text className={classes.text}>
+                      {item.title.replace('#038;', '')}
+                    </Text>
+                  </Link>
+                </ListItem>
+              );
+            })}
+          </List>
+        )}
+      </AnimatePresence>
     </ListItem>
   );
 };

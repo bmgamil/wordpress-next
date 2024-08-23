@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Container } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Close from '@mui/icons-material/Close';
@@ -18,9 +18,10 @@ import LocaleSwitcherSelect from '../../Molecules/LocaleSwitcher';
 
 type Props = {
   header: options['header'];
+  services: ServiceDetail[];
 };
 
-const Header = ({ header }: Props) => {
+const Header = ({ header, services }: Props) => {
   const { logo, logo_ar } = header;
 
   const router = useRouter();
@@ -37,6 +38,15 @@ const Header = ({ header }: Props) => {
 
   const currentLogo = isAr ? logo_ar : logo;
 
+  useEffect(() => {
+    const body = document.querySelector('body') as HTMLElement;
+    if (isOpen) {
+      body.style.overflow = 'hidden';
+    } else {
+      body.style.overflow = 'auto';
+    }
+  }, [isOpen]);
+
   return (
     <Box className={classes.container}>
       <Container sx={{ height: '100%' }}>
@@ -52,21 +62,32 @@ const Header = ({ header }: Props) => {
               height={currentLogo.height}
             />
           </Link>
-
-          <Button
+          <Box
             sx={{
-              padding: '0.5rem !important',
-              display: { xs: 'flex', md: 'none' },
+              display: {
+                xs: 'flex',
+                md: 'none',
+                alignItems: 'center',
+                gap: '0.5rem',
+              },
             }}
-            endIcon={isOpen ? <Close /> : <MenuIcon />}
-            background='main'
-            radius='md'
-            iconSize='xl'
-            onPointerUp={() => setIsOpen((prev) => !prev)}
-          />
+          >
+            <LocaleSwitcherSelect />
+
+            <Button
+              sx={{
+                padding: '0.5rem !important',
+              }}
+              endIcon={isOpen ? <Close /> : <MenuIcon />}
+              background='main'
+              radius='md'
+              iconSize='xl'
+              onPointerUp={() => setIsOpen((prev) => !prev)}
+            />
+          </Box>
 
           <Box className={classes.navContainer}>
-            <Navbar setIsOpen={setIsOpen} />
+            <Navbar setIsOpen={setIsOpen} services={services} />
             <Text
               hasGradientBG
               textSize='3xl'
@@ -110,8 +131,13 @@ const Header = ({ header }: Props) => {
             >
               {bt('contact')}
             </Button>
-
-            <LocaleSwitcherSelect />
+            <Box
+              sx={{
+                display: { xs: 'none', md: 'block' },
+              }}
+            >
+              <LocaleSwitcherSelect />
+            </Box>
           </Box>
         </Box>
       </Container>

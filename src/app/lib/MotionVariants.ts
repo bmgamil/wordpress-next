@@ -31,6 +31,7 @@ export const FadeInVariant: Variants = {
   visible: {
     opacity: 1,
   },
+  exit: { opacity: 0 },
 };
 
 export const MotionDelay = {

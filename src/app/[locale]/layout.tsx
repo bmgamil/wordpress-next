@@ -7,7 +7,7 @@ import ThemeRegistry from '../ThemeRegistery';
 import Header from '../Components/Organisms/Header';
 import Footer from '../Components/Organisms/Footer';
 import ScrollBar from '../Components/Atoms/Scrollbar';
-import { getOptions } from '../lib/Controller';
+import { getOptions, getServices } from '../lib/Controller';
 import { getMessages } from 'next-intl/server';
 
 export const metadata: Metadata = {
@@ -38,7 +38,15 @@ export default async function RootLayout({
 }>) {
   const messages = await getMessages();
   const dir = locale === 'ar' ? 'rtl' : 'ltr';
-  const options: options = await getOptions(locale);
+  const servicePromise = getServices();
+  const optionsPromise: Promise<options> = getOptions(locale);
+
+  const [
+    {
+      services: { services },
+    },
+    options,
+  ] = await Promise.all([servicePromise, optionsPromise]);
 
   return (
     <html lang={locale} dir={dir}>
@@ -54,7 +62,9 @@ export default async function RootLayout({
                 overflowX: 'hidden',
               }}
             >
-              {options.header && <Header header={options.header} />}
+              {options.header && (
+                <Header header={options.header} services={services} />
+              )}
               <ScrollBar />
 
               {children}

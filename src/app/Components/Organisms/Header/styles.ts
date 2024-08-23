@@ -41,11 +41,12 @@ export const useStyles = makeStyles<Props>()((theme, { isAr, isOpen }) => {
       },
     },
     navContainer: {
-      overflow: 'hidden',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
       [theme.breakpoints.down('md')]: {
+        overflow: 'hidden',
+
         height: '100%',
         gap: '0.8rem',
         padding: '1rem',

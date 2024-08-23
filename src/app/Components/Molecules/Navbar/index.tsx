@@ -9,7 +9,12 @@ import { navlinks } from '@/app/lib/data';
 import { usePathname } from '@/navigation';
 import NavActiveLine from '../../Atoms/NavActiveLine';
 
-const Navbar = ({ setIsOpen }: { setIsOpen: Function }) => {
+type Props = {
+  services: ServiceDetail[];
+  setIsOpen: Function;
+};
+
+const Navbar = ({ setIsOpen, services }: Props) => {
   const { classes } = useStyles();
   const pathname = usePathname();
   const [activeLine, setActiveLine] = useState({ width: 0, left: 0 });
@@ -47,8 +52,10 @@ const Navbar = ({ setIsOpen }: { setIsOpen: Function }) => {
             fontSize='base'
             currentActive={pathname}
             index={i}
-            onPointerUp={() => setIsOpen(false)}
+            onPointerUp={() => navlink.title !== 'service' && setIsOpen(false)}
             hasIcon
+            menu={navlink.title === 'service' ? services : undefined}
+            menuBaseUrl='/service'
           >
             {t(navlink.title as any)}
           </NavLink>

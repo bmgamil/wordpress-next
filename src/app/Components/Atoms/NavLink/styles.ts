@@ -1,4 +1,4 @@
-import { handleFontSize } from '@/app/lib/handlers';
+import { handleBorderRadiusSize, handleFontSize } from '@/app/lib/handlers';
 import { makeStyles } from 'tss-react/mui';
 
 type Props = {
@@ -11,6 +11,7 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
   const { isFooter, fontSize, isProjectCate } = props;
   return {
     link: {
+      position: 'relative',
       fontSize: handleFontSize(fontSize),
       textTransform: 'capitalize',
       textWrap: 'nowrap',
@@ -21,6 +22,9 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
         : theme.typography.fontWeightLight,
 
       a: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         color: theme.palette.text.primary,
         textDecoration: 'none',
         fontWeight: !isFooter
@@ -38,9 +42,6 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
 
         a: {
           filter: 'unset',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
           width: '100%',
         },
       },
@@ -65,6 +66,36 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
       },
       [theme.breakpoints.up('md')]: {
         display: 'none',
+      },
+    },
+
+    dropdownMenu: {
+      display: 'flex',
+      flexDirection: 'column',
+      position: 'absolute',
+      top: 'calc(100% + 10px) ',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      backgroundColor: 'rgba(0,0,0,0.9)',
+      paddingBlock: '0.5rem',
+      borderRadius: handleBorderRadiusSize('sm'),
+      border: '1px solid rgba(255,255,255,0.5)',
+      zIndex: 100,
+      paddingInline: 0,
+      li: {
+        padding: '0.5rem 1rem',
+
+        a: {
+          width: '100%',
+        },
+        p: {
+          transition: 'color 0.3s ease-in-out',
+        },
+      },
+      'li:hover': {
+        p: {
+          color: theme.palette.primary.main,
+        },
       },
     },
   };
