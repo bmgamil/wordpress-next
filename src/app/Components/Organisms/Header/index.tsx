@@ -68,6 +68,7 @@ const Header = ({ header, services }: Props) => {
                 xs: 'flex',
                 md: 'none',
                 alignItems: 'center',
+                justifyContent: 'flex-end',
                 gap: '0.5rem',
               },
             }}

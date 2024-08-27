@@ -13,6 +13,7 @@ import {
 import Image from '@/app/Components/Atoms/Image';
 import Text from '../../Atoms/Text';
 import { useStyles } from './style';
+import { Cairo } from '@/app/theme/theme';
 
 export default function LocaleSwitcherSelect() {
   const router = useRouter();
@@ -42,6 +43,7 @@ export default function LocaleSwitcherSelect() {
         // @ts-ignore
         value={currentLocale}
         onChange={onSelectChange}
+        size='small'
         sx={{
           '#locale': {
             padding: 0,
@@ -55,7 +57,7 @@ export default function LocaleSwitcherSelect() {
       >
         <MenuItem value={'en'}>
           <Box className={classes.menuItem}>
-            <Text color='#fff'>English</Text>
+            <Text color='#fff'>EN</Text>
             <Image
               src='/image/English_language.png'
               alt='english language'
@@ -66,7 +68,9 @@ export default function LocaleSwitcherSelect() {
         </MenuItem>
         <MenuItem value={'ar'}>
           <Box className={classes.menuItem}>
-            <Text color='#fff'>العربية</Text>
+            <Text color='#fff' fontFamily={Cairo.style.fontFamily}>
+              ع
+            </Text>
             <Image
               src='/image/Flag_of_the_Arabic_language.png'
               alt='اللغة العربية'

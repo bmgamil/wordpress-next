@@ -31,7 +31,7 @@ export const useStyles = makeStyles<Props>()((theme, { isAr, isOpen }) => {
       [theme.breakpoints.down('md')]: {
         marginBottom: '2rem',
         display: 'grid',
-        gridTemplateColumns: 'repeat(2,auto)',
+        gridTemplateColumns: 'repeat(2,1fr)',
         gridTemplateRows: isOpen ? 'auto 1fr' : 'auto 0fr',
         transition: 'grid-template-rows 0.3s ease-in-out',
         height: '100%',
