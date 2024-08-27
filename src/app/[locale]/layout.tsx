@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Box } from '@mui/material';
 import { NextIntlClientProvider } from 'next-intl';
+import { GoogleTagManager } from '@next/third-parties/google';
 
 import '../globals.css';
 import ThemeRegistry from '../ThemeRegistery';
@@ -50,6 +51,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={dir}>
+      <GoogleTagManager gtmId='G-D892RL6RTC' />
       <NextIntlClientProvider messages={messages}>
         {/* <AppWrapper> */}
         <ThemeRegistry>
