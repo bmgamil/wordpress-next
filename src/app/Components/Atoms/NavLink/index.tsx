@@ -25,7 +25,7 @@ type Props = ListItemProps & {
   isFooter?: boolean;
   isActive?: boolean;
   setActiveLine?: Function;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsOpen?: Dispatch<SetStateAction<boolean>>;
   fontSize: FontSize;
   index?: number;
   target?: string;
@@ -133,7 +133,7 @@ const NavLink = (props: Props) => {
             e.preventDefault();
             setIsMenuOpen(!isMenuOpen);
           } else {
-            setIsOpen(false);
+            setIsOpen && setIsOpen(false);
           }
         }}
         href={to as AppPathnames}
@@ -189,7 +189,7 @@ const NavLink = (props: Props) => {
                     href={`${menuBaseUrl}/${item.slug}` as AppPathnames}
                     target={target}
                     onClick={(e: any) => {
-                      setIsOpen(false);
+                      setIsOpen && setIsOpen(false);
                       setIsMenuOpen(false);
                     }}
                   >
