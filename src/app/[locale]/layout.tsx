@@ -51,7 +51,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={dir}>
-      <GoogleTagManager gtmId='G-D892RL6RTC' />
+      <GoogleTagManager gtmId='GTM-5F3NRLNN' />
       <NextIntlClientProvider messages={messages}>
         {/* <AppWrapper> */}
         <ThemeRegistry>
