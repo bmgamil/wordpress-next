@@ -11,6 +11,8 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
   const { isFooter, fontSize, isProjectCate } = props;
   return {
     link: {
+      display: 'flex',
+      flexDirection: 'column',
       position: 'relative',
       fontSize: handleFontSize(fontSize),
       textTransform: 'capitalize',
@@ -72,16 +74,12 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
     dropdownMenu: {
       display: 'flex',
       flexDirection: 'column',
-      position: 'absolute',
-      top: 'calc(100% + 10px) ',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      backgroundColor: 'rgba(0,0,0,0.9)',
-      paddingBlock: '0.5rem',
+      overflow: 'hidden',
+      // paddingBlock: '0.5rem',
       borderRadius: handleBorderRadiusSize('sm'),
-      border: '1px solid rgba(255,255,255,0.5)',
       zIndex: 100,
-      paddingInline: 0,
+      // paddingInline: 0,
+      padding: 0,
       li: {
         padding: '0.5rem 1rem',
 
@@ -96,6 +94,19 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
         p: {
           color: theme.palette.primary.main,
         },
+      },
+
+      [theme.breakpoints.up('md')]: {
+        position: 'absolute',
+        top: 'calc(100% + 10px) ',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        backgroundColor: 'rgba(0,0,0,0.9)',
+        border: '1px solid rgba(255,255,255,0.5)',
+      },
+
+      [theme.breakpoints.down('md')]: {
+        width: '100%',
       },
     },
   };

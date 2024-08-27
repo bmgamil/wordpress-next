@@ -112,14 +112,14 @@ const Header = ({ header, services }: Props) => {
           </Box>
           <Box
             sx={{
-              display: 'flex',
+              display: { xs: 'none', md: 'flex' },
               alignItems: 'center',
               gap: '0.5rem',
             }}
           >
             <Button
               sx={{
-                display: { xs: 'none', md: 'flex' },
+                whiteSpace: 'nowrap',
               }}
               disableRipple={pathname === '/'}
               background={pathname !== '/' ? 'main' : undefined}
@@ -131,11 +131,7 @@ const Header = ({ header, services }: Props) => {
             >
               {bt('contact')}
             </Button>
-            <Box
-              sx={{
-                display: { xs: 'none', md: 'block' },
-              }}
-            >
+            <Box>
               <LocaleSwitcherSelect />
             </Box>
           </Box>

@@ -2,13 +2,7 @@
 
 import { useLocale } from 'next-intl';
 import { AnimatePresence, motion } from 'framer-motion';
-import {
-  MouseEvent,
-  MouseEventHandler,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { Box, List, ListItem, ListItemProps } from '@mui/material';
 import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
@@ -17,9 +11,12 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Text from '../Text';
 import { Link } from '@/navigation';
 import { useStyles } from './styles';
-import { FadeInVariant, RowVariant } from '@/app/lib/MotionVariants';
+import {
+  AccordionVariant,
+  FadeInVariant,
+  RowVariant,
+} from '@/app/lib/MotionVariants';
 import { AppPathnames } from '@/config';
-import { handleFontSize } from '@/app/lib/handlers';
 
 type Props = ListItemProps & {
   to: string;
@@ -28,6 +25,7 @@ type Props = ListItemProps & {
   isFooter?: boolean;
   isActive?: boolean;
   setActiveLine?: Function;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
   fontSize: FontSize;
   index?: number;
   target?: string;
@@ -50,6 +48,7 @@ const NavLink = (props: Props) => {
     currentActive,
     hasIcon,
     isProjectCate,
+    setIsOpen,
     menu,
     menuBaseUrl,
     ...proprties
@@ -76,6 +75,12 @@ const NavLink = (props: Props) => {
     }
   };
 
+  const handleClickOutside = (ev: any) => {
+    if (linkRef && !linkRef.current?.contains(ev.target)) {
+      setIsMenuOpen(false);
+    }
+  };
+
   useEffect(() => {
     let timeOut: string | number | NodeJS.Timeout | undefined;
     const onResize = () => {
@@ -88,6 +93,18 @@ const NavLink = (props: Props) => {
       window.removeEventListener('resize', onResize);
     };
   }, [currentActive, locale]);
+
+  useEffect(() => {
+    if (menu) {
+      window.document.addEventListener('click', handleClickOutside);
+    }
+
+    return () => {
+      if (menu) {
+        window.document.removeEventListener('click', handleClickOutside);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     handleActiveLink();
@@ -108,14 +125,15 @@ const NavLink = (props: Props) => {
       disablePadding
       ref={linkRef}
       onMouseOver={() => menu && setIsMenuOpen(true)}
-      onMouseLeave={() => menu && setIsMenuOpen(false)}
       {...proprties}
     >
       <Link
         onClick={(e: any) => {
           if (menu) {
             e.preventDefault();
-            setIsMenuOpen(true);
+            setIsMenuOpen(!isMenuOpen);
+          } else {
+            setIsOpen(false);
           }
         }}
         href={to as AppPathnames}
@@ -131,7 +149,19 @@ const NavLink = (props: Props) => {
             )}
           </Box>
         )}
-        {menu && <KeyboardArrowDownIcon fontSize='medium' />}
+        {menu && (
+          <Box
+            component={motion.div}
+            sx={{
+              display: 'flex',
+            }}
+            animate={{
+              rotate: isMenuOpen ? '180deg' : '0deg',
+            }}
+          >
+            <KeyboardArrowDownIcon fontSize='medium' />
+          </Box>
+        )}
       </Link>
 
       <AnimatePresence>
@@ -139,13 +169,11 @@ const NavLink = (props: Props) => {
           <List
             className={classes.dropdownMenu}
             component={motion.ul}
-            variants={FadeInVariant}
-            initial='hidden'
-            animate='visible'
-            exit='exit'
-            transition={{
-              delay: 0.3,
-            }}
+            variants={AccordionVariant}
+            initial='collapsed'
+            animate='open'
+            exit='collapsed'
+            disablePadding
           >
             {menu.map((item: any, i) => {
               return (
@@ -160,6 +188,10 @@ const NavLink = (props: Props) => {
                   <Link
                     href={`${menuBaseUrl}/${item.slug}` as AppPathnames}
                     target={target}
+                    onClick={(e: any) => {
+                      setIsOpen(false);
+                      setIsMenuOpen(false);
+                    }}
                   >
                     <Text className={classes.text}>
                       {item.title.replace('#038;', '')}

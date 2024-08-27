@@ -21,7 +21,8 @@ export const useStyles = makeStyles<Props>()((theme, { isAr, isOpen }) => {
       },
     },
     innerContainer: {
-      display: 'flex',
+      display: 'grid',
+      gridTemplateColumns: '0.5fr 1fr 0.5fr',
       alignItems: 'start',
       justifyContent: 'space-between',
       gap: '0.8rem',
@@ -43,10 +44,9 @@ export const useStyles = makeStyles<Props>()((theme, { isAr, isOpen }) => {
     navContainer: {
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
       [theme.breakpoints.down('md')]: {
-        overflow: 'hidden',
-
+        overflow: 'auto',
         height: '100%',
         gap: '0.8rem',
         padding: '1rem',
@@ -61,6 +61,9 @@ export const useStyles = makeStyles<Props>()((theme, { isAr, isOpen }) => {
         visibility: isOpen ? 'visible' : 'hidden',
         opacity: isOpen ? 1 : 0,
         gridArea: '2 / 1 / span 1 / span 2',
+        '::-webkit-scrollbar': {
+          width: 0,
+        },
       },
     },
   };

@@ -1,6 +1,6 @@
 'use client';
 import { List } from '@mui/material';
-import { useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import { useStyles } from './styles';
@@ -11,7 +11,7 @@ import NavActiveLine from '../../Atoms/NavActiveLine';
 
 type Props = {
   services: ServiceDetail[];
-  setIsOpen: Function;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const Navbar = ({ setIsOpen, services }: Props) => {
@@ -52,7 +52,7 @@ const Navbar = ({ setIsOpen, services }: Props) => {
             fontSize='base'
             currentActive={pathname}
             index={i}
-            onPointerUp={() => navlink.title !== 'service' && setIsOpen(false)}
+            setIsOpen={setIsOpen}
             hasIcon
             menu={navlink.title === 'service' ? services : undefined}
             menuBaseUrl='/service'
