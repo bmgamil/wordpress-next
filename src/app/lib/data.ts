@@ -1,4 +1,4 @@
-export const revalidate = process.env.NODE_ENV === 'development' ? 0 : 3600;
+export const revalidate = Number(process.env.NEXT_REVALIDATE_INTERVAL);
 
 export const navlinks: Navlink[] = [
   {
