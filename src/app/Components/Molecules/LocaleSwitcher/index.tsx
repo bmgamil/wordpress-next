@@ -59,7 +59,7 @@ export default function LocaleSwitcherSelect() {
           <Box className={classes.menuItem}>
             <Text color='#fff'>EN</Text>
             <Image
-              src='/image/English_language.png'
+              src='/image/English_lang.png'
               alt='english language'
               height={600}
               width={900}
