@@ -1,4 +1,3 @@
-import { revalidate } from '@/app/lib/data';
 import { NextRequest, NextResponse } from 'next/server';
 import { getPlaiceholder } from 'plaiceholder';
 
@@ -17,12 +16,7 @@ export async function GET(request: NextRequest) {
 
   const url = `https://units.a2hosted.com/next/wp-json/wp/v2/project?${perPage}${page}${category}`;
   try {
-    const response = await fetch(url, {
-      next: {
-        revalidate,
-      },
-      // cache: 'force-cache',
-    });
+    const response = await fetch(url);
     const totalPages = response.headers.get('x-wp-totalpages');
 
     const data: Project[] = await response.json();

@@ -1,16 +1,9 @@
-import { revalidate } from '@/app/lib/data';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
     const response = await fetch(
-      `https://units.a2hosted.com/next/wp-json/wp/v2/service`,
-      {
-        next: {
-          revalidate,
-        },
-        // cache: 'force-cache',
-      }
+      `https://units.a2hosted.com/next/wp-json/wp/v2/service`
     );
 
     const responseData: ServiceDetail[] = await response.json();

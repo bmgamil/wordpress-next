@@ -20,14 +20,7 @@ export async function GET(request: NextRequest) {
     const data = await response.json();
 
     const categoryResponse = await fetch(
-      `https://units.a2hosted.com/next/wp-json/wp/v2/categories?slug=${slug}`,
-      {
-        next: {
-          revalidate,
-        },
-
-        // cache: 'force-cache',
-      }
+      `https://units.a2hosted.com/next/wp-json/wp/v2/categories?slug=${slug}`
     );
 
     const categoryData = await categoryResponse.json();

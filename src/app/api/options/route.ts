@@ -1,18 +1,12 @@
 import { getPlaiceholder } from 'plaiceholder';
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidate } from '@/app/lib/data';
 
 export async function GET(request: NextRequest) {
   const lang = request.nextUrl.searchParams.get('lang');
 
   try {
     const response = await fetch(
-      `https://units.a2hosted.com/next/wp-json/wp/v2/options`,
-      {
-        next: {
-          revalidate,
-        },
-      }
+      `https://units.a2hosted.com/next/wp-json/wp/v2/options`
     );
 
     const data: options = await response.json();
