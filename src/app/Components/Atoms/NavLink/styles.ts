@@ -13,6 +13,7 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
     link: {
       display: 'flex',
       flexDirection: 'column',
+      alignItems: 'flex-start',
       position: 'relative',
       fontSize: handleFontSize(fontSize),
       textTransform: 'capitalize',

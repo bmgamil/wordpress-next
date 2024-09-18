@@ -60,6 +60,7 @@ const Header = ({ header, services }: Props) => {
               alt='header logo'
               width={currentLogo.width}
               height={currentLogo.height}
+              draggable={false}
             />
           </Link>
           <Box

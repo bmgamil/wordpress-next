@@ -28,7 +28,7 @@ const HomeWorkingSteps = ({ stepsOptions }: Props) => {
   const [selectorIndex, setSelectorIndex] = useState(0);
 
   return (
-    <Box className={classes.container} component={motion.section} layout>
+    <Box className={classes.container} component={motion.section}>
       <Box className={classes.header}>
         <SectionRoundedTitle
           number={t('number')}
