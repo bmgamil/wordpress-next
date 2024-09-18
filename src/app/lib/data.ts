@@ -22,8 +22,8 @@ export const navlinks: Navlink[] = [
     link: '/about-us',
   },
   {
-    title: 'contact-us',
-    link: '/contact-us',
+    title: 'contact',
+    link: '/contact',
   },
 ];
 

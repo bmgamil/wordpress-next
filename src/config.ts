@@ -16,9 +16,9 @@ export const pathnames = {
     en: '/blogs',
     ar: '/blogs',
   },
-  '/contact-us': {
-    en: '/contact-us',
-    ar: '/contact-us',
+  '/contact': {
+    en: '/contact',
+    ar: '/contact',
   },
 };
 

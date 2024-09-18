@@ -6,7 +6,7 @@
       "projects": "projects",
       "blogs": "blogs",
       "about-us": "about us",
-      "contact-us": "contact us"
+      "contact": "contact us"
     }
   },
   "home": {
@@ -218,8 +218,8 @@
         "service": "service",
         "projects": "projects",
         "blogs": "blogs",
-        "about-us": "about us",
-        "contact-us": "contact us"
+        "about": "about us",
+        "contact": "contact us"
       }
     },
     "follow": {
