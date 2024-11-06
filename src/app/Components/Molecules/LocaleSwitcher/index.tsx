@@ -25,10 +25,28 @@ export default function LocaleSwitcherSelect() {
 
   function onSelectChange(event: SelectChangeEvent<HTMLSelectElement>) {
     const nextLocale = event.target.value;
-    startTransition(() => {
-      router.replace(pathname, { locale: nextLocale as any });
+    const startTime = performance.now(); // Start timer
+
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.setItem('localeSwitchStartTime', startTime.toString());
     });
+
+    startTransition(() => {
+      router.push(pathname, { locale: nextLocale as any });
+    });
+
     setCurrentLocale(nextLocale as string);
+  }
+
+  if (typeof window !== 'undefined') {
+    const startTime = sessionStorage.getItem('localeSwitchStartTime');
+    if (startTime) {
+      const endTime = performance.now(); // End timer
+      console.log(
+        `Locale switch took ${endTime - parseFloat(startTime)} milliseconds.`
+      );
+      sessionStorage.removeItem('localeSwitchStartTime');
+    }
   }
 
   return (

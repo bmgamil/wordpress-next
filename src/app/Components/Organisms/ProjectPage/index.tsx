@@ -1,13 +1,11 @@
 'use client';
 
 import { Box } from '@mui/material';
-import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 import Text from '../../Atoms/Text';
 import { useStyles } from './style';
-import Image from '../../Atoms/Image';
-import { MotionDelay, RowVariant } from '@/app/lib/MotionVariants';
+import { MotionDelay } from '@/app/lib/MotionVariants';
 import { getRelatedProjects } from '@/app/lib/Controller';
 import TagsSlider from '../../Molecules/TagsSlider';
 import RelatedProjects from '../RelatedProjects';

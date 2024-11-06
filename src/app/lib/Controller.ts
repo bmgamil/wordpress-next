@@ -3,168 +3,103 @@ export const IS_CACHING = process.env.NEXT_IS_CACHING === 'true';
 
 import { revalidate } from '@/app/lib/data';
 
+const fetchData = async (endpoint: string, options = {}) => {
+  try {
+    const response = await fetch(`${API_URL}${endpoint}`, {
+      next: { revalidate: IS_CACHING ? revalidate : undefined },
+      cache: IS_CACHING ? undefined : 'no-cache',
+      ...options,
+    });
+    return await response.json();
+  } catch (error) {
+    return { error };
+  }
+};
+
 export const getProjects = async (
   perPage?: number,
   page?: number,
   slug?: string
 ) => {
-  const _perPage = perPage ? `per_page=${perPage}` : '';
-  const _page = page ? `&page=${page}` : '';
-  const _slug = slug ? `&types_cat_slug=${slug}` : '';
+  const query = new URLSearchParams();
+  if (perPage) query.append('per_page', perPage.toString());
+  if (page) query.append('page', page.toString());
+  if (slug) query.append('types_cat_slug', slug);
 
-  try {
-    const response = await fetch(
-      `${API_URL}/projects?${_perPage}${_page}${_slug}`,
-      {
-        next: { revalidate: IS_CACHING ? revalidate : undefined },
-        cache: IS_CACHING ? undefined : 'no-cache',
-      }
-    );
-    const data = await response.json();
-    return {
-      projects: data.projects,
-      totalPages: data.totalPages,
-      error: null,
-    };
-  } catch (error) {
-    return {
-      projects: null,
-      error: error,
-    };
-  }
+  const data = await fetchData(`/projects?${query.toString()}`);
+  return {
+    projects: data.projects,
+    totalPages: data.totalPages,
+    error: data.error || null,
+  };
 };
 
 export const getProjectCategories = async () => {
-  try {
-    const response = await fetch(`${API_URL}/projectCategories`, {
-      next: { revalidate: IS_CACHING ? revalidate : undefined },
-      cache: IS_CACHING ? undefined : 'no-cache',
-    });
-    const data = await response.json();
-
-    return {
-      success: true,
-      data,
-    };
-  } catch (error) {
-    return {
-      success: false,
-    };
-  }
+  const data = await fetchData('/projectCategories');
+  return {
+    success: !data.error,
+    data: data.error ? null : data,
+  };
 };
 
 export const getRelatedProjects = async (id: number) => {
-  try {
-    const response = await fetch(`${API_URL}/relatedProjects?id=${id}`);
-    const data = await response.json();
-
-    return {
-      success: true,
-      data,
-    };
-  } catch (error) {
-    return {
-      success: false,
-    };
-  }
+  const data = await fetchData(`/relatedProjects?id=${id}`);
+  return {
+    success: !data.error,
+    data: data.error ? null : data,
+  };
 };
 
 export const getServices = async (slug?: string) => {
-  const _slug = slug ? `?slug=${slug}` : '';
-  try {
-    const response = await fetch(`${API_URL}/services${_slug}`, {
-      next: { revalidate: IS_CACHING ? revalidate : undefined },
-      cache: IS_CACHING ? undefined : 'no-cache',
-    });
-    const data = await response.json();
-    return {
-      services: data,
-      error: null,
-    };
-  } catch (error) {
-    return {
-      services: null,
-      error: error,
-    };
-  }
+  const endpoint = slug ? `/services?slug=${slug}` : '/services';
+  const data = await fetchData(endpoint);
+  console.log(data.duration);
+  return {
+    services: data.error ? null : data,
+    error: data.error || null,
+  };
 };
+
 export const getProject = async (slug: string) => {
-  try {
-    const response = await fetch(`${API_URL}/project?slug=${slug}`, {
-      next: { revalidate: IS_CACHING ? revalidate : undefined },
-      cache: IS_CACHING ? undefined : 'no-cache',
-    });
-    return await response.json();
-  } catch (error) {
-    return error;
-  }
+  return await fetchData(`/project?slug=${slug}`);
 };
 
 export const contactSubmitHandler = async (data: ContactSubmission) => {
-  const response = fetch(
-    'https://units.a2hosted.com/next/wp-json/wp/v2/contacts',
-    {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
-
-  return response;
+  try {
+    const response = await fetch(
+      'https://units.a2hosted.com/next/wp-json/wp/v2/contacts',
+      {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return { error };
+  }
 };
 
 export const getFAQS = async () => {
-  try {
-    const response = await fetch(`${API_URL}/faqs`, {
-      next: { revalidate: IS_CACHING ? revalidate : undefined },
-      cache: IS_CACHING ? undefined : 'no-cache',
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    return error;
-  }
+  return await fetchData('/faqs');
 };
 
 export const getOptions = async (lang: string) => {
-  try {
-    const response = await fetch(`${API_URL}/options?lang=${lang}`, {
-      next: { revalidate: IS_CACHING ? revalidate : undefined },
-      cache: IS_CACHING ? undefined : 'no-cache',
-    });
-    return await response.json();
-  } catch (error) {
-    return error;
-  }
+  return await fetchData(`/options?lang=${lang}`);
 };
 
 export const getCategoriesList = async () => {
-  try {
-    const response = await fetch(`${API_URL}/blogs-categories`, {
-      next: { revalidate: IS_CACHING ? revalidate : undefined },
-      cache: IS_CACHING ? undefined : 'no-cache',
-    });
-    return await response.json();
-  } catch (error) {
-    return error;
-  }
+  return await fetchData('/blogs-categories');
 };
 
 export const getBlogs = async (perPage: number, page: number) => {
-  const _perPage = `per_page=${perPage}`;
-  const _page = `&page=${page}`;
-  try {
-    const response = await fetch(`${API_URL}/blogs?${_perPage}${_page}`, {
-      next: { revalidate: IS_CACHING ? revalidate : undefined },
-      cache: IS_CACHING ? undefined : 'no-cache',
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    return error;
-  }
+  const query = new URLSearchParams({
+    per_page: perPage.toString(),
+    page: page.toString(),
+  });
+  return await fetchData(`/blogs?${query.toString()}`);
 };
 
 export const getCategoryBlogs = async (
@@ -172,35 +107,14 @@ export const getCategoryBlogs = async (
   perPage: number,
   page: number
 ) => {
-  const _slug = `slug=${slug}`;
-  const _perPage = `&per_page=${perPage}`;
-  const _page = `&page=${page}`;
-  try {
-    const response = await fetch(
-      `${API_URL}/blog-category?${_slug}${_perPage}${_page}`,
-      {
-        next: { revalidate: IS_CACHING ? revalidate : undefined },
-        cache: IS_CACHING ? undefined : 'no-cache',
-      }
-    );
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    return error;
-  }
+  const query = new URLSearchParams({
+    slug,
+    per_page: perPage.toString(),
+    page: page.toString(),
+  });
+  return await fetchData(`/blog-category?${query.toString()}`);
 };
 
 export const getBlogBySlug = async (slug: string) => {
-  const _slug = `slug=${slug}`;
-
-  try {
-    const response = await fetch(`${API_URL}/blog?${_slug}`, {
-      next: { revalidate: IS_CACHING ? revalidate : undefined },
-      cache: IS_CACHING ? undefined : 'no-cache',
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    return error;
-  }
+  return await fetchData(`/blog?slug=${slug}`);
 };

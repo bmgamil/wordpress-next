@@ -7,23 +7,16 @@ export async function GET(request: NextRequest) {
     );
 
     const data: BlogCategory[] = await response.json();
-    const newData: BlogCategory[] = [];
 
-    if (data.length > 0) {
-      for (let i = 0; i < data.length; i++) {
-        const category: BlogCategory = {
-          id: data[i].id,
-          title: data[i].title,
-          name: data[i].name,
-          slug: data[i].slug,
-        };
-
-        newData.push(category);
-      }
-    }
+    const newData: BlogCategory[] = data.map((category) => ({
+      id: category.id,
+      title: category.title,
+      name: category.name,
+      slug: category.slug,
+    }));
 
     return NextResponse.json(newData);
   } catch (error) {
-    return NextResponse.json(error);
+    return NextResponse.json({ error: (error as Error).message });
   }
 }

@@ -1,3 +1,5 @@
+'use client';
+
 import { Box } from '@mui/material';
 import Logo from '../../Atoms/Logo';
 import Text from '../../Atoms/Text';

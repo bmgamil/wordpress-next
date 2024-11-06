@@ -3,8 +3,6 @@ import Image from '@/app/Components/Atoms/Image';
 import Text from '@/app/Components/Atoms/Text';
 import { Box, Grid } from '@mui/material';
 import useStyles from './style';
-import Carousel from '../../Carousel';
-import ProjectCard from '../../ProjectCard';
 import { useTranslations } from 'next-intl';
 import ServiceFAQs from '../FAQs';
 import { motion } from 'framer-motion';

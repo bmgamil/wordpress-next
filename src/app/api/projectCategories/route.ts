@@ -8,18 +8,14 @@ export async function GET() {
 
     const responseData: ServiceDetail[] = await response.json();
 
-    const data: ProjectCategory[] = [];
-    if (responseData.length > 0) {
-      for (let i = 0; i < responseData.length; i++) {
-        if (responseData[i].projects.length > 0) {
-          data.push({
-            id: responseData[i].id,
-            slug: responseData[i].slug,
-            title: responseData[i].title,
-          });
-        }
-      }
-    }
+    const data: ProjectCategory[] = responseData
+      .filter((service) => service.projects.length > 0)
+      .map((service) => ({
+        id: service.id,
+        slug: service.slug,
+        title: service.title,
+      }));
+
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json({

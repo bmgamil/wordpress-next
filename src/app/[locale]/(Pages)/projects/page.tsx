@@ -20,8 +20,14 @@ export const generateMetadata = ({ searchParams }: Props): Metadata => {
 const Projects = async ({ searchParams }: Props) => {
   const page = searchParams.page ?? 1;
   const category = searchParams.category;
-  const { projects, totalPages } = await getProjects(6, +page, category);
-  const { success, data: categories } = await getProjectCategories();
+
+  const [projectsResponse, categoriesResponse] = await Promise.all([
+    getProjects(6, +page, category),
+    getProjectCategories(),
+  ]);
+
+  const { projects, totalPages } = projectsResponse;
+  const { success, data: categories } = categoriesResponse;
 
   if (page > totalPages) {
     notFound();

@@ -18,41 +18,24 @@ export async function GET(request: NextRequest) {
       return await getPlaiceholder(buffer);
     };
 
+    const processImages = async (images: optionMedia[]) => {
+      const placeholders = await Promise.all(
+        images.map(async (image) => await getImagePlaceholder(image.url))
+      );
+
+      images.forEach((image, index) => {
+        image.placeholder = placeholders[index];
+      });
+    };
+
     if (lang === 'en') {
-      data.home.main.image.placeholder = await getImagePlaceholder(
-        data.home.main.image.url
-      );
-      data.home.about.image.placeholder = await getImagePlaceholder(
-        data.home.about.image.url
-      );
-
-      const placeholders = await Promise.all(
-        data.home.steps.map(
-          async (step) => await getImagePlaceholder(step.image.url)
-        )
-      );
-
-      data.home.steps.forEach(
-        (step, index) => (step.image.placeholder = placeholders[index])
-      );
+      await processImages([data.home.main.image, data.home.about.image]);
+      await processImages(data.home.steps.map((step) => step.image));
     } else {
-      data.home.main_ar.image.placeholder = await getImagePlaceholder(
-        data.home.main_ar.image.url
-      );
-      data.home.about_ar.image.placeholder = await getImagePlaceholder(
-        data.home.about_ar.image.url
-      );
-
-      const placeholders = await Promise.all(
-        data.home.steps_ar.map(
-          async (step) => await getImagePlaceholder(step.image.url)
-        )
-      );
-
-      data.home.steps_ar.forEach(
-        (step, index) => (step.image.placeholder = placeholders[index])
-      );
+      await processImages([data.home.main_ar.image, data.home.about_ar.image]);
+      await processImages(data.home.steps_ar.map((step) => step.image));
     }
+
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(error);

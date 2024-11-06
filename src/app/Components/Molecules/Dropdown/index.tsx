@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useStyles } from './styles';
-import { Box, Icon, List, ListItem } from '@mui/material';
+import { Box, List, ListItem } from '@mui/material';
 import Text from '../../Atoms/Text';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { AnimatePresence, motion } from 'framer-motion';

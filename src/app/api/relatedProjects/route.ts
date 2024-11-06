@@ -17,20 +17,27 @@ export async function GET(request: NextRequest) {
     const data: Project[] = await response.json();
     const newData: Project[] = [];
     if (data.length > 0) {
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].featured_media !== null) {
-          const buffer = await fetch(
-            data[i].featured_media.source_url ?? ''
-          ).then(async (res) => Buffer.from(await res.arrayBuffer()));
-          const { base64, color, metadata, css } = await getPlaiceholder(
-            buffer
-          );
+      await Promise.all(
+        data.map(async (project) => {
+          if (project.featured_media !== null) {
+            const buffer = await fetch(
+              project.featured_media.source_url ?? ''
+            ).then(async (res) => Buffer.from(await res.arrayBuffer()));
+            const { base64, color, metadata, css } = await getPlaiceholder(
+              buffer
+            );
 
-          data[i].featured_media.placeholder = { base64, color, metadata, css };
-        }
+            project.featured_media.placeholder = {
+              base64,
+              color,
+              metadata,
+              css,
+            };
+          }
 
-        newData.push(data[i]);
-      }
+          newData.push(project);
+        })
+      );
     }
 
     return NextResponse.json(newData);

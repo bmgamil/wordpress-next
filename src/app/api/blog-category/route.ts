@@ -13,33 +13,33 @@ export async function GET(request: NextRequest) {
     : '';
 
   try {
-    const response = await fetch(
-      `https://units.a2hosted.com/next/wp-json/wp/v2/posts?category=${slug}${perPage}${page}`
-    );
+    const [response, categoryResponse] = await Promise.all([
+      fetch(
+        `https://units.a2hosted.com/next/wp-json/wp/v2/posts?category=${slug}${perPage}${page}`
+      ),
+      fetch(
+        `https://units.a2hosted.com/next/wp-json/wp/v2/categories?slug=${slug}`
+      ),
+    ]);
+
     const totalPages = response.headers.get('x-wp-totalpages');
     const data = await response.json();
-
-    const categoryResponse = await fetch(
-      `https://units.a2hosted.com/next/wp-json/wp/v2/categories?slug=${slug}`
-    );
-
     const categoryData = await categoryResponse.json();
 
-    debugger;
-
     if (data.length > 0) {
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].featured_media !== null) {
-          const buffer = await fetch(
-            data[i].featured_media.source_url ?? ''
-          ).then(async (res) => Buffer.from(await res.arrayBuffer()));
-          const { base64 } = await getPlaiceholder(buffer);
-
-          data[i].featured_media.placeholder = {
-            base64,
-          };
-        }
-      }
+      await Promise.all(
+        data.map(async (post: Blog) => {
+          if (post.featured_media !== null) {
+            const buffer = await fetch(
+              post.featured_media.source_url ?? ''
+            ).then(async (res) => Buffer.from(await res.arrayBuffer()));
+            const { base64, color, css, metadata } = await getPlaiceholder(
+              buffer
+            );
+            post.featured_media.placeholder = { base64, color, css, metadata };
+          }
+        })
+      );
     }
 
     return NextResponse.json({
