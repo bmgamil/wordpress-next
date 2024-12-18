@@ -53,7 +53,7 @@ const ContactUs = async () => {
           <ContactForm />
         </Grid>
       </Grid>
-      <FAQs list={faqs} />
+      {/* <FAQs list={faqs} /> */}
     </Container>
   );
 };

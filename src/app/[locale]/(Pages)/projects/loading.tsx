@@ -1,9 +1,8 @@
 'use client';
-
-import LoadingCircular from '@/app/Components/Molecules/Loading/LoadingCircular';
+import ProjectsPageLoading from '@/app/Components/Organisms/ProjectsPageLoading';
 
 const Loading = () => {
-  return <LoadingCircular />;
+  <ProjectsPageLoading />;
 };
 
 export default Loading;

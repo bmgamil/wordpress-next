@@ -20,10 +20,6 @@ const ProjectPage = ({ project }: Props) => {
   const t = useTranslations('services');
   const [relatedProjects, setRelatedProjects] = useState<Project[]>([]);
   const { featured_media, content, categories, id, title } = project;
-  const {
-    placeholder: { metadata },
-    source_url,
-  } = featured_media;
 
   const handleRelatedProjects = async () => {
     try {

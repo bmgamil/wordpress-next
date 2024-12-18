@@ -42,12 +42,10 @@ export default async function RootLayout({
   const servicePromise = getServices();
   const optionsPromise: Promise<options> = getOptions(locale);
 
-  const [
-    {
-      services: { services },
-    },
-    options,
-  ] = await Promise.all([servicePromise, optionsPromise]);
+  const [{ services }, options] = await Promise.all([
+    servicePromise,
+    optionsPromise,
+  ]);
 
   return (
     <html lang={locale} dir={dir}>

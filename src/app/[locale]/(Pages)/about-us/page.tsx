@@ -19,15 +19,11 @@ const AboutUs = async () => {
   const locale = await getLocale();
   const t = await getTranslations('about.main');
 
-  const [servicesData, faqs, options] = await Promise.all([
+  const [{ services }, faqs, options] = await Promise.all([
     getServices(),
     getFAQS(),
     getOptions(locale),
   ]);
-
-  const {
-    services: { services },
-  } = servicesData;
 
   return (
     <Container
@@ -60,7 +56,7 @@ const AboutUs = async () => {
       <Introduction />
       <TickerWithTitle gallery={options.home.clients_gallary} />
       <AboutService services={services} />
-      <FAQs list={faqs} />
+      {/* <FAQs list={faqs} /> */}
     </Container>
   );
 };

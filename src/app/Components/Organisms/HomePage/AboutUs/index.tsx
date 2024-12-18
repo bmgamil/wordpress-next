@@ -38,8 +38,8 @@ const HomeAboutUs = ({ aboutOptions }: Props) => {
             alt={t('title')}
             width={image.width}
             height={image.height}
-            blurDataURL={image.placeholder.base64}
-            placeholder='blur'
+            // blurDataURL={image.placeholder.base64}
+            // placeholder='blur'
           />
         </Grid>
         <Grid item md={7} className={classes.column2}>

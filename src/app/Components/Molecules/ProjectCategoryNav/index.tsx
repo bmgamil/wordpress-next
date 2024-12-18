@@ -1,11 +1,9 @@
 'use client';
-import { Box, List } from '@mui/material';
+import { List } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from '@/navigation';
 import { useStyles } from './styles';
-import NavLink from '../../Atoms/NavLink';
-import NavActiveLine from '../../Atoms/NavActiveLine';
 import Dropdown from '../Dropdown';
 import Tag from '../../Atoms/Tag';
 
@@ -74,28 +72,8 @@ const ProjectCategoryNav = (props: Props) => {
             >
               {navlink.title && navlink.title.replace('#038;', '')}
             </Tag>
-            // <NavLink
-            //   to={link}
-            //   key={navlink.title}
-            //   isActive={isActive}
-            //   setActiveLine={setActiveLineDimenstions}
-            //   fontSize='base'
-            //   index={i}
-            //   currentActive={category}
-            //   onClick={() => {
-            //     navlink.title && setCurrentValue(navlink.title);
-            //   }}
-            //   isProjectCate
-            // >
-            //   {navlink.title && navlink.title.replace('#038;', '')}
-            // </NavLink>
           );
         })}
-        {/* <NavActiveLine
-          left={activeLine.left}
-          width={activeLine.width}
-          listWidth={listWidth}
-        /> */}
       </List>
     </>
   );

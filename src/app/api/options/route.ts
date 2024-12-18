@@ -1,7 +1,8 @@
-import { getPlaiceholder } from 'plaiceholder';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
+  const startTime = Date.now(); // Start timing
+
   const lang = request.nextUrl.searchParams.get('lang');
 
   try {
@@ -11,33 +12,20 @@ export async function GET(request: NextRequest) {
 
     const data: options = await response.json();
 
-    const getImagePlaceholder = async (url: string) => {
-      const buffer = await fetch(url).then(async (res) =>
-        Buffer.from(await res.arrayBuffer())
-      );
-      return await getPlaiceholder(buffer);
-    };
+    const endTime = Date.now(); // End timing
+    const duration = endTime - startTime; // Calculate duration
 
-    const processImages = async (images: optionMedia[]) => {
-      const placeholders = await Promise.all(
-        images.map(async (image) => await getImagePlaceholder(image.url))
-      );
-
-      images.forEach((image, index) => {
-        image.placeholder = placeholders[index];
-      });
-    };
-
-    if (lang === 'en') {
-      await processImages([data.home.main.image, data.home.about.image]);
-      await processImages(data.home.steps.map((step) => step.image));
-    } else {
-      await processImages([data.home.main_ar.image, data.home.about_ar.image]);
-      await processImages(data.home.steps_ar.map((step) => step.image));
-    }
-
-    return NextResponse.json(data);
+    return NextResponse.json({
+      data,
+      duration, // Include duration in the response
+    });
   } catch (error) {
-    return NextResponse.json(error);
+    const endTime = Date.now(); // End timing in case of error
+    const duration = endTime - startTime; // Calculate duration
+
+    return NextResponse.json({
+      error,
+      duration, // Include duration in the response
+    });
   }
 }

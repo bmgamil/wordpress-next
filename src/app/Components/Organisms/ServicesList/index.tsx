@@ -33,7 +33,7 @@ const ServicesBlogsList = (props: Props) => {
   useEffect(() => {
     if (serviceSlug) {
       const item = list.find((item) => item.slug === serviceSlug);
-      if (item) setCurrentValue(item.title);
+      if (item) setCurrentValue(item.name);
     }
   }, [serviceSlug]);
 
@@ -75,7 +75,7 @@ const ServicesBlogsList = (props: Props) => {
         )}
 
         {list?.map((item, i) => {
-          const title = item.name || item.title;
+          const title = item.name;
           return (
             <motion.div
               variants={RowVariant}
@@ -90,7 +90,7 @@ const ServicesBlogsList = (props: Props) => {
             >
               <SingleServiceBlog
                 href={`/${isBlog ? 'blogs' : 'service'}/${item.slug}`}
-                title={title.replace('#038;', '')}
+                title={title.replace('amp;', ' ')}
                 iconSize={iconSize}
                 textSize={textSize}
                 isAr={isAr}

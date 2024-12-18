@@ -17,9 +17,7 @@ export const metadata: Metadata = {
 
 const ServicesLayout = async ({ children }: { children: React.ReactNode }) => {
   const t = await getTranslations('services');
-  const {
-    services: { services },
-  } = await getServices();
+  const { services } = await getServices();
 
   return (
     <Container

@@ -11,16 +11,17 @@ type Props = {
   color?: 'dark' | 'light';
   href?: string;
   onClick?: (e: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>) => void;
+  className?: string;
 };
 const Tag = (props: Props) => {
-  const { mode, href, onClick, color } = props;
+  const { mode, href, onClick, color, className } = props;
   const { classes } = useStyles({ mode, href });
 
   return (
     <Link
       href={(href as AppPathnames) ?? '#'}
       draggable='false'
-      className={classes.container}
+      className={`${classes.container} ${className}`}
       onClick={(e) => onClick && onClick(e)}
     >
       <Text textWeight='regular' textColor={color ?? mode} textSize='sm'>

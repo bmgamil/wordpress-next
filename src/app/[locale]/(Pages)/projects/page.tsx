@@ -29,10 +29,9 @@ const Projects = async ({ searchParams }: Props) => {
   const { projects, totalPages } = projectsResponse;
   const { success, data: categories } = categoriesResponse;
 
-  if (page > totalPages) {
-    notFound();
-  }
-
+  // if (page > totalPages) {
+  //   notFound();
+  // }
   return (
     <Box
       sx={{
@@ -41,7 +40,7 @@ const Projects = async ({ searchParams }: Props) => {
         gap: '4rem',
       }}
     >
-      {success && <ProjectCategoryNav categories={categories} />}
+      {success && categories && <ProjectCategoryNav categories={categories} />}
       <ProjectsList
         list={projects}
         totalPages={+totalPages}

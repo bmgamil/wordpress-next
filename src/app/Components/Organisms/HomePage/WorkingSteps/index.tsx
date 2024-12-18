@@ -87,8 +87,8 @@ const HomeWorkingSteps = ({ stepsOptions }: Props) => {
               alt={t('title')}
               width={stepsOptions[selectorIndex].image.width}
               height={stepsOptions[selectorIndex].image.height}
-              blurDataURL={stepsOptions[selectorIndex].image.placeholder.base64}
-              placeholder='blur'
+              // blurDataURL={stepsOptions[selectorIndex].image.placeholder.base64}
+              // placeholder='blur'
             />
           </Box>
         </Grid>

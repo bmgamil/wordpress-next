@@ -104,8 +104,8 @@ const HomeMain = ({ mainOptions }: Props) => {
           shadow
           height={image.height}
           width={image.width}
-          blurDataURL={image.placeholder.base64}
-          placeholder='blur'
+          // blurDataURL={image.placeholder.base64}
+          // placeholder='blur'
           alt='units'
         />
       </Grid>

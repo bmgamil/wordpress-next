@@ -14,10 +14,15 @@ type Props = {
 };
 
 const ServiceDetail = (props: Props) => {
-  const { content, projects, title, featured_media, faq } = {
+  const {
+    description: content,
+    projects,
+    name,
+    acf: { featured_media, faq },
+  } = {
     ...props.service,
   };
-  const { source_url, media_details, placeholder } = { ...featured_media };
+  const { source_url, media_details } = { ...featured_media };
   const { height, width } = { ...media_details };
 
   const { classes } = useStyles();
@@ -43,16 +48,16 @@ const ServiceDetail = (props: Props) => {
       >
         <Box className={classes.Title}>
           <Text textSize='xl' textWeight='medium'>
-            {title.replace('#038;', '')}
+            {name.replace('amp;', ' ')}
           </Text>
         </Box>
         {source_url && (
           <Box className={classes.Image}>
             <Image
               src={source_url}
-              placeholder='blur'
-              blurDataURL={placeholder.base64}
-              alt={title}
+              // placeholder='blur'
+              // blurDataURL={placeholder.base64}
+              alt={name}
               width={width}
               height={height}
             />

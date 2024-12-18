@@ -42,9 +42,7 @@ export default function LocaleSwitcherSelect() {
     const startTime = sessionStorage.getItem('localeSwitchStartTime');
     if (startTime) {
       const endTime = performance.now(); // End timer
-      console.log(
-        `Locale switch took ${endTime - parseFloat(startTime)} milliseconds.`
-      );
+
       sessionStorage.removeItem('localeSwitchStartTime');
     }
   }

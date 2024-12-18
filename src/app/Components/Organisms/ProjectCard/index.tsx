@@ -16,14 +16,7 @@ const ProjectCard = (props: { project: Project }) => {
     project: { featured_media, title, categories, slug },
   } = props;
 
-  const {
-    media_details,
-    source_url,
-    placeholder: {
-      css,
-      color: { b, g, r },
-    },
-  } = featured_media;
+  const { media_details, source_url } = featured_media;
 
   const t = useTranslations('buttons');
   const { classes } = useStyles();
@@ -34,13 +27,13 @@ const ProjectCard = (props: { project: Project }) => {
       variants={RowVariant}
       initial='hidden'
       whileInView='visible'
-      exit='exit'
       viewport={{ once: true, amount: 0.3 }}
       className={classes.container}
-      sx={{
-        ...css,
-        backgroundColor: `rgba(${r},${g},${b},0.5)`,
-      }}
+      layout
+      // sx={{
+      //   ...css,
+      //   backgroundColor: `rgba(${r},${g},${b},0.5)`,
+      // }}
     >
       <Box className={classes.header}>
         <Text variant='h4' textWeight='medium' textSize='lg'>
@@ -55,6 +48,8 @@ const ProjectCard = (props: { project: Project }) => {
           width={media_details.width}
           height={media_details.height}
           alt={title}
+          placeholder='blur'
+          blurDataURL='data:image/svg+xml;base64,LGhlaWdodCBjYXJkIHN0eWxl'
         />
       </Box>
 

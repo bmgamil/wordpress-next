@@ -1,8 +1,9 @@
 import { revalidate } from '@/app/lib/data';
 import { NextRequest, NextResponse } from 'next/server';
-import { getPlaiceholder } from 'plaiceholder';
 
 export async function GET(request: NextRequest) {
+  const startTime = Date.now(); // Start timing
+
   const slug = request.nextUrl.searchParams.get('slug');
   const perPage = request.nextUrl.searchParams.get('per_page')
     ? `&per_page=${request.nextUrl.searchParams.get('per_page')}`
@@ -26,29 +27,23 @@ export async function GET(request: NextRequest) {
     const data = await response.json();
     const categoryData = await categoryResponse.json();
 
-    if (data.length > 0) {
-      await Promise.all(
-        data.map(async (post: Blog) => {
-          if (post.featured_media !== null) {
-            const buffer = await fetch(
-              post.featured_media.source_url ?? ''
-            ).then(async (res) => Buffer.from(await res.arrayBuffer()));
-            const { base64, color, css, metadata } = await getPlaiceholder(
-              buffer
-            );
-            post.featured_media.placeholder = { base64, color, css, metadata };
-          }
-        })
-      );
-    }
+    const endTime = Date.now(); // End timing
+    const duration = endTime - startTime; // Calculate duration
 
     return NextResponse.json({
       blogs: data,
       seo: categoryData[0].seo,
       totalPages,
       error: null,
+      duration, // Include duration in the response
     });
   } catch (error) {
-    return NextResponse.json(error);
+    const endTime = Date.now(); // End timing in case of error
+    const duration = endTime - startTime; // Calculate duration
+
+    return NextResponse.json({
+      error,
+      duration, // Include duration in the response
+    });
   }
 }

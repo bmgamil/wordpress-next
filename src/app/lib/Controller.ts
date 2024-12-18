@@ -1,7 +1,7 @@
-export const API_URL = process.env.NEXT_PUBLIC_API_URL;
-export const IS_CACHING = process.env.NEXT_IS_CACHING === 'true';
-
+'use server';
 import { revalidate } from '@/app/lib/data';
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const IS_CACHING = process.env.NEXT_IS_CACHING === 'true';
 
 const fetchData = async (endpoint: string, options = {}) => {
   try {
@@ -25,20 +25,30 @@ export const getProjects = async (
   if (perPage) query.append('per_page', perPage.toString());
   if (page) query.append('page', page.toString());
   if (slug) query.append('types_cat_slug', slug);
+  const url = `/project?${query.toString()}`;
+  const data = await fetchData(url);
 
-  const data = await fetchData(`/projects?${query.toString()}`);
   return {
-    projects: data.projects,
-    totalPages: data.totalPages,
+    projects: data,
+    totalPages: 1,
     error: data.error || null,
   };
 };
 
 export const getProjectCategories = async () => {
-  const data = await fetchData('/projectCategories');
+  const endpoint = '/types_cat';
+  const responseData = (await fetchData(endpoint)) as ServiceDetail[];
+  const data: ProjectCategory[] = responseData
+    // .filter((service) => service.projects.length > 0)
+    .map((service) => ({
+      id: service.id,
+      slug: service.slug,
+      title: service.name.replace('amp;', ' '),
+    }));
+
   return {
-    success: !data.error,
-    data: data.error ? null : data,
+    success: !!data,
+    data: !data ? null : data,
   };
 };
 
@@ -51,17 +61,26 @@ export const getRelatedProjects = async (id: number) => {
 };
 
 export const getServices = async (slug?: string) => {
-  const endpoint = slug ? `/services?slug=${slug}` : '/services';
+  const endpoint = slug ? `/types_cat?slug=${slug}` : '/types_cat';
   const data = await fetchData(endpoint);
-  console.log(data.duration);
+
+  if (slug) {
+    const featured_mediaId = data[0].acf.featured_image;
+    const endpoint = `/media/${featured_mediaId}`;
+    const media = await fetchData(endpoint);
+    data[0].acf.featured_media = media;
+  }
+
   return {
-    services: data.error ? null : data,
+    services: data.error ? null : slug ? data[0] : data,
     error: data.error || null,
   };
 };
 
 export const getProject = async (slug: string) => {
-  return await fetchData(`/project?slug=${slug}`);
+  const endpoint = `/project?slug=${slug}`;
+  const data = await fetchData(endpoint);
+  return data[0];
 };
 
 export const contactSubmitHandler = async (data: ContactSubmission) => {
@@ -83,15 +102,23 @@ export const contactSubmitHandler = async (data: ContactSubmission) => {
 };
 
 export const getFAQS = async () => {
-  return await fetchData('/faqs');
+  const data = await fetchData('/faq');
+  return data.data;
 };
 
 export const getOptions = async (lang: string) => {
-  return await fetchData(`/options?lang=${lang}`);
+  const data = await fetchData(`/options`);
+  const { header, footer, home } = data;
+  return {
+    header,
+    footer,
+    home,
+  };
 };
 
 export const getCategoriesList = async () => {
-  return await fetchData('/blogs-categories');
+  const data = await fetchData('/categories-list');
+  return data.data;
 };
 
 export const getBlogs = async (perPage: number, page: number) => {
@@ -112,7 +139,20 @@ export const getCategoryBlogs = async (
     per_page: perPage.toString(),
     page: page.toString(),
   });
-  return await fetchData(`/blog-category?${query.toString()}`);
+  const {
+    blogs,
+    seo,
+    totalPages,
+    error,
+    duration, // Include duration in the response
+  } = await fetchData(`/blog-category?${query.toString()}`);
+  console.log(duration / 1000, 'getCategoryBlogs duration');
+  return {
+    blogs,
+    seo,
+    totalPages,
+    error,
+  };
 };
 
 export const getBlogBySlug = async (slug: string) => {

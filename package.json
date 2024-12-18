@@ -23,7 +23,6 @@
     "joi": "^17.12.1",
     "next": "^14.2.5",
     "next-intl": "^3.17.2",
-    "plaiceholder": "^3.0.0",
     "react": "^18",
     "react-dom": "^18",
     "react-fast-marquee": "^1.6.5",

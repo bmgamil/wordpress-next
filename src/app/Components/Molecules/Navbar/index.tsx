@@ -21,7 +21,7 @@ const Navbar = ({ setIsOpen, services }: Props) => {
 
   const t = useTranslations('header.navbar');
   const listRef = useRef<HTMLUListElement>(null);
-  const setActiveLineDimenstions = (left: number, width: number) => {
+  const setActiveLineDimensions = (left: number, width: number) => {
     setActiveLine({ left, width });
   };
 
@@ -48,7 +48,7 @@ const Navbar = ({ setIsOpen, services }: Props) => {
             to={`${navlink.link}`}
             key={navlink.title}
             isActive={isActive}
-            setActiveLine={setActiveLineDimenstions}
+            setActiveLine={setActiveLineDimensions}
             fontSize='base'
             currentActive={pathname}
             index={i}

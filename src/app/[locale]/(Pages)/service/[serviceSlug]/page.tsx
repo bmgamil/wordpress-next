@@ -13,11 +13,9 @@ type Props = {
 export const generateMetadata = async ({
   params: { serviceSlug },
 }: Props): Promise<Metadata> => {
-  const {
-    services: { services },
-  } = await getServices(serviceSlug);
+  const { services } = await getServices(serviceSlug);
 
-  const seo = services?.seo;
+  const seo = services?.yoast_head_json;
 
   return {
     ...seo,
@@ -25,9 +23,7 @@ export const generateMetadata = async ({
 };
 
 const SingleService = async ({ params: { serviceSlug } }: Props) => {
-  const {
-    services: { services },
-  } = await getServices(serviceSlug);
+  const { services } = await getServices(serviceSlug);
 
   // if (!services) {
   //   notFound();

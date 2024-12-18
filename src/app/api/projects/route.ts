@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getPlaiceholder } from 'plaiceholder';
+//
 
 export async function GET(request: NextRequest) {
+  const startTime = Date.now(); // Start timing
+
   const perPage = request.nextUrl.searchParams.get('per_page')
     ? `&per_page=${request.nextUrl.searchParams.get('per_page')}`
     : '';
@@ -20,32 +22,23 @@ export async function GET(request: NextRequest) {
     const totalPages = response.headers.get('x-wp-totalpages');
 
     const data: Project[] = await response.json();
-
-    const newData: Project[] = await Promise.all(
-      data.map(async (project) => {
-        if (project.featured_media !== null) {
-          const buffer = await fetch(
-            project.featured_media.source_url ?? ''
-          ).then(async (res) => Buffer.from(await res.arrayBuffer()));
-          const { base64, color, metadata, css } = await getPlaiceholder(
-            buffer
-          );
-
-          project.featured_media.placeholder = { base64, color, metadata, css };
-        }
-        return project;
-      })
-    );
+    const endTime = Date.now(); // End timing
+    const duration = endTime - startTime; // Calculate duration
 
     return NextResponse.json({
-      projects: newData,
+      projects: data,
       totalPages,
       error: null,
+      duration, // Include duration in the response
     });
   } catch (error) {
+    const endTime = Date.now(); // End timing in case of error
+    const duration = endTime - startTime; // Calculate duration
+
     return NextResponse.json({
       projects: null,
       error: error,
+      duration, // Include duration in the response
     });
   }
 }
