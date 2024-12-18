@@ -1,10 +1,17 @@
 import { revalidate } from '@/app/lib/data';
+import { getLocale } from 'next-intl/server';
 export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const IS_CACHING = process.env.NEXT_IS_CACHING === 'true';
 
+const appendLocaleParam = (url: string, locale: string): string => {
+  if (!url || !locale || url.includes('options')) return url;
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}lang=${encodeURIComponent(locale)}`;
+};
+
 const fetchData = async (endpoint: string, options = {}) => {
-  const query = new URLSearchParams();
-  let lang = query.get('lang');
+  const locale = await getLocale();
+  endpoint = appendLocaleParam(endpoint, locale);
 
   try {
     const response = await fetch(`${API_URL}${endpoint}`, {

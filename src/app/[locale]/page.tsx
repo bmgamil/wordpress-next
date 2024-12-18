@@ -1,13 +1,12 @@
 import { Container } from '@mui/material';
 import { getLocale } from 'next-intl/server';
 
-import HomeMain from '../Components/Organisms/HomePage/Main';
 import HomeAboutUs from '../Components/Organisms/HomePage/AboutUs';
-import HomeService from '../Components/Organisms/HomePage/Services';
+import HomeMain from '../Components/Organisms/HomePage/Main';
 import HomeProjects from '../Components/Organisms/HomePage/Projects';
+import HomeService from '../Components/Organisms/HomePage/Services';
 import HomeWorkingSteps from '../Components/Organisms/HomePage/WorkingSteps';
 import { getOptions, getProjects, getServices } from '../lib/Controller';
-import Blogs from '../Components/Organisms/HomePage/Blogs';
 
 export default async function Home() {
   const locale = await getLocale();
