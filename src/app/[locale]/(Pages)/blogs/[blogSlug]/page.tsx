@@ -33,7 +33,7 @@ const CategoryBlogs = async (props: Props) => {
   );
 
   if (data.blogs && data.blogs?.length <= 0) {
-    return <Text>No Blogs Avilable</Text>;
+    return <Text>No Blogs Available</Text>;
   }
 
   return (

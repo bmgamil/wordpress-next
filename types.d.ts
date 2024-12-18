@@ -51,7 +51,7 @@ type ServiceDetail = {
 
     faq: FAQ[];
   };
-  seo: SEO;
+  yoast_head_json: SEO;
 };
 
 type Blog = {

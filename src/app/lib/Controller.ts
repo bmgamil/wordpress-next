@@ -1,9 +1,11 @@
-'use server';
 import { revalidate } from '@/app/lib/data';
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-const IS_CACHING = process.env.NEXT_IS_CACHING === 'true';
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;
+export const IS_CACHING = process.env.NEXT_IS_CACHING === 'true';
 
 const fetchData = async (endpoint: string, options = {}) => {
+  const query = new URLSearchParams();
+  let lang = query.get('lang');
+
   try {
     const response = await fetch(`${API_URL}${endpoint}`, {
       next: { revalidate: IS_CACHING ? revalidate : undefined },
