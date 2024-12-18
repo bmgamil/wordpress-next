@@ -22,7 +22,7 @@ const CategoryWrapper = ({ service }: Props) => {
         animate
         delay={MotionDelay.xs}
       >
-        {service.title.replace('#038;', '')}
+        {service.name.replace('#038;', '')}
       </Text>
       <ProjectsList list={service.projects} />
     </Box>

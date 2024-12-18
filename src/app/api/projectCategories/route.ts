@@ -15,7 +15,7 @@ export async function GET() {
       .map((service) => ({
         id: service.id,
         slug: service.slug,
-        title: service.title,
+        title: service.name.replace('amp;', ' '),
       }));
 
     const endTime = Date.now(); // End timing

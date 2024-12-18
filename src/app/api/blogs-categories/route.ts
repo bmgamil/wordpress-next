@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
 
     const newData: BlogCategory[] = data.map((category) => ({
       id: category.id,
-      title: category.title,
+      title: category.name,
       name: category.name,
       slug: category.slug,
     }));
