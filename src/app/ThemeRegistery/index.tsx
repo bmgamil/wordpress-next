@@ -13,12 +13,32 @@ import { Cairo, ClashDisplay } from '../theme/theme';
 type Props = {
   children: React.ReactNode;
 };
+
+const options = { key: `mui-theme` };
+const createEmotionCache = () => {
+  const cache = createCache(options);
+  cache.compat = true;
+  const prevInsert = cache.insert;
+  let inserted: string[] = [];
+  cache.insert = (...args) => {
+    const serialized = args[1];
+    if (cache.inserted[serialized.name] === undefined) {
+      inserted.push(serialized.name);
+    }
+    return prevInsert(...args);
+  };
+  const flush = () => {
+    const prevInserted = inserted;
+    inserted = [];
+    return prevInserted;
+  };
+  return { cache, flush };
+};
+
 export default function ThemeRegistry(props: Props) {
   const locale = useLocale();
   const isAr = locale === 'ar';
   const { children } = props;
-  // const { appMode, setAppMode } = useAppContext();
-  const options = { key: `mui-theme` };
 
   const theme = createTheme({
     palette: {
@@ -47,25 +67,7 @@ export default function ThemeRegistry(props: Props) {
     },
   });
 
-  const [{ cache, flush }] = useState(() => {
-    const cache = createCache(options);
-    cache.compat = true;
-    const prevInsert = cache.insert;
-    let inserted: string[] = [];
-    cache.insert = (...args) => {
-      const serialized = args[1];
-      if (cache.inserted[serialized.name] === undefined) {
-        inserted.push(serialized.name);
-      }
-      return prevInsert(...args);
-    };
-    const flush = () => {
-      const prevInserted = inserted;
-      inserted = [];
-      return prevInserted;
-    };
-    return { cache, flush };
-  });
+  const [{ cache, flush }] = useState(createEmotionCache);
 
   useServerInsertedHTML(() => {
     const names = flush();
@@ -87,24 +89,11 @@ export default function ThemeRegistry(props: Props) {
     );
   });
 
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     const getThemeLocalStorage =
-  //       typeof window !== 'undefined' && window.localStorage.getItem('appMode');
-  //     const useThemeLocalStorage = getThemeLocalStorage
-  //       ? JSON.parse(getThemeLocalStorage)
-  //       : 'dark';
-  //     setAppMode && setAppMode(useThemeLocalStorage);
-  //   }
-  //   flush();
-  // }, [appMode]);
-
   return (
-    <CacheProvider value={cache}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        {children}
-      </ThemeProvider>
-    </CacheProvider>
+    // <CacheProvider value={cache}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
   );
 }

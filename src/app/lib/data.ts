@@ -1,6 +1,6 @@
 export const revalidate = Number(process.env.NEXT_REVALIDATE_INTERVAL);
 
-export const navlinks: Navlink[] = [
+export const navlinks: NavLink[] = [
   {
     title: 'home',
     link: '/',
@@ -27,7 +27,7 @@ export const navlinks: Navlink[] = [
   },
 ];
 
-export const socialLinks: Navlink[] = [
+export const socialLinks: NavLink[] = [
   {
     title: 'linkedin',
     link: '/',

@@ -19,7 +19,7 @@ const BlogCard = (props: Props) => {
     blog: { featured_media, title, categories, slug },
   } = props;
 
-  const { source_url, placeholder, media_details } = featured_media;
+  const { source_url, media_details } = featured_media;
 
   const bt = useTranslations('buttons');
   const { classes } = useStyles();
@@ -31,8 +31,8 @@ const BlogCard = (props: Props) => {
           src={source_url}
           width={media_details.width}
           height={media_details.height}
-          placeholder='blur'
-          blurDataURL={placeholder.base64}
+          // placeholder='blur'
+          // blurDataURL={placeholder.base64}
           alt='blog'
         />
       </Box>

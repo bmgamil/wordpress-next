@@ -194,7 +194,7 @@ const NavLink = (props: Props) => {
                     }}
                   >
                     <Text className={classes.text}>
-                      {item.title.replace('#038;', '')}
+                      {item.name.replace('amp;', ' ')}
                     </Text>
                   </Link>
                 </ListItem>

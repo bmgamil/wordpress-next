@@ -10,10 +10,8 @@ import { useStyles } from './styles';
 import Image from '@/app/Components/Atoms/Image';
 import Button from '@/app/Components/Atoms/Button';
 import Navbar from '@/app/Components/Molecules/Navbar';
-import HeaderLogo from '@/../public/image/header-logo.svg';
 import BluredCircle from '@/app/Components/Atoms/BluredCircle';
 import Text from '../../Atoms/Text';
-import { AppPathnames } from '@/config';
 import LocaleSwitcherSelect from '../../Molecules/LocaleSwitcher';
 
 type Props = {

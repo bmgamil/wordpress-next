@@ -18,12 +18,12 @@ export const metadata: Metadata = {
 const AboutUs = async () => {
   const locale = await getLocale();
   const t = await getTranslations('about.main');
-  const {
-    services: { services },
-  } = await getServices();
 
-  const faqs: FAQ[] = await getFAQS();
-  const options: options = await getOptions(locale);
+  const [{ services }, faqs, options] = await Promise.all([
+    getServices(),
+    getFAQS(),
+    getOptions(locale),
+  ]);
 
   return (
     <Container
@@ -56,7 +56,7 @@ const AboutUs = async () => {
       <Introduction />
       <TickerWithTitle gallery={options.home.clients_gallary} />
       <AboutService services={services} />
-      <FAQs list={faqs} />
+      {/* <FAQs list={faqs} /> */}
     </Container>
   );
 };

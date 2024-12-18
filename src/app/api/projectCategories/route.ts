@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
+  const startTime = Date.now(); // Start timing
+
   try {
     const response = await fetch(
       `https://units.a2hosted.com/next/wp-json/wp/v2/service`
@@ -8,23 +10,29 @@ export async function GET() {
 
     const responseData: ServiceDetail[] = await response.json();
 
-    const data: ProjectCategory[] = [];
-    if (responseData.length > 0) {
-      for (let i = 0; i < responseData.length; i++) {
-        if (responseData[i].projects.length > 0) {
-          data.push({
-            id: responseData[i].id,
-            slug: responseData[i].slug,
-            title: responseData[i].title,
-          });
-        }
-      }
-    }
-    return NextResponse.json(data);
+    const data: ProjectCategory[] = responseData
+      .filter((service) => service.projects.length > 0)
+      .map((service) => ({
+        id: service.id,
+        slug: service.slug,
+        title: service.title,
+      }));
+
+    const endTime = Date.now(); // End timing
+    const duration = endTime - startTime; // Calculate duration
+
+    return NextResponse.json({
+      data,
+      duration, // Include duration in the response
+    });
   } catch (error) {
+    const endTime = Date.now(); // End timing in case of error
+    const duration = endTime - startTime; // Calculate duration
+
     return NextResponse.json({
       project: null,
       error: error,
+      duration, // Include duration in the response
     });
   }
 }

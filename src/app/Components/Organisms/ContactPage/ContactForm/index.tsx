@@ -45,7 +45,7 @@ const ContactForm = () => {
       setLoading(true);
       const response = await contactSubmitHandler(data);
 
-      if (response.ok) {
+      if (response instanceof Response && response.ok) {
         reset();
       } else {
         throw new Error('error occured');

@@ -1,8 +1,6 @@
 'use client';
 import { Box } from '@mui/material';
-import { useCallback, useEffect, useState } from 'react';
-import Autoplay from 'embla-carousel-autoplay';
-import { EmblaOptionsType } from 'embla-carousel';
+import { useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';

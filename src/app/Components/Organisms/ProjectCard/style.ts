@@ -12,6 +12,7 @@ export const useStyles = makeStyles()((theme) => {
       borderRadius: handleBorderRadiusSize('xl'),
       height: '100%',
       userSelect: 'none',
+      background: `linear-gradient(90deg, ${theme.palette.background.paper} ,  ${theme.palette.grey[900]} , ${theme.palette.grey[800]})`,
     },
     link: {
       alignSelf: 'flex-start',

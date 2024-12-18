@@ -9,19 +9,12 @@ export async function GET(request: NextRequest) {
     );
 
     const data: Blog[] = await response.json();
-    const newData = [];
 
-    if (data.length > 0) {
-      for (let i = 0; i < data.length; i++) {
-        const blog = {
-          id: data[i].id,
-          title: data[i].title,
-          slug: data[i].slug,
-        };
-
-        newData.push(blog);
-      }
-    }
+    const newData = data.map((blog) => ({
+      id: blog.id,
+      title: blog.title,
+      slug: blog.slug,
+    }));
 
     return NextResponse.json(newData);
   } catch (error) {

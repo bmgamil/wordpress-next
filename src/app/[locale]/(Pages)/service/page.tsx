@@ -5,9 +5,7 @@ import { AppPathnames } from '@/config';
 import { getServices } from '@/app/lib/Controller';
 
 const Services = async () => {
-  const {
-    services: { services },
-  } = await getServices();
+  const { services } = await getServices();
 
   if (!services && !!!services.length) {
     return null;

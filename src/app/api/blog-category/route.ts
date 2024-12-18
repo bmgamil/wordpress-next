@@ -1,8 +1,9 @@
 import { revalidate } from '@/app/lib/data';
 import { NextRequest, NextResponse } from 'next/server';
-import { getPlaiceholder } from 'plaiceholder';
 
 export async function GET(request: NextRequest) {
+  const startTime = Date.now(); // Start timing
+
   const slug = request.nextUrl.searchParams.get('slug');
   const perPage = request.nextUrl.searchParams.get('per_page')
     ? `&per_page=${request.nextUrl.searchParams.get('per_page')}`
@@ -13,42 +14,36 @@ export async function GET(request: NextRequest) {
     : '';
 
   try {
-    const response = await fetch(
-      `https://units.a2hosted.com/next/wp-json/wp/v2/posts?category=${slug}${perPage}${page}`
-    );
+    const [response, categoryResponse] = await Promise.all([
+      fetch(
+        `https://units.a2hosted.com/next/wp-json/wp/v2/posts?category=${slug}${perPage}${page}`
+      ),
+      fetch(
+        `https://units.a2hosted.com/next/wp-json/wp/v2/categories?slug=${slug}`
+      ),
+    ]);
+
     const totalPages = response.headers.get('x-wp-totalpages');
     const data = await response.json();
-
-    const categoryResponse = await fetch(
-      `https://units.a2hosted.com/next/wp-json/wp/v2/categories?slug=${slug}`
-    );
-
     const categoryData = await categoryResponse.json();
 
-    debugger;
-
-    if (data.length > 0) {
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].featured_media !== null) {
-          const buffer = await fetch(
-            data[i].featured_media.source_url ?? ''
-          ).then(async (res) => Buffer.from(await res.arrayBuffer()));
-          const { base64 } = await getPlaiceholder(buffer);
-
-          data[i].featured_media.placeholder = {
-            base64,
-          };
-        }
-      }
-    }
+    const endTime = Date.now(); // End timing
+    const duration = endTime - startTime; // Calculate duration
 
     return NextResponse.json({
       blogs: data,
       seo: categoryData[0].seo,
       totalPages,
       error: null,
+      duration, // Include duration in the response
     });
   } catch (error) {
-    return NextResponse.json(error);
+    const endTime = Date.now(); // End timing in case of error
+    const duration = endTime - startTime; // Calculate duration
+
+    return NextResponse.json({
+      error,
+      duration, // Include duration in the response
+    });
   }
 }

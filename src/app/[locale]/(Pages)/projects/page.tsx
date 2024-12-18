@@ -20,13 +20,18 @@ export const generateMetadata = ({ searchParams }: Props): Metadata => {
 const Projects = async ({ searchParams }: Props) => {
   const page = searchParams.page ?? 1;
   const category = searchParams.category;
-  const { projects, totalPages } = await getProjects(6, +page, category);
-  const { success, data: categories } = await getProjectCategories();
 
-  if (page > totalPages) {
-    notFound();
-  }
+  const [projectsResponse, categoriesResponse] = await Promise.all([
+    getProjects(6, +page, category),
+    getProjectCategories(),
+  ]);
 
+  const { projects, totalPages } = projectsResponse;
+  const { success, data: categories } = categoriesResponse;
+
+  // if (page > totalPages) {
+  //   notFound();
+  // }
   return (
     <Box
       sx={{
@@ -35,7 +40,7 @@ const Projects = async ({ searchParams }: Props) => {
         gap: '4rem',
       }}
     >
-      {success && <ProjectCategoryNav categories={categories} />}
+      {success && categories && <ProjectCategoryNav categories={categories} />}
       <ProjectsList
         list={projects}
         totalPages={+totalPages}

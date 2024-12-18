@@ -12,17 +12,12 @@ import Blogs from '../Components/Organisms/HomePage/Blogs';
 export default async function Home() {
   const locale = await getLocale();
   const isAr = locale === 'ar';
-  const projectsPromise = getProjects(4);
-  const servicePromise = getServices();
-  const optionsPromise: Promise<options> = getOptions(locale);
 
-  const [
-    { projects },
-    {
-      services: { services },
-    },
-    options,
-  ] = await Promise.all([projectsPromise, servicePromise, optionsPromise]);
+  const [{ projects }, { services }, options] = await Promise.all([
+    getProjects(4),
+    getServices(),
+    getOptions(locale),
+  ]);
   const {
     home: {
       main,

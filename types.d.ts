@@ -12,7 +12,7 @@ type TextColor = 'main' | 'light' | 'dark';
 
 type FontWeight = 'bold' | 'medium' | 'regular' | 'light';
 
-type Navlink = {
+type NavLink = {
   title: string;
   link: string;
 };
@@ -41,14 +41,16 @@ type SingleContact = {
 
 type ServiceDetail = {
   id: number;
-  title: string;
-  name?: string;
+  name: string;
   type: string;
   slug: string;
-  content: string | TrustedHTML;
+  description: string | TrustedHTML;
   projects: Project[];
-  featured_media: ProjectMedia;
-  faq: FAQ[];
+  acf: {
+    featured_media: ProjectMedia;
+
+    faq: FAQ[];
+  };
   seo: SEO;
 };
 
@@ -65,8 +67,7 @@ type Blog = {
 
 type BlogCategory = {
   id: number;
-  title: string;
-  name?: string;
+  name: string;
   slug: string;
   posts?: Blog[];
   seo?: SEO;
@@ -99,7 +100,7 @@ type ProjectMedia = {
     width: number;
     height: number;
   };
-  placeholder: Placeholder;
+  // placeholder: Placeholder;
 };
 
 type ProjectCategory = {
@@ -144,7 +145,7 @@ type optionMedia = {
   link: string;
   width: number;
   height: number;
-  placeholder: Placeholder;
+  // placeholder: Placeholder;
 };
 
 type optionFooterLinks = {

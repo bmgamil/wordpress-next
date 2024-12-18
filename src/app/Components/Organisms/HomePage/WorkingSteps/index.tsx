@@ -1,5 +1,5 @@
 'use client';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Box, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
 
@@ -7,7 +7,6 @@ import useStyles from './style';
 import Text from '@/app/Components/Atoms/Text';
 import Image from '@/app/Components/Atoms/Image';
 import Button from '@/app/Components/Atoms/Button';
-import HomeSteps from '@/../public/image/home-steps.jpg';
 import WorkingStepsList from '../../WorkingStepsList';
 import SectionRoundedTitle from '@/app/Components/Molecules/SectionRoundedTitle';
 import {
@@ -88,8 +87,8 @@ const HomeWorkingSteps = ({ stepsOptions }: Props) => {
               alt={t('title')}
               width={stepsOptions[selectorIndex].image.width}
               height={stepsOptions[selectorIndex].image.height}
-              blurDataURL={stepsOptions[selectorIndex].image.placeholder.base64}
-              placeholder='blur'
+              // blurDataURL={stepsOptions[selectorIndex].image.placeholder.base64}
+              // placeholder='blur'
             />
           </Box>
         </Grid>
