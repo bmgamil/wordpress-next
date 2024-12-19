@@ -92,29 +92,7 @@
 
   "faqs": {
     "heading_1": "frequently asked questions",
-    "heading_2": "FAQs",
-    "list": {
-      "faq_1": {
-        "title": "What should i expect from using this product?",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi."
-      },
-      "faq_2": {
-        "title": "How can i get this product?",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi."
-      },
-      "faq_3": {
-        "title": "Pricing and subscriptions",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi."
-      },
-      "faq_4": {
-        "title": "Another question goes here?",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi."
-      },
-      "faq_5": {
-        "title": "How can i get this product?",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi."
-      }
-    }
+    "heading_2": "FAQs"
   },
 
   "services": {
@@ -188,7 +166,7 @@
     },
     "form": {
       "title": "request a quote for your work",
-      "name": "first name",
+      "name": "name",
       "email": "email",
       "phone": "phone number",
       "subject": "subject",
@@ -256,7 +234,11 @@
       "min": "too short",
       "max": "too long",
       "base": "required",
-      "email": "invalid email"
+      "email": "invalid email",
+      "length": "invalid length",
+      "pattern": {
+        "base": "invalid"
+      }
     }
   },
   "loading": "loading",

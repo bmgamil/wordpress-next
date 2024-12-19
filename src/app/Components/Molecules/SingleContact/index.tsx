@@ -4,6 +4,8 @@ import { Box, useTheme } from '@mui/material';
 
 import Text from '../../Atoms/Text';
 import { RowVariant } from '@/app/lib/MotionVariants';
+import { Link } from '@/navigation';
+import { useStyles } from './style';
 
 type Props = {
   contact: SingleContact;
@@ -12,10 +14,11 @@ type Props = {
 
 const SingleContact = (props: Props) => {
   const {
-    contact: { description, icon, title },
+    contact: { description, icon, title, link },
     index,
   } = props;
-  const theme = useTheme();
+
+  const { classes } = useStyles();
 
   return (
     <Box
@@ -35,9 +38,16 @@ const SingleContact = (props: Props) => {
         <Text textSize='base' textWeight='medium'>
           {title}
         </Text>
-        <Text textSize='sm' textWeight='light'>
-          {description}
-        </Text>
+        <a
+          href={link}
+          target='_blank'
+          rel='noreferrer'
+          className={classes.link}
+        >
+          <Text textSize='sm' textWeight='light' textTransform={'none'}>
+            {description}
+          </Text>
+        </a>
       </Box>
     </Box>
   );

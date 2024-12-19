@@ -22,7 +22,7 @@ export const useStyles = makeStyles<Props>()((theme, { isAr, isOpen }) => {
     },
     innerContainer: {
       display: 'grid',
-      gridTemplateColumns: '0.5fr 1fr 0.5fr',
+      gridTemplateColumns: '150px 1fr 0.5fr',
       alignItems: 'start',
       justifyContent: 'space-between',
       gap: '0.8rem',

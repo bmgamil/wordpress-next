@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import Text from '../../Atoms/Text';
 import { useStyles } from './style';
 import { MotionDelay } from '@/app/lib/MotionVariants';
-import { getRelatedProjects } from '@/app/lib/Controller';
+import { getProjectById } from '@/app/lib/Controller';
 import TagsSlider from '../../Molecules/TagsSlider';
 import RelatedProjects from '../RelatedProjects';
 import { useTranslations } from 'next-intl';
@@ -19,22 +19,8 @@ const ProjectPage = ({ project }: Props) => {
   const { classes } = useStyles();
   const t = useTranslations('services');
   const [relatedProjects, setRelatedProjects] = useState<Project[]>([]);
-  const { featured_media, content, categories, id, title } = project;
-
-  const handleRelatedProjects = async () => {
-    try {
-      const response = await getRelatedProjects(id);
-      if (response.success) {
-        setRelatedProjects(response.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    handleRelatedProjects();
-  }, []);
+  const { featured_media, content, categories, id, title, related_projects } =
+    project;
 
   return (
     <Box className={classes.container}>
@@ -69,9 +55,9 @@ const ProjectPage = ({ project }: Props) => {
         />
       </Box> */}
       <div dangerouslySetInnerHTML={{ __html: content }} />
-      {!!relatedProjects.length && (
-        <RelatedProjects projects={relatedProjects} title={t('related')} />
-      )}
+      {/* {!!related_projects?.length && (
+        <RelatedProjects projects={related_projects} title={t('related')} />
+      )} */}
     </Box>
   );
 };

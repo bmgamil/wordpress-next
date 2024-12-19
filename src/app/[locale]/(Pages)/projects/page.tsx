@@ -1,10 +1,9 @@
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 
-import { getProjectCategories, getProjects } from '@/app/lib/Controller';
-import ProjectsList from '@/app/Components/Organisms/ProjectsList';
-import { Box } from '@mui/material';
 import ProjectCategoryNav from '@/app/Components/Molecules/ProjectCategoryNav';
+import ProjectsList from '@/app/Components/Organisms/ProjectsList';
+import { getProjectCategories, getProjects } from '@/app/lib/Controller';
+import { Box } from '@mui/material';
 
 type Props = {
   searchParams: { page?: string; category?: string };

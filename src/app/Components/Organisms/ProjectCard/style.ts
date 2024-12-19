@@ -27,6 +27,10 @@ export const useStyles = makeStyles()((theme) => {
       flexDirection: 'column',
       gap: '0.5rem',
       textTransform: 'capitalize',
+      a: {
+        color: theme.palette.primary.light,
+        textDecoration: 'none',
+      },
       h4: {
         width: '100%',
         textOverflow: 'ellipsis',

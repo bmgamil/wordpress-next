@@ -26,7 +26,7 @@ const TextIcon = (props: Props) => {
     // icon,
     iconDirection,
     iconSize,
-    ...proprties
+    ...properties
   } = props;
   const { classes } = useStyles({
     hasGradientBG,
@@ -46,7 +46,7 @@ const TextIcon = (props: Props) => {
       >
         {/* {<Icon name={icon} size={iconSize} />} */}
       </Box>
-      <Typography {...proprties} className={classes.text}>
+      <Typography {...properties} className={classes.text}>
         {children}
       </Typography>
     </Box>

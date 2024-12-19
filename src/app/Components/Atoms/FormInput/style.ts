@@ -23,6 +23,7 @@ export const useStyles = makeStyles()((theme) => {
       // textAlign: 'start',
       '&::placeholder': {
         color: theme.palette.grey[400],
+        textTransform: 'capitalize',
       },
     },
 

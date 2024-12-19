@@ -1,14 +1,13 @@
+import { Box, Container, Grid } from '@mui/material';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { Box, Container, Grid } from '@mui/material';
 
-import { getFAQS } from '@/app/lib/Controller';
 import Text from '@/app/Components/Atoms/Text';
-import FAQs from '@/app/Components/Organisms/FAQs';
-import { MotionDelay } from '@/app/lib/MotionVariants';
-import PageIntroText from '@/app/Components/Organisms/PageIntroText';
-import ContactForm from '@/app/Components/Organisms/ContactPage/ContactForm';
 import ContactDetails from '@/app/Components/Organisms/ContactPage/ContactDetails';
+import ContactForm from '@/app/Components/Organisms/ContactPage/ContactForm';
+import PageIntroText from '@/app/Components/Organisms/PageIntroText';
+import { getFAQS, getOptions } from '@/app/lib/Controller';
+import { MotionDelay } from '@/app/lib/MotionVariants';
 
 export const metadata: Metadata = {
   title: 'Contact Us',
@@ -16,7 +15,10 @@ export const metadata: Metadata = {
 
 const ContactUs = async () => {
   const t = await getTranslations('contact.main');
-  const faqs: FAQ[] = await getFAQS();
+  // const faqs: FAQ[] = await getFAQS();
+  const options = await getOptions();
+  const { footer } = options;
+
   return (
     <Container
       component='main'
@@ -47,9 +49,9 @@ const ContactUs = async () => {
       </PageIntroText>
       <Grid container justifyContent={'space-between'} spacing={2}>
         <Grid item xs={12} sm={7} md={6}>
-          <ContactDetails />
+          <ContactDetails details={footer} />
         </Grid>
-        <Grid item xs={12} sm={5} md={4}>
+        <Grid item xs={12} sm={5} md={5}>
           <ContactForm />
         </Grid>
       </Grid>

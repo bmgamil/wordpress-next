@@ -61,8 +61,22 @@ export const getProjectCategories = async () => {
   };
 };
 
-export const getRelatedProjects = async (id: number) => {
-  const data = await fetchData(`/relatedProjects?id=${id}`);
+export const getProjectById = async (id: number, getImage?: boolean) => {
+  const data = await fetchData(`/project/${id}`);
+  if (getImage) {
+    const mediaId = data.featured_media;
+    const media = await fetchData(`/media/${mediaId}`);
+    data.featured_media = media;
+  }
+
+  return {
+    success: !data.error,
+    data: data.error ? null : data,
+  };
+};
+
+export const getProjectByServiceSlug = async (slug: string) => {
+  const data = await fetchData(`/project?types_cat_slug=${slug}`);
   return {
     success: !data.error,
     data: data.error ? null : data,
@@ -78,6 +92,8 @@ export const getServices = async (slug?: string) => {
     const endpoint = `/media/${featured_mediaId}`;
     const media = await fetchData(endpoint);
     data[0].acf.featured_media = media;
+    const projects = await getProjectByServiceSlug(slug);
+    data[0].projects = projects.data;
   }
 
   return {
@@ -89,6 +105,18 @@ export const getServices = async (slug?: string) => {
 export const getProject = async (slug: string) => {
   const endpoint = `/project?slug=${slug}`;
   const data = await fetchData(endpoint);
+  if (!!data.length && data[0].id) {
+    const project = await getProjectById(data[0].id);
+    const projectData = project.data;
+    if (!!projectData?.acf?.related_projects?.length) {
+      const promises = projectData.acf.related_projects.map((id: number) =>
+        getProjectById(id, true)
+      );
+      const relatedProjects = await Promise.all(promises);
+      data[0].related_projects = relatedProjects.map((project) => project.data);
+    }
+  }
+
   return data[0];
 };
 
@@ -115,7 +143,7 @@ export const getFAQS = async () => {
   return data.data;
 };
 
-export const getOptions = async (lang: string) => {
+export const getOptions = async () => {
   const data = await fetchData(`/options`);
   const { header, footer, home } = data;
   return {
@@ -155,7 +183,6 @@ export const getCategoryBlogs = async (
     error,
     duration, // Include duration in the response
   } = await fetchData(`/blog-category?${query.toString()}`);
-  console.log(duration / 1000, 'getCategoryBlogs duration');
   return {
     blogs,
     seo,

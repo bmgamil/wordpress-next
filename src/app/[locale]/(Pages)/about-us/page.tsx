@@ -19,10 +19,14 @@ const AboutUs = async () => {
   const locale = await getLocale();
   const t = await getTranslations('about.main');
 
-  const [{ services }, faqs, options] = await Promise.all([
+  const [
+    { services },
+    // faqs,
+    options,
+  ] = await Promise.all([
     getServices(),
-    getFAQS(),
-    getOptions(locale),
+    // getFAQS(),
+    getOptions(),
   ]);
 
   return (

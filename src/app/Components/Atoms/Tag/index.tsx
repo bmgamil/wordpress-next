@@ -24,7 +24,7 @@ const Tag = (props: Props) => {
       className={`${classes.container} ${className}`}
       onClick={(e) => onClick && onClick(e)}
     >
-      <Text textWeight='regular' textColor={color ?? mode} textSize='sm'>
+      <Text textWeight='regular' textColor={color ?? mode} textSize='xs'>
         {props.children}
       </Text>
     </Link>

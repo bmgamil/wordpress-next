@@ -21,11 +21,11 @@ export const handleBorderRadiusSize = (radius?: BorderRadius) => {
 export const handleFontSize = (size?: FontSize) => {
   switch (size) {
     case 'xs':
-      return '0.5rem';
-    case 'sm':
       return '0.8rem';
-    case 'base':
+    case 'sm':
       return '1rem';
+    case 'base':
+      return '1.25rem';
     case 'lg':
       return '1.5rem';
     case 'xl':

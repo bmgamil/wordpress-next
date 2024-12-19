@@ -91,6 +91,10 @@ type Project = {
   featured_media: ProjectMedia;
   services: ProjectCategory[];
   seo: SEO;
+  acf: {
+    related_projects: number[];
+  };
+  related_projects: Project[];
 };
 
 type ProjectMedia = {

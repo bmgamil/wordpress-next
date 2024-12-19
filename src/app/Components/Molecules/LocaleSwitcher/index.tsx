@@ -14,10 +14,9 @@ import Image from '@/app/Components/Atoms/Image';
 import Text from '../../Atoms/Text';
 import { useStyles } from './style';
 import { Cairo } from '@/app/theme/theme';
-
+import TranslateIcon from '@mui/icons-material/Translate';
 export default function LocaleSwitcherSelect() {
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const locale = useLocale();
   const [currentLocale, setCurrentLocale] = useState(locale);
@@ -25,26 +24,8 @@ export default function LocaleSwitcherSelect() {
 
   function onSelectChange(event: SelectChangeEvent<HTMLSelectElement>) {
     const nextLocale = event.target.value;
-    const startTime = performance.now(); // Start timer
-
-    window.addEventListener('beforeunload', () => {
-      sessionStorage.setItem('localeSwitchStartTime', startTime.toString());
-    });
-
-    startTransition(() => {
-      router.push(pathname, { locale: nextLocale as any });
-    });
-
+    router.push(pathname, { locale: nextLocale as any });
     setCurrentLocale(nextLocale as string);
-  }
-
-  if (typeof window !== 'undefined') {
-    const startTime = sessionStorage.getItem('localeSwitchStartTime');
-    if (startTime) {
-      const endTime = performance.now(); // End timer
-
-      sessionStorage.removeItem('localeSwitchStartTime');
-    }
   }
 
   return (
@@ -69,7 +50,7 @@ export default function LocaleSwitcherSelect() {
             border: 'none !important',
           },
         }}
-        IconComponent={() => undefined}
+        IconComponent={() => <TranslateIcon />}
       >
         <MenuItem value={'en'}>
           <Box className={classes.menuItem}>

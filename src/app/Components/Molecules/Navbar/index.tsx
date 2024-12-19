@@ -49,7 +49,7 @@ const Navbar = ({ setIsOpen, services }: Props) => {
             key={navlink.title}
             isActive={isActive}
             setActiveLine={setActiveLineDimensions}
-            fontSize='base'
+            fontSize='sm'
             currentActive={pathname}
             index={i}
             setIsOpen={setIsOpen}

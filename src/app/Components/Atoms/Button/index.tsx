@@ -18,7 +18,7 @@ type Props = ButtonProps &
     type?: ButtonType;
     isBold?: boolean;
     iconSize?: FontSize;
-    textTrasfrom?: TextTransform;
+    textTransform?: TextTransform;
     full?: boolean;
   };
 
@@ -31,10 +31,10 @@ const Button = (props: Props) => {
     fontSize,
     type,
     isBold,
-    textTrasfrom,
+    textTransform,
     iconSize,
     full,
-    ...proprties
+    ...properties
   } = props;
 
   const locale = useLocale();
@@ -46,7 +46,7 @@ const Button = (props: Props) => {
     color,
     fontSize,
     isBold,
-    textTrasfrom,
+    textTransform,
     isAr,
     full,
   });
@@ -64,7 +64,7 @@ const Button = (props: Props) => {
           <NorthWestIcon fontSize='small' />
         )
       }
-      {...proprties}
+      {...properties}
     >
       {children}
     </MUIButton>

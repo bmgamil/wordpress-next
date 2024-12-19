@@ -1,11 +1,9 @@
 import { Container } from '@mui/material';
 
-import { getProject } from '@/app/lib/Controller';
-import ProjectPage from '@/app/Components/Organisms/ProjectPage';
-import { Metadata } from 'next';
-import { getLocale } from 'next-intl/server';
 import '@/../public/style/style.css';
-import Head from 'next/head';
+import ProjectPage from '@/app/Components/Organisms/ProjectPage';
+import { getProject } from '@/app/lib/Controller';
+import { Metadata } from 'next';
 
 type Props = {
   params: {

@@ -14,6 +14,7 @@ import FormInput from '@/app/Components/Atoms/FormInput';
 import { RowVariant } from '@/app/lib/MotionVariants';
 import { contactSubmitHandler } from '@/app/lib/Controller';
 import { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 
 const ContactForm = () => {
   const { classes } = useStyles();
@@ -28,7 +29,7 @@ const ContactForm = () => {
     formState: { errors },
     reset,
   } = useForm<ContactSubmission>({
-    mode: 'onBlur',
+    mode: 'onChange',
     reValidateMode: 'onChange',
     resolver: joiResolver(ContactSchema),
     defaultValues: {
@@ -44,11 +45,12 @@ const ContactForm = () => {
     try {
       setLoading(true);
       const response = await contactSubmitHandler(data);
-
+      debugger;
       if (response instanceof Response && response.ok) {
+        toast.success('Message sent successfully');
         reset();
       } else {
-        throw new Error('error occured');
+        throw new Error('error occurred');
       }
     } catch (error) {
       console.log(error);
@@ -66,6 +68,8 @@ const ContactForm = () => {
       whileInView='visible'
       viewport={{ once: true, amount: 0.5 }}
     >
+      <ToastContainer />
+
       <Text textColor='main' textSize='lg'>
         {t('title')}
       </Text>
@@ -110,7 +114,7 @@ const ContactForm = () => {
         />
         <Button
           fontSize='base'
-          textTrasfrom='capitalize'
+          textTransform='capitalize'
           isBold
           type='submit'
           background='main'

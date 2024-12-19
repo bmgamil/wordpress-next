@@ -27,6 +27,7 @@
     "react-dom": "^18",
     "react-fast-marquee": "^1.6.5",
     "react-hook-form": "^7.50.1",
+    "react-toastify": "^11.0.1",
     "sharp": "^0.33.2",
     "stylis": "^4.3.1",
     "tss-react": "^4.9.3"

@@ -63,11 +63,11 @@ const Dropdown = (props: Props) => {
             {list.map((li, i) => (
               <ListItem
                 className={`${classes.listItem} ${
-                  li.title === currentValue && 'active'
+                  li.name === currentValue && 'active'
                 }`}
                 key={li.id}
                 onClick={() =>
-                  handleChange(li.slug, li.title.replace('#038;', ''))
+                  handleChange(li.slug, li.name.replace('#038;', ''))
                 }
                 component={motion.li}
                 variants={RowVariant}
@@ -75,7 +75,7 @@ const Dropdown = (props: Props) => {
                 animate='visible'
                 custom={i}
               >
-                {li.title.replace('#038;', '')}
+                {li.name.replace('amp;', '')}
               </ListItem>
             ))}
           </List>

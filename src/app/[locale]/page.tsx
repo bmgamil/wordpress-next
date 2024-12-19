@@ -15,7 +15,7 @@ export default async function Home() {
   const [{ projects }, { services }, options] = await Promise.all([
     getProjects(4),
     getServices(),
-    getOptions(locale),
+    getOptions(),
   ]);
   const {
     home: {

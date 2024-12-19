@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useLocale } from 'next-intl';
 import createCache from '@emotion/cache';
 import { orange } from '@mui/material/colors';
-import { CacheProvider } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useServerInsertedHTML } from 'next/navigation';
 import { ThemeProvider, createTheme } from '@mui/material/styles';

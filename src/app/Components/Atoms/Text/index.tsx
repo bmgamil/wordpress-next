@@ -28,7 +28,7 @@ const Text = (props: Props) => {
     textColor,
     animate,
     delay,
-    ...proprties
+    ...properties
   } = props;
   const locale = useLocale();
   const isAr = locale === 'ar';
@@ -67,7 +67,7 @@ const Text = (props: Props) => {
       initial='hidden'
       animate={controls}
     >
-      <Typography className={classes.text} {...proprties}>
+      <Typography className={classes.text} {...properties}>
         {children}
       </Typography>
     </Box>

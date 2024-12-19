@@ -10,6 +10,7 @@ import Image from '../../Atoms/Image';
 import CustomLink from '../../Atoms/Link';
 import TagsSlider from '../../Molecules/TagsSlider';
 import { RowVariant } from '@/app/lib/MotionVariants';
+import { Link } from '@/navigation';
 
 const ProjectCard = (props: { project: Project }) => {
   const {
@@ -36,9 +37,11 @@ const ProjectCard = (props: { project: Project }) => {
       // }}
     >
       <Box className={classes.header}>
-        <Text variant='h4' textWeight='medium' textSize='lg'>
-          {title}
-        </Text>
+        <Link href={`/project/${slug}` as any}>
+          <Text variant='h4' textWeight='medium' textSize='lg'>
+            {title}
+          </Text>
+        </Link>
         <TagsSlider mode='dark' tags={categories} />
       </Box>
 

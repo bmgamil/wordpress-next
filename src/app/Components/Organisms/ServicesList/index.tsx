@@ -43,7 +43,7 @@ const ServicesBlogsList = (props: Props) => {
         <Dropdown
           className={classes.dropdown}
           list={list}
-          currentValue={currentValue.replace('#038;', '')}
+          currentValue={currentValue.replace('amp;', '')}
           onChange={(slug, value) => {
             const url: any = `/${isBlog ? 'blogs' : 'service'}/${slug}`;
             setCurrentValue(value);

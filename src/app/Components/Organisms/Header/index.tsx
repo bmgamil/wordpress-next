@@ -104,7 +104,7 @@ const Header = ({ header, services }: Props) => {
               background='main'
               radius='2xl'
               fontSize='base'
-              textTrasfrom='capitalize'
+              textTransform='capitalize'
               isBold
             >
               {bt('contact')}
@@ -124,8 +124,8 @@ const Header = ({ header, services }: Props) => {
               disableRipple={pathname === '/'}
               background={pathname !== '/' ? 'main' : undefined}
               radius='2xl'
-              fontSize='base'
-              textTrasfrom='capitalize'
+              fontSize='sm'
+              textTransform='capitalize'
               isBold
               onPointerUp={(e) => router.push('/contact')}
             >

@@ -96,7 +96,7 @@ const ProjectsList = ({
                   full
                   fullWidth
                   textColor='main'
-                  textTrasfrom='capitalize'
+                  textTransform='capitalize'
                   disableRipple
                   radius='xl'
                   fontSize='lg'

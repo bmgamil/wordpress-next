@@ -7,7 +7,7 @@ type Props = {
   color?: TextColor;
   fontSize?: FontSize;
   isBold?: boolean;
-  textTrasfrom?: TextTransform;
+  textTransform?: TextTransform;
   isAr?: boolean;
   full?: boolean;
 };
@@ -18,7 +18,7 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
     fontSize,
     isBold,
     radius,
-    textTrasfrom,
+    textTransform,
     isAr,
     full,
   } = props;
@@ -28,7 +28,7 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
   return {
     btn: {
       minWidth: 'unset',
-      textTransform: textTrasfrom ?? 'capitalize',
+      textTransform: textTransform ?? 'capitalize',
       fontWeight: isBold
         ? theme.typography.fontWeightMedium
         : theme.typography.fontWeightRegular,
