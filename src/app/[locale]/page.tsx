@@ -7,6 +7,7 @@ import HomeProjects from '../Components/Organisms/HomePage/Projects';
 import HomeService from '../Components/Organisms/HomePage/Services';
 import HomeWorkingSteps from '../Components/Organisms/HomePage/WorkingSteps';
 import { getOptions, getProjects, getServices } from '../lib/Controller';
+import TickerWithTitle from '../Components/Organisms/AboutPage/TickerWithTitle';
 
 export default async function Home() {
   const locale = await getLocale();
@@ -43,6 +44,7 @@ export default async function Home() {
 
       <HomeAboutUs aboutOptions={isAr ? about_ar : about} />
       <HomeService services={services} />
+      <TickerWithTitle gallery={options.home.clients_gallary} />
       <HomeWorkingSteps stepsOptions={isAr ? steps_ar : steps} />
       <HomeProjects list={projects} workOptions={isAr ? ourWork_ar : ourWork} />
 
