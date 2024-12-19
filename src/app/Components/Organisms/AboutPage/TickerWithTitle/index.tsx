@@ -15,7 +15,7 @@ const TickerWithTitle = (props: Props) => {
   const { classes } = useStyles();
 
   return (
-    <Box className={classes.contianer}>
+    <Box className={classes.container}>
       <Text
         hasGradientBG
         textTransform='capitalize'

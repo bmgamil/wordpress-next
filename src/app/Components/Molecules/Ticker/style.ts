@@ -26,6 +26,10 @@ export const useStyles = makeStyles<Props>()((theme, props) => {
           },
         },
       },
+
+      img: {
+        maxWidth: '150px',
+      },
     },
   };
 });
