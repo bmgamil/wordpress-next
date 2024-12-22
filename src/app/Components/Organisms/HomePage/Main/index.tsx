@@ -91,13 +91,13 @@ const HomeMain = ({ mainOptions }: Props) => {
         item
         className={classes.column2}
         component={motion.div}
-        variants={FadeInVariant}
-        initial='hidden'
-        animate='visible'
-        transition={{
-          duration: 1,
-          delay: 1,
-        }}
+        // variants={FadeInVariant}
+        // initial='hidden'
+        // animate='visible'
+        // transition={{
+        //   duration: 1,
+        //   delay: 1,
+        // }}
       >
         <Image
           src={image.url}
@@ -106,6 +106,7 @@ const HomeMain = ({ mainOptions }: Props) => {
           width={image.width}
           // blurDataURL={image.placeholder.base64}
           // placeholder='blur'
+          priority
           alt='units'
         />
       </Grid>

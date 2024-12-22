@@ -37,9 +37,6 @@ export const useStyles = makeStyles<Props>()((theme, { isAr, width }) => {
         alignItems: 'flex-start',
         textAlign: 'initial',
       },
-      [theme.breakpoints.down('md')]: {
-        height: '85dvh',
-      },
     },
 
     column2: {
