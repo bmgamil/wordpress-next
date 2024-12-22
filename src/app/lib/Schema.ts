@@ -13,8 +13,8 @@ export const EmailFieldSchema = Joi.string()
   });
 
 export const TelephoneFieldSchema = Joi.string()
-  .pattern(/^[0-9]+$/)
-  .length(11)
+  .pattern(/^\+?[0-9]+$/)
+  .min(11)
   .required()
   .messages({
     'string.pattern.base': 'invalid phone number',
