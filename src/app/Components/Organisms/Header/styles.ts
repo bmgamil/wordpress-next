@@ -20,9 +20,15 @@ export const useStyles = makeStyles<Props>()((theme, { isAr, isOpen }) => {
         transitionTimingFunction: 'ease-in-out',
       },
     },
+    image: {
+      maxWidth: '150px !important',
+      [theme.breakpoints.down('md')]: {
+        maxWidth: '80% !important',
+      },
+    },
     innerContainer: {
       display: 'grid',
-      gridTemplateColumns: '150px 1fr 0.5fr',
+      gridTemplateColumns: '0.5fr 1fr 0.6fr',
       alignItems: 'start',
       justifyContent: 'space-between',
       gap: '0.8rem',
@@ -35,10 +41,6 @@ export const useStyles = makeStyles<Props>()((theme, { isAr, isOpen }) => {
         gridTemplateRows: isOpen ? 'auto 1fr' : 'auto 0fr',
         transition: 'grid-template-rows 0.3s ease-in-out',
         height: '100%',
-
-        img: {
-          maxWidth: '80%',
-        },
       },
     },
     navContainer: {

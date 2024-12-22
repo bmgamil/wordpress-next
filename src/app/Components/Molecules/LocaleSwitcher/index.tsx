@@ -19,7 +19,7 @@ export default function LocaleSwitcherSelect() {
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
-  const [currentLocale, setCurrentLocale] = useState(locale);
+  const [currentLocale, setCurrentLocale] = useState<string>(locale);
   const { classes } = useStyles();
 
   function onSelectChange(event: SelectChangeEvent<HTMLSelectElement>) {
@@ -37,8 +37,19 @@ export default function LocaleSwitcherSelect() {
         MenuProps={{
           disableScrollLock: true,
         }}
-        // @ts-ignore
-        value={currentLocale}
+        renderValue={(value) => (
+          <Box className={classes.menuItem}>
+            <Text
+              fontFamily={
+                `${value}` === 'ar' ? Cairo.style.fontFamily : undefined
+              }
+              color='#fff'
+            >
+              {`${value}` === 'ar' ? 'ع' : 'EN'}
+            </Text>
+          </Box>
+        )}
+        value={currentLocale as unknown as ''}
         onChange={onSelectChange}
         size='small'
         sx={{
@@ -73,6 +84,7 @@ export default function LocaleSwitcherSelect() {
               alt='اللغة العربية'
               height={600}
               width={900}
+              placeholder='blur'
             />
           </Box>
         </MenuItem>

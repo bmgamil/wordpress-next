@@ -10,7 +10,7 @@ import { useStyles } from './styles';
 import Image from '@/app/Components/Atoms/Image';
 import Button from '@/app/Components/Atoms/Button';
 import Navbar from '@/app/Components/Molecules/Navbar';
-import BluredCircle from '@/app/Components/Atoms/BluredCircle';
+import BlurredCircle from '@/app/Components/Atoms/BluredCircle';
 import Text from '../../Atoms/Text';
 import LocaleSwitcherSelect from '../../Molecules/LocaleSwitcher';
 
@@ -49,10 +49,11 @@ const Header = ({ header, services }: Props) => {
     <Box className={classes.container}>
       <Container sx={{ height: '100%' }}>
         <Box className={classes.innerContainer}>
-          <BluredCircle />
+          <BlurredCircle />
 
           <Link href='/'>
             <Image
+              className={classes.image}
               priority
               src={currentLogo.url}
               alt='header logo'
@@ -124,7 +125,7 @@ const Header = ({ header, services }: Props) => {
               disableRipple={pathname === '/'}
               background={pathname !== '/' ? 'main' : undefined}
               radius='2xl'
-              fontSize='sm'
+              fontSize='xs'
               textTransform='capitalize'
               isBold
               onPointerUp={(e) => router.push('/contact')}
