@@ -2,7 +2,7 @@
 
 import { Box } from '@mui/material';
 
-const BluredCircle = () => {
+const BlurredCircle = () => {
   return (
     <Box
       sx={{
@@ -22,4 +22,4 @@ const BluredCircle = () => {
   );
 };
 
-export default BluredCircle;
+export default BlurredCircle;

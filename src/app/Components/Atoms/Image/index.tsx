@@ -10,7 +10,7 @@ type Props = ImageProps & {
 };
 
 const Image = (props: Props) => {
-  const { alt, className, shadow, ...proprties } = props;
+  const { alt, className, shadow, ...properties } = props;
   const { classes } = useStyles({
     shadow,
   });
@@ -20,7 +20,7 @@ const Image = (props: Props) => {
       className={`${classes.img} ${className}`}
       width={650}
       height={650}
-      {...proprties}
+      {...properties}
     />
   );
 };
