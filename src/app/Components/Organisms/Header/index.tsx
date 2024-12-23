@@ -13,6 +13,8 @@ import Navbar from '@/app/Components/Molecules/Navbar';
 import BlurredCircle from '@/app/Components/Atoms/BluredCircle';
 import Text from '../../Atoms/Text';
 import LocaleSwitcherSelect from '../../Molecules/LocaleSwitcher';
+import { motion } from 'framer-motion';
+import { FadeInVariant } from '@/app/lib/MotionVariants';
 
 type Props = {
   header: options['header'];
@@ -50,18 +52,27 @@ const Header = ({ header, services }: Props) => {
       <Container sx={{ height: '100%' }}>
         <Box className={classes.innerContainer}>
           <BlurredCircle />
-
-          <Link href='/'>
-            <Image
-              className={classes.image}
-              priority
-              src={currentLogo.url}
-              alt='header logo'
-              width={currentLogo.width}
-              height={currentLogo.height}
-              draggable={false}
-            />
-          </Link>
+          <Box
+            component={motion.div}
+            variants={FadeInVariant}
+            initial='hidden'
+            animate='visible'
+            transition={{
+              duration: 0.5,
+            }}
+          >
+            <Link href='/'>
+              <Image
+                className={classes.image}
+                priority
+                src={currentLogo.url}
+                alt='header logo'
+                width={currentLogo.width}
+                height={currentLogo.height}
+                draggable={false}
+              />
+            </Link>
+          </Box>
           <Box
             sx={{
               display: {

@@ -1,16 +1,15 @@
 'use client';
 
 import { useRouter } from '@/navigation';
-import { useTranslations } from 'next-intl';
 import { Box, Container, Grid } from '@mui/material';
+import { useTranslations } from 'next-intl';
 
-import useStyles from './styles';
-import Text from '../../Atoms/Text';
-import Image from '../../Atoms/Image';
-import Button from '../../Atoms/Button';
-import NavLink from '../../Atoms/NavLink';
 import { navlinks } from '@/app/lib/data';
-import { AppPathnames } from '@/config';
+import Button from '../../Atoms/Button';
+import Image from '../../Atoms/Image';
+import NavLink from '../../Atoms/NavLink';
+import Text from '../../Atoms/Text';
+import useStyles from './styles';
 
 type Props = {
   footer: options['footer'];

@@ -1,15 +1,15 @@
 'use client';
 
+import { Grid } from '@mui/material';
 import { motion } from 'framer-motion';
-import { Container, Grid } from '@mui/material';
 import { useLocale, useTranslations } from 'next-intl';
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { RefObject, useLayoutEffect, useRef, useState } from 'react';
 
-import useStyles from './styles';
-import Text from '@/app/Components/Atoms/Text';
-import Image from '@/app/Components/Atoms/Image';
 import Button from '@/app/Components/Atoms/Button';
-import { FadeInVariant, RowVariant } from '@/app/lib/MotionVariants';
+import Image from '@/app/Components/Atoms/Image';
+import Text from '@/app/Components/Atoms/Text';
+import useStyles from './styles';
+import { FadeInVariant } from '@/app/lib/MotionVariants';
 
 type Props = {
   mainOptions: options['home']['main'];
@@ -24,7 +24,7 @@ const HomeMain = ({ mainOptions }: Props) => {
   const { classes } = useStyles({ isAr, width });
   const { description, image, title } = mainOptions;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let viewPortWidth = window.document.documentElement.clientWidth;
     setWidth((x) =>
       containerRef && containerRef.current
@@ -60,12 +60,6 @@ const HomeMain = ({ mainOptions }: Props) => {
         md={6}
         className={classes.column1}
         component={motion.div}
-        variants={RowVariant}
-        initial='hidden'
-        animate='visible'
-        transition={{
-          duration: 1,
-        }}
       >
         <Text textSize='3xl' textTransform='capitalize' textWeight='bold'>
           {title}
@@ -91,13 +85,12 @@ const HomeMain = ({ mainOptions }: Props) => {
         item
         className={classes.column2}
         component={motion.div}
-        // variants={FadeInVariant}
-        // initial='hidden'
-        // animate='visible'
-        // transition={{
-        //   duration: 1,
-        //   delay: 1,
-        // }}
+        variants={FadeInVariant}
+        initial='hidden'
+        animate='visible'
+        transition={{
+          duration: 0.5,
+        }}
       >
         <Image
           src={image.url}
