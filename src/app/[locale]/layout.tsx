@@ -9,6 +9,8 @@ import Header from '../Components/Organisms/Header';
 import '../globals.css';
 import { getOptions, getServices } from '../lib/Controller';
 import ThemeRegistry from '../ThemeRegistery';
+import { GoogleAnalytics } from '@next/third-parties/google';
+import ToastProvider from '@/ToastifyProvider';
 
 export const metadata: Metadata = {
   title: { default: 'UNITS', template: 'UNITS | %s' },
@@ -53,23 +55,26 @@ export default async function RootLayout({
       <NextIntlClientProvider messages={messages}>
         {/* <AppWrapper> */}
         <ThemeRegistry>
-          <body>
-            <Box
-              sx={{
-                display: 'grid',
-                gridTemplateRows: '1fr auto',
-                minHeight: '100dvh',
-                overflowX: 'hidden',
-              }}
-            >
-              {options.header && (
-                <Header header={options.header} services={services} />
-              )}
-              <ScrollBar />
-              {children}
-              <Footer footer={options.footer} />
-            </Box>
-          </body>
+          <ToastProvider>
+            <body>
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateRows: '1fr auto',
+                  minHeight: '100dvh',
+                  overflowX: 'hidden',
+                }}
+              >
+                {options.header && (
+                  <Header header={options.header} services={services} />
+                )}
+                <ScrollBar />
+                {children}
+                <Footer footer={options.footer} />
+              </Box>
+            </body>
+            <GoogleAnalytics gaId='G-D892RL6RTC' />
+          </ToastProvider>
         </ThemeRegistry>
         {/* </AppWrapper> */}
       </NextIntlClientProvider>

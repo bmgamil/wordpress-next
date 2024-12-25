@@ -6,7 +6,7 @@ import Text from '@/app/Components/Atoms/Text';
 import ContactDetails from '@/app/Components/Organisms/ContactPage/ContactDetails';
 import ContactForm from '@/app/Components/Organisms/ContactPage/ContactForm';
 import PageIntroText from '@/app/Components/Organisms/PageIntroText';
-import { getFAQS, getOptions } from '@/app/lib/Controller';
+import { getOptions } from '@/app/lib/Controller';
 import { MotionDelay } from '@/app/lib/MotionVariants';
 
 export const metadata: Metadata = {

@@ -1,20 +1,23 @@
 'use client';
 
-import { Box } from '@mui/material';
-import { motion } from 'framer-motion';
-import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
+import CheckCircleTwoToneIcon from '@mui/icons-material/CheckCircleTwoTone';
+import { Box, useTheme } from '@mui/material';
+import { sendGAEvent } from '@next/third-parties/google';
+import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import { useForm } from 'react-hook-form';
 
-import useStyles from './styles';
-import Text from '@/app/Components/Atoms/Text';
-import { ContactSchema } from '@/app/lib/Schema';
 import Button from '@/app/Components/Atoms/Button';
 import FormInput from '@/app/Components/Atoms/FormInput';
-import { RowVariant } from '@/app/lib/MotionVariants';
+import Text from '@/app/Components/Atoms/Text';
 import { contactSubmitHandler } from '@/app/lib/Controller';
+import { RowVariant } from '@/app/lib/MotionVariants';
+import { ContactSchema } from '@/app/lib/Schema';
 import { useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
+import useStyles from './styles';
+import DangerousTwoToneIcon from '@mui/icons-material/DangerousTwoTone';
 
 const ContactForm = () => {
   const { classes } = useStyles();
@@ -22,7 +25,7 @@ const ContactForm = () => {
   const bt = useTranslations('buttons');
   const et = useTranslations('form_errors');
   const [loading, setLoading] = useState(false);
-
+  const theme = useTheme();
   const {
     register,
     handleSubmit,
@@ -45,15 +48,25 @@ const ContactForm = () => {
     try {
       setLoading(true);
       const response = await contactSubmitHandler(data);
-      debugger;
       if (response instanceof Response && response.ok) {
-        toast.success('Message sent successfully');
+        sendGAEvent('Contact', 'Form Submission', {
+          value: 'Contact Form Submitted',
+        });
+        toast.success('Message sent successfully', {
+          icon: () => {
+            return <CheckCircleTwoToneIcon color='primary' />;
+          },
+        });
         reset();
       } else {
         throw new Error('error occurred');
       }
     } catch (error) {
-      console.log(error);
+      toast.error('Error occurred while sending message', {
+        icon: () => {
+          return <DangerousTwoToneIcon color='error' />;
+        },
+      });
     } finally {
       setLoading(false);
     }
@@ -68,8 +81,6 @@ const ContactForm = () => {
       whileInView='visible'
       viewport={{ once: true, amount: 0.5 }}
     >
-      <ToastContainer />
-
       <Text textColor='main' textSize='lg'>
         {t('title')}
       </Text>
