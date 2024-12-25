@@ -13,19 +13,19 @@ const LoadingCircular = () => {
         width: '100%',
         height: '100%',
         display: 'flex',
-        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        gap: '1rem',
       }}
     >
       <Logo />
       <Text
-        textSize='lg'
+        textSize='3xl'
         textWeight='medium'
         hasGradientBG
         textTransform='capitalize'
       >
-        {t('loading')}
+        UNITS
       </Text>
     </Box>
   );
