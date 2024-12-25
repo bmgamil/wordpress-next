@@ -37,7 +37,7 @@ const ProjectCard = (props: { project: Project }) => {
       // }}
     >
       <Box className={classes.header}>
-        <Link href={`/project/${slug}` as any}>
+        <Link href={`/projects/${slug}` as any}>
           <Text variant='h4' textWeight='medium' textSize='lg'>
             {title}
           </Text>
@@ -58,7 +58,7 @@ const ProjectCard = (props: { project: Project }) => {
 
       <CustomLink
         className={classes.link}
-        href={`/project/${slug}`}
+        href={`/projects/${slug}`}
         title={t('view')}
       />
     </Box>
