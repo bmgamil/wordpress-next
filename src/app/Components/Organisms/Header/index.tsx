@@ -10,7 +10,7 @@ import { useStyles } from './styles';
 import Image from '@/app/Components/Atoms/Image';
 import Button from '@/app/Components/Atoms/Button';
 import Navbar from '@/app/Components/Molecules/Navbar';
-import BlurredCircle from '@/app/Components/Atoms/BluredCircle';
+import BlurredCircle from '@/app/Components/Atoms/BlurredCircle';
 import Text from '../../Atoms/Text';
 import LocaleSwitcherSelect from '../../Molecules/LocaleSwitcher';
 import { motion } from 'framer-motion';
