@@ -84,7 +84,6 @@ export default function LocaleSwitcherSelect() {
               alt='اللغة العربية'
               height={600}
               width={900}
-              placeholder='blur'
             />
           </Box>
         </MenuItem>
