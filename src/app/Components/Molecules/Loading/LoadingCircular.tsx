@@ -1,12 +1,12 @@
 'use client';
 
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import Logo from '../../Atoms/Logo';
 import Text from '../../Atoms/Text';
-import { useTranslations } from 'next-intl';
+import { ClashDisplay } from '@/app/theme/theme';
 
 const LoadingCircular = () => {
-  const t = useTranslations();
+  const theme = useTheme();
   return (
     <Box
       sx={{
@@ -24,6 +24,7 @@ const LoadingCircular = () => {
         textWeight='medium'
         hasGradientBG
         textTransform='capitalize'
+        fontFamily={ClashDisplay.style.fontFamily}
       >
         UNITS
       </Text>
