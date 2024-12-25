@@ -55,8 +55,8 @@ export default async function RootLayout({
       <NextIntlClientProvider messages={messages}>
         {/* <AppWrapper> */}
         <ThemeRegistry>
-          <ToastProvider>
-            <body>
+          <body>
+            <ToastProvider>
               <Box
                 sx={{
                   display: 'grid',
@@ -72,9 +72,9 @@ export default async function RootLayout({
                 {children}
                 <Footer footer={options.footer} />
               </Box>
-            </body>
-            <GoogleAnalytics gaId='G-D892RL6RTC' />
-          </ToastProvider>
+            </ToastProvider>
+          </body>
+          <GoogleAnalytics gaId='G-D892RL6RTC' />
         </ThemeRegistry>
         {/* </AppWrapper> */}
       </NextIntlClientProvider>

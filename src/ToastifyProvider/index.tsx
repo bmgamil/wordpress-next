@@ -1,6 +1,7 @@
 'use client';
 
 import { useTheme } from '@mui/material';
+import { useLocale } from 'next-intl';
 import { Flip, ToastContainer } from 'react-toastify';
 
 interface ToastProviderProps {
@@ -9,18 +10,19 @@ interface ToastProviderProps {
 
 export default function ToastProvider({ children }: ToastProviderProps) {
   const theme = useTheme();
+  const locale = useLocale();
+  const isArabic = locale === 'ar';
   return (
     <>
       {children}
       <ToastContainer
         position='bottom-center'
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
+        closeOnClick={true}
+        rtl={isArabic}
         draggable
+        draggablePercent={60}
         pauseOnHover
         theme='dark'
         transition={Flip}
