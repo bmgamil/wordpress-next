@@ -44,12 +44,16 @@ export const MotionDelay = {
 
 export const PathVariants: Variants = {
   hidden: {
-    opacity: 0,
+    // opacity: 0,
+    pathLength: 0,
   },
   visible: (i: number) => ({
-    opacity: 1,
+    // opacity: 1,
+    pathLength: 1,
     transition: {
-      duration: i * 0.2,
+      // repeatType: 'reverse',
+      // repeat: Infinity,
+      duration: 2,
       ease: 'easeInOut',
     },
   }),
@@ -58,15 +62,17 @@ export const PathVariants: Variants = {
 export const svgVariants: Variants = {
   hidden: {
     scale: 0.9,
-    rotate: 0,
+    // rotate: 0,
+    opacity: 0.5,
   },
   visible: {
-    scale: 1.1,
-    rotate: 90,
+    scale: 1,
+    // rotate: 90,
+    opacity: 1,
     transition: {
       repeatType: 'reverse',
       repeat: Infinity,
-      ease: 'anticipate',
+      ease: 'circInOut',
       duration: 1,
       delay: 1,
     },
