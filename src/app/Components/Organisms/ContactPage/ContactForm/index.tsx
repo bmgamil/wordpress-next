@@ -7,6 +7,7 @@ import { sendGAEvent } from '@next/third-parties/google';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import Button from '@/app/Components/Atoms/Button';
 import FormInput from '@/app/Components/Atoms/FormInput';
@@ -25,7 +26,6 @@ const ContactForm = () => {
   const bt = useTranslations('buttons');
   const et = useTranslations('form_errors');
   const [loading, setLoading] = useState(false);
-  const theme = useTheme();
   const {
     register,
     handleSubmit,
@@ -47,12 +47,17 @@ const ContactForm = () => {
   const onSubmit = async (data: ContactSubmission) => {
     try {
       setLoading(true);
+      toast.loading(t('sending'), {
+        icon: () => {
+          return <CircularProgress color='primary' size={20} />;
+        },
+      });
       const response = await contactSubmitHandler(data);
       if (response instanceof Response && response.ok) {
         sendGAEvent('Contact', 'Form Submission', {
           value: 'Contact Form Submitted',
         });
-        toast.success('Message sent successfully', {
+        toast.update(t('sent'), {
           icon: () => {
             return <CheckCircleTwoToneIcon color='primary' />;
           },
@@ -62,7 +67,7 @@ const ContactForm = () => {
         throw new Error('error occurred');
       }
     } catch (error) {
-      toast.error('Error occurred while sending message', {
+      toast.update(t('failed'), {
         icon: () => {
           return <DangerousTwoToneIcon color='error' />;
         },

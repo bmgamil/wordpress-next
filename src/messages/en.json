@@ -170,7 +170,10 @@
       "email": "email",
       "phone": "phone number",
       "subject": "subject",
-      "comment": "your comment"
+      "comment": "your comment",
+      "sending": "sending",
+      "sent": "sent successfully",
+      "failed": "send failed"
     },
     "list": {
       "location": {
