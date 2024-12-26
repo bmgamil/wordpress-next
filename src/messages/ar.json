@@ -195,7 +195,8 @@
       "comment": "تعليقك",
       "sending": "جاري الإرسال",
       "sent": "تم الإرسال بنجاح",
-      "failed": "فشل الإرسال"
+      "failed": "فشل الإرسال",
+      "failed_verification": "فشل التحقق"
     },
     "list": {
       "location": {

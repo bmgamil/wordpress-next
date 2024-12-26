@@ -173,7 +173,8 @@
       "comment": "your comment",
       "sending": "sending",
       "sent": "sent successfully",
-      "failed": "send failed"
+      "failed": "send failed",
+      "failed_verification": "verification failed"
     },
     "list": {
       "location": {
