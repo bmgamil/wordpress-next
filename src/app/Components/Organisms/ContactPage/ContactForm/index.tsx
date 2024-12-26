@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 import Button from '@/app/Components/Atoms/Button';
 import FormInput from '@/app/Components/Atoms/FormInput';
@@ -19,8 +20,10 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import useStyles from './styles';
 import DangerousTwoToneIcon from '@mui/icons-material/DangerousTwoTone';
+import useReCaptcha from '@/hooks/useReCaptcha';
 
 const ContactForm = () => {
+  const { handleVerify } = useReCaptcha({ action: 'contact' });
   const { classes } = useStyles();
   const t = useTranslations('contact.form');
   const bt = useTranslations('buttons');
@@ -52,6 +55,16 @@ const ContactForm = () => {
           return <CircularProgress color='primary' size={20} />;
         },
       });
+      const verifyData = await handleVerify();
+      if (!verifyData.success) {
+        toast.update(t('failed_verification'), {
+          icon: () => {
+            return <DangerousTwoToneIcon color='error' />;
+          },
+        });
+        return;
+      }
+
       const response = await contactSubmitHandler(data);
       if (response instanceof Response && response.ok) {
         sendGAEvent('Contact', 'Form Submission', {

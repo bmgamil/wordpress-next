@@ -1,5 +1,7 @@
+import ThemeProvider from '@/Providers/ThemeProvider';
+import ToastProvider from '@/Providers/ToastProvider';
 import { Box } from '@mui/material';
-import { GoogleTagManager } from '@next/third-parties/google';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -8,9 +10,7 @@ import Footer from '../Components/Organisms/Footer';
 import Header from '../Components/Organisms/Header';
 import '../globals.css';
 import { getOptions, getServices } from '../lib/Controller';
-import ThemeRegistry from '../ThemeRegistery';
-import { GoogleAnalytics } from '@next/third-parties/google';
-import ToastProvider from '@/ToastifyProvider';
+import ReCaptchaProvider from '@/Providers/ReCaptchaProvider';
 
 export const metadata: Metadata = {
   title: { default: 'UNITS', template: 'UNITS | %s' },
@@ -54,7 +54,7 @@ export default async function RootLayout({
       <GoogleTagManager gtmId='GTM-5F3NRLNN' />
       <NextIntlClientProvider messages={messages}>
         {/* <AppWrapper> */}
-        <ThemeRegistry>
+        <ThemeProvider>
           <body>
             <ToastProvider>
               <Box
@@ -69,13 +69,13 @@ export default async function RootLayout({
                   <Header header={options.header} services={services} />
                 )}
                 <ScrollBar />
-                {children}
+                <ReCaptchaProvider>{children}</ReCaptchaProvider>
                 <Footer footer={options.footer} />
               </Box>
             </ToastProvider>
           </body>
           <GoogleAnalytics gaId='G-D892RL6RTC' />
-        </ThemeRegistry>
+        </ThemeProvider>
         {/* </AppWrapper> */}
       </NextIntlClientProvider>
     </html>
