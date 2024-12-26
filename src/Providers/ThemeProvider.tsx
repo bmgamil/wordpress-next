@@ -5,9 +5,12 @@ import createCache from '@emotion/cache';
 import { orange } from '@mui/material/colors';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useServerInsertedHTML } from 'next/navigation';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import {
+  ThemeProvider as MUIThemeProvider,
+  createTheme,
+} from '@mui/material/styles';
 
-import { Cairo, ClashDisplay } from '../theme/theme';
+import { Cairo, ClashDisplay } from '../app/theme/theme';
 
 type Props = {
   children: React.ReactNode;
@@ -34,7 +37,7 @@ const createEmotionCache = () => {
   return { cache, flush };
 };
 
-export default function ThemeRegistry(props: Props) {
+export default function ThemeProvider(props: Props) {
   const locale = useLocale();
   const isAr = locale === 'ar';
   const { children } = props;
@@ -90,9 +93,9 @@ export default function ThemeRegistry(props: Props) {
 
   return (
     // <CacheProvider value={cache}>
-    <ThemeProvider theme={theme}>
+    <MUIThemeProvider theme={theme}>
       <CssBaseline />
       {children}
-    </ThemeProvider>
+    </MUIThemeProvider>
   );
 }
