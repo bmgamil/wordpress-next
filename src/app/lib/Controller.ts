@@ -1,5 +1,6 @@
 import { revalidate } from '@/app/lib/data';
 import { getLocale } from 'next-intl/server';
+
 export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const IS_CACHING = process.env.NEXT_IS_CACHING === 'true';
 
@@ -61,12 +62,20 @@ export const getProjectCategories = async () => {
   };
 };
 
-export const getProjectById = async (id: number, getImage?: boolean) => {
-  const data = await fetchData(`/project/${id}`);
-  if (getImage) {
-    const mediaId = data.featured_media;
-    const media = await fetchData(`/media/${mediaId}`);
-    data.featured_media = media;
+export const getProjectById = async (id: number, embed?: boolean) => {
+  const url = `/project/${id}${embed ? '?_embed' : ''}`;
+  const data = await fetchData(`${url}`);
+  if (embed) {
+    let media = {} as ProjectMedia;
+    if (data.featured_media) {
+      const embeddedMedia = data._embedded['wp:featuredmedia'][0];
+      media.id = embeddedMedia.id;
+      media.source_url = embeddedMedia.link;
+      media.media_details = embeddedMedia.media_details;
+      data.featured_media = media;
+    }
+    data.categories = data._embedded['wp:term'].flat();
+    data.title = data.title.rendered;
   }
 
   return {
