@@ -34,17 +34,17 @@
         "step_1": {
           "number": "1",
           "title": "design a customized solution",
-          "description": "we offer services that can help businesses improve their visibility and business reputation online, expand market reach, and increase turnover through effective digital strategies. Following are the services we provide."
+          "description": "We collaborate with you to design a tailored solution that meets your specific business needs and goals."
         },
         "step_2": {
           "number": "2",
           "title": "we’ll implement a dedicated training program.",
-          "description": "we offer services that can help businesses improve their visibility and business reputation online, expand market reach, and increase turnover through effective digital strategies. Following are the services we provide."
+          "description": "Our team will implement a comprehensive training program to ensure your team is well-equipped to use the new solution effectively."
         },
         "step_3": {
           "number": "3",
           "title": "go live & schedule check-ins!",
-          "description": "we offer services that can help businesses improve their visibility and business reputation online, expand market reach, and increase turnover through effective digital strategies. Following are the services we provide."
+          "description": "Launch your solution and schedule regular check-ins to monitor progress and make necessary adjustments for optimal performance."
         }
       }
     },
@@ -130,6 +130,9 @@
         "our_clients": "our clients",
         "success": "success"
       }
+    },
+    "cate": {
+      "all": "all"
     }
   },
   "blogs": {

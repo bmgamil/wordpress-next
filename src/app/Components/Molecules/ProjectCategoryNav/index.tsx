@@ -6,12 +6,14 @@ import { useRouter } from '@/navigation';
 import { useStyles } from './styles';
 import Dropdown from '../Dropdown';
 import Tag from '../../Atoms/Tag';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   categories: ProjectCategory[];
 };
 
 const ProjectCategoryNav = (props: Props) => {
+  const t = useTranslations('projects.cate');
   const { categories } = props;
   const { classes } = useStyles();
   const category = useSearchParams().get('category') ?? '';
@@ -28,7 +30,7 @@ const ProjectCategoryNav = (props: Props) => {
     {
       id: 0,
       slug: '',
-      title: 'all',
+      title: t('all'),
     },
     ...categories,
   ];

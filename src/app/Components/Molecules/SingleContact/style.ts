@@ -5,6 +5,7 @@ export const useStyles = makeStyles()((theme) => {
     link: {
       color: theme.palette.primary.light,
       textDecoration: 'none',
+      width: 'fit-content',
     },
   };
 });

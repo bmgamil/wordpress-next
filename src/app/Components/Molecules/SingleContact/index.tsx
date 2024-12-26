@@ -44,7 +44,14 @@ const SingleContact = (props: Props) => {
           rel='noreferrer'
           className={classes.link}
         >
-          <Text textSize='sm' textWeight='light' textTransform={'none'}>
+          <Text
+            textSize='sm'
+            textWeight='light'
+            textTransform={'none'}
+            sx={{
+              direction: 'ltr',
+            }}
+          >
             {description}
           </Text>
         </a>
