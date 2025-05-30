@@ -2,13 +2,12 @@
 
 import { joiResolver } from '@hookform/resolvers/joi';
 import CheckCircleTwoToneIcon from '@mui/icons-material/CheckCircleTwoTone';
-import { Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 import { sendGAEvent } from '@next/third-parties/google';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
-import CircularProgress from '@mui/material/CircularProgress';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 import Button from '@/app/Components/Atoms/Button';
 import FormInput from '@/app/Components/Atoms/FormInput';
@@ -16,11 +15,11 @@ import Text from '@/app/Components/Atoms/Text';
 import { contactSubmitHandler } from '@/app/lib/Controller';
 import { RowVariant } from '@/app/lib/MotionVariants';
 import { ContactSchema } from '@/app/lib/Schema';
+import useReCaptcha from '@/hooks/useReCaptcha';
+import DangerousTwoToneIcon from '@mui/icons-material/DangerousTwoTone';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import useStyles from './styles';
-import DangerousTwoToneIcon from '@mui/icons-material/DangerousTwoTone';
-import useReCaptcha from '@/hooks/useReCaptcha';
 
 const ContactForm = () => {
   const { handleVerify } = useReCaptcha({ action: 'contact' });

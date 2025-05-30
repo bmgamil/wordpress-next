@@ -1,7 +1,7 @@
 'use client';
 import Error from '@/app/Components/Organisms/ErrorBoundry';
 
-const ErrorBoundry = ({
+const ErrorBoundary = ({
   error,
   reset,
 }: {
@@ -11,4 +11,4 @@ const ErrorBoundry = ({
   return <Error error={error} reset={reset} />;
 };
 
-export default ErrorBoundry;
+export default ErrorBoundary;

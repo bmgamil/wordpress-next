@@ -16,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return services.map((service: ServiceDetail) => ({
     url: `${SITE_URL}/service/${service.slug}`,
-    lastModified: new Date('2024-12-01'),
+    lastModified: new Date(),
     alternates: {
       languages: {
         ar: `${SITE_URL}/ar/service/${service.slug}`,

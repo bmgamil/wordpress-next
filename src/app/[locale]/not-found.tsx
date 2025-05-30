@@ -1,4 +1,3 @@
-'use client';
 import Text from '@/app/Components/Atoms/Text';
 import { Colors } from '@/app/theme/colors';
 import { Link } from '@/navigation';

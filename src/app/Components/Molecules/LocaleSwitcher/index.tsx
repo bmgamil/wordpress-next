@@ -1,8 +1,9 @@
 'use client';
 
-import { useLocale } from 'next-intl';
-import { useState, useTransition } from 'react';
-import { useRouter, usePathname } from '@/navigation';
+import Image from '@/app/Components/Atoms/Image';
+import { Cairo } from '@/app/theme/theme';
+import { usePathname, useRouter } from '@/navigation';
+import TranslateIcon from '@mui/icons-material/Translate';
 import {
   Box,
   FormControl,
@@ -10,11 +11,11 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
-import Image from '@/app/Components/Atoms/Image';
+import { useLocale } from 'next-intl';
+import { useState } from 'react';
 import Text from '../../Atoms/Text';
 import { useStyles } from './style';
-import { Cairo } from '@/app/theme/theme';
-import TranslateIcon from '@mui/icons-material/Translate';
+
 export default function LocaleSwitcherSelect() {
   const router = useRouter();
   const pathname = usePathname();

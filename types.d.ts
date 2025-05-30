@@ -149,6 +149,11 @@ type optionMedia = {
   link: string;
   width: number;
   height: number;
+  sizes: {
+    thumbnail: string;
+    'thumbnail-width': number;
+    'thumbnail-height': number;
+  };
   // placeholder: Placeholder;
 };
 

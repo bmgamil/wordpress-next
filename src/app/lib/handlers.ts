@@ -78,3 +78,20 @@ export const getSlideWidth = (listLength: number) => {
     return 'calc((100% / 3) - 1rem)';
   }
 };
+
+export const imageURLtoBase64 = async (url: string): Promise<string> => {
+  const response = await fetch('/api/image-to-base64', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ url }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch image: ${response.statusText}`);
+  }
+
+  const { dataUrl } = await response.json();
+  return dataUrl;
+};

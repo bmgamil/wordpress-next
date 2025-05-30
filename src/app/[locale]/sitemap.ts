@@ -6,8 +6,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: `${SITE_URL}/`,
-      lastModified: new Date('2024-12-01'),
-      changeFrequency: 'yearly',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
       priority: 1,
       alternates: {
         languages: {
@@ -17,8 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/about`,
-      lastModified: new Date('2024-12-01'),
-      changeFrequency: 'monthly',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
       priority: 0.5,
       alternates: {
         languages: {
@@ -28,8 +28,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/service`,
-      lastModified: new Date('2024-12-01'),
-      changeFrequency: 'monthly',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
       priority: 1,
       alternates: {
         languages: {
@@ -39,8 +39,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/contact`,
-      lastModified: new Date('2024-12-01'),
-      changeFrequency: 'yearly',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
       priority: 0.5,
       alternates: {
         languages: {
@@ -50,8 +50,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/projects`,
-      lastModified: new Date('2024-12-01'),
-      changeFrequency: 'monthly',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
       priority: 1,
       alternates: {
         languages: {

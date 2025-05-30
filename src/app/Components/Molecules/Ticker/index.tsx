@@ -31,7 +31,7 @@ const Ticker = (props: Props) => {
             sx={{
               padding: '0.5rem 3rem',
             }}
-            key={item.id + index}
+            key={`${item.id}-${index}`}
           >
             <Image src={item.url} alt={''} />
           </Box>
